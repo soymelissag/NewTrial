@@ -11,26 +11,28 @@
   <style>
 /* ===========================================================
    ABUELA 8 BALL — styles
-   Palette pulled from the reference art:
-   orange/red, magenta, purple, green, light pink, cream.
-   Type: Anton (chunky uppercase display) + Fraunces (body).
+   Re-skinned to the flat-illustration COLLAGE look of
+   bannedbooksshelf.com: cream ground, solid color blocks,
+   tilted book spines with rotated condensed titles, NO drop
+   shadows / no heavy black outlines.
+   Type: Anton (condensed display) + Fraunces (body).
    =========================================================== */
 
 :root {
-  --cream:   #fff7e9;
-  --ink:     #2f2440;
+  --cream:   #f4efe1;   /* warm off-white ground */
+  --ink:     #241c33;
   --magenta: #e6007e;
   --purple:  #6c4bd1;
   --lilac:   #b3a6d9;
   --orange:  #ff5a2b;
   --green:   #2e9e5b;
+  --teal:    #19b6b0;
   --pink:    #f4a6c6;
-  --yellow:  #ffd23f;
-  --shadow:  0 10px 0 rgba(47,36,64,.12);
+  --yellow:  #ffc21f;
+  --paper:   #fffaf0;
 }
 
 * { box-sizing: border-box; }
-
 html, body { height: 100%; }
 
 body {
@@ -39,12 +41,6 @@ body {
   color: var(--ink);
   font-family: "Fraunces", Georgia, serif;
   -webkit-font-smoothing: antialiased;
-  /* playful confetti dots like the busy illustration background */
-  background-image:
-    radial-gradient(var(--pink) 8%, transparent 9%),
-    radial-gradient(var(--lilac) 8%, transparent 9%);
-  background-size: 64px 64px, 64px 64px;
-  background-position: 0 0, 32px 32px;
 }
 
 /* ---------- App shell / screen switching ---------- */
@@ -52,64 +48,56 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 28px 18px 72px;
+  padding: 24px 18px 64px;
 }
 
 .screen { display: none; width: 100%; }
-.screen.is-active { display: block; animation: pop .35s ease both; }
-
+.screen.is-active { display: block; animation: pop .3s ease both; }
 @keyframes pop {
-  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
 
+/* Flat panel — no card border, no offset shadow. Color block + cream. */
 .wrap {
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
-  background: #fff;
-  border: 4px solid var(--ink);
-  border-radius: 26px;
-  box-shadow: 14px 14px 0 var(--ink);
-  padding: 34px 30px 38px;
   text-align: center;
+  padding: 8px 22px 30px;
 }
 
 /* ---------- Type ---------- */
 .kicker {
   font-family: "Anton", Impact, sans-serif;
   text-transform: uppercase;
-  letter-spacing: .22em;
-  font-size: 13px;
-  margin: 0 0 14px;
+  letter-spacing: .26em;
+  font-size: 12px;
+  margin: 0 0 16px;
   color: var(--orange);
 }
 
-.title {
-  margin: 0 0 18px;
-  line-height: .86;
-}
+.title { margin: 0 0 16px; line-height: .82; }
 .title__line {
   display: block;
   font-family: "Anton", Impact, sans-serif;
-  font-size: clamp(58px, 16vw, 104px);
-  letter-spacing: .01em;
+  font-size: clamp(64px, 19vw, 128px);
+  letter-spacing: .005em;
   text-transform: uppercase;
-  -webkit-text-stroke: 2px var(--ink);
 }
 
 .heading {
   font-family: "Anton", Impact, sans-serif;
   text-transform: uppercase;
-  font-size: clamp(34px, 9vw, 56px);
-  line-height: .92;
-  margin: 0 0 14px;
+  font-size: clamp(38px, 11vw, 68px);
+  line-height: .88;
+  margin: 0 0 16px;
 }
 
 .lede {
   font-size: 17px;
   line-height: 1.5;
-  margin: 0 auto 24px;
-  max-width: 42ch;
+  margin: 0 auto 26px;
+  max-width: 44ch;
 }
 .lede--tight { margin-bottom: 18px; font-size: 16px; }
 
@@ -119,49 +107,108 @@ body {
 .c-green   { color: var(--green); }
 .c-orange  { color: var(--orange); }
 
-/* ---------- Abuela illustration ---------- */
-.abuela-art {
-  width: 200px;
-  margin: 6px auto 26px;
+/* ===========================================================
+   BOOKSHELF HERO — the signature motif
+   =========================================================== */
+.shelf {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 200px;
+  margin: 8px auto 30px;
+  padding-bottom: 10px;
+  border-bottom: 7px solid var(--ink);   /* the shelf board */
 }
-.abuela-art svg { width: 100%; height: auto; display: block; }
 
-/* ---------- Buttons ---------- */
+.spine {
+  width: 42px;
+  height: var(--h, 150px);
+  transform: rotate(var(--rot, 0deg));
+  transform-origin: bottom center;
+  border-radius: 4px 4px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 0 0 auto;
+}
+/* thin spine detail line, like a printed book edge */
+.spine::after {
+  content: "";
+  position: absolute;
+  top: 8px; bottom: 8px; left: 6px;
+  width: 2px;
+  background: rgba(255,255,255,.45);
+  border-radius: 2px;
+}
+.spine span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 16px;
+  color: var(--paper);
+  white-space: nowrap;
+}
+.s-tilt { align-self: flex-end; }
+
+.s-magenta { background: var(--magenta); }
+.s-orange  { background: var(--orange); }
+.s-purple  { background: var(--purple); }
+.s-green   { background: var(--green); }
+.s-yellow  { background: var(--yellow); }
+.s-yellow span { color: var(--ink); }
+.s-pink    { background: var(--pink); }
+.s-pink span   { color: var(--ink); }
+.s-teal    { background: var(--teal); }
+
+/* abuela peeking up between the spines */
+.peek {
+  width: 92px;
+  align-self: flex-end;
+  margin: 0 -4px 2px;
+  z-index: 2;
+}
+.peek svg { width: 100%; height: auto; display: block; }
+
+/* ---------- Buttons (flat, solid, pill) ---------- */
 .btn {
   display: inline-block;
   font-family: "Anton", Impact, sans-serif;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .05em;
   font-size: 20px;
-  color: #fff;
+  color: var(--paper);
   background: var(--magenta);
-  border: 4px solid var(--ink);
+  border: none;
   border-radius: 999px;
-  padding: 14px 30px;
+  padding: 15px 34px;
   cursor: pointer;
-  box-shadow: 0 6px 0 var(--ink);
-  transition: transform .08s ease, box-shadow .08s ease;
+  transition: transform .1s ease, filter .1s ease;
 }
-.btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
-.btn:active { transform: translateY(4px);  box-shadow: 0 2px 0 var(--ink); }
+.btn:hover  { transform: translateY(-2px); filter: brightness(1.06); }
+.btn:active { transform: translateY(1px); }
 
 .btn--magenta { background: var(--magenta); }
 .btn--purple  { background: var(--purple); }
 .btn--block   { display: block; width: 100%; margin-top: 6px; }
-.btn--ghost   { background: var(--green); }
+.btn--ghost   { background: var(--teal); }
 
 .btn-row {
   display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* ---------- Form ---------- */
-#ask-form { text-align: left; margin-top: 8px; }
+#ask-form { text-align: left; margin: 8px auto 0; max-width: 460px; }
 .field-label, .moods__label {
   display: block;
   font-family: "Anton", Impact, sans-serif;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
   font-size: 13px;
   color: var(--purple);
   margin: 0 0 8px;
@@ -171,44 +218,43 @@ body {
   font-family: "Fraunces", serif;
   font-size: 18px;
   padding: 14px 16px;
-  border: 4px solid var(--ink);
-  border-radius: 16px;
-  background: var(--cream);
-  margin-bottom: 22px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  margin-bottom: 24px;
 }
-.field:focus { outline: none; box-shadow: 0 0 0 4px var(--yellow); }
+.field:focus { outline: none; border-color: var(--magenta); }
 
-.moods { margin-bottom: 24px; }
+.moods { margin-bottom: 26px; }
 .moods__label { margin-bottom: 12px; }
 .chip {
-  font-family: "Fraunces", serif;
-  font-weight: 600;
+  font-family: "Anton", Impact, sans-serif;
+  letter-spacing: .04em;
+  text-transform: uppercase;
   font-size: 15px;
-  background: #fff;
+  background: transparent;
+  color: var(--ink);
   border: 3px solid var(--ink);
   border-radius: 999px;
-  padding: 8px 16px;
-  margin: 0 8px 8px 0;
+  padding: 9px 16px;
+  margin: 0 8px 10px 0;
   cursor: pointer;
-  transition: background .12s ease, color .12s ease;
+  transition: background .12s ease, color .12s ease, border-color .12s ease;
 }
-.chip.is-selected { background: var(--purple); color: #fff; }
+.chip.is-selected { background: var(--purple); border-color: var(--purple); color: var(--paper); }
 
 /* ---------- Waiting / shaking ball ---------- */
-.screen--wait .wrap { padding-top: 56px; padding-bottom: 56px; }
+.screen--wait .wrap { padding-top: 48px; padding-bottom: 48px; }
 .ball {
-  width: 160px; height: 160px; margin: 0 auto 26px;
+  width: 170px; height: 170px; margin: 0 auto 28px;
   border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, #5a4a8f, var(--purple) 60%, #3a2a6b);
-  border: 5px solid var(--ink);
+  background: radial-gradient(circle at 34% 30%, #7a64c4, var(--purple) 58%, #3a2a6b);
   display: grid; place-items: center;
-  box-shadow: inset -10px -14px 0 rgba(0,0,0,.18), 0 8px 0 var(--ink);
 }
 .ball__star {
   font-family: "Anton", sans-serif;
   color: var(--yellow);
-  font-size: 64px;
-  text-shadow: 0 3px 0 var(--ink);
+  font-size: 70px;
 }
 .ball--shaking { animation: shake .5s infinite; }
 @keyframes shake {
@@ -223,7 +269,7 @@ body {
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--purple);
-  font-size: 20px;
+  font-size: 21px;
   margin: 0;
 }
 
@@ -237,10 +283,10 @@ body {
 .advice {
   font-family: "Anton", Impact, sans-serif;
   text-transform: uppercase;
-  font-size: clamp(26px, 7vw, 40px);
-  line-height: 1.02;
+  font-size: clamp(30px, 8vw, 46px);
+  line-height: 1.0;
   color: var(--magenta);
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   border: none;
   padding: 0;
 }
@@ -248,7 +294,7 @@ body {
   font-style: italic;
   font-size: 17px;
   color: var(--ink);
-  margin: 0 0 26px;
+  margin: 0 0 28px;
 }
 
 /* ---------- Misc ---------- */
@@ -256,7 +302,7 @@ body {
   text-align: left;
   list-style: none;
   padding: 0;
-  margin: 4px auto 26px;
+  margin: 4px auto 28px;
   max-width: 44ch;
 }
 .steps li { font-size: 16px; margin-bottom: 12px; line-height: 1.45; }
@@ -273,15 +319,18 @@ body {
   text-align: center;
   font-family: "Anton", sans-serif;
   text-transform: uppercase;
-  letter-spacing: .2em;
+  letter-spacing: .22em;
   font-size: 12px;
   color: var(--ink);
-  padding: 16px;
-  opacity: .7;
+  padding: 14px;
+  opacity: .65;
 }
 
 @media (max-width: 480px) {
-  .wrap { box-shadow: 8px 8px 0 var(--ink); padding: 26px 20px 30px; }
+  .shelf { gap: 3px; height: 180px; }
+  .spine { width: 34px; }
+  .spine span { font-size: 14px; }
+  .peek { width: 74px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -306,36 +355,32 @@ body {
         <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
           Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
 
-        <div class="abuela-art" aria-hidden="true">
-          <!-- Flat-illustration abuela, drawn to match the reference palette -->
-          <svg viewBox="0 0 220 240" role="img" aria-label="Illustration of an abuela">
-            <!-- hair bun -->
-            <ellipse cx="110" cy="58" rx="62" ry="48" fill="#b3a6d9"/>
-            <circle cx="110" cy="34" r="20" fill="#b3a6d9"/>
-            <!-- face -->
-            <ellipse cx="110" cy="100" rx="52" ry="56" fill="#f4a6c6"/>
-            <!-- glasses -->
-            <circle cx="86" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
-            <circle cx="134" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
-            <line x1="106" y1="98" x2="114" y2="98" stroke="#e6007e" stroke-width="5"/>
-            <!-- eyes -->
-            <circle cx="86" cy="98" r="6" fill="#2f2440"/>
-            <circle cx="134" cy="98" r="6" fill="#2f2440"/>
-            <!-- rosy cheeks -->
-            <circle cx="70" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
-            <circle cx="150" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
-            <!-- knowing smile -->
-            <path d="M88 128 Q110 148 132 128" fill="none" stroke="#c83a6b" stroke-width="5" stroke-linecap="round"/>
-            <!-- shoulders / shawl -->
-            <path d="M44 240 Q44 168 110 168 Q176 168 176 240 Z" fill="#ff5a2b"/>
-            <path d="M64 240 Q72 196 110 196 Q148 196 156 240 Z" fill="#2e9e5b"/>
-            <!-- flower brooch -->
-            <g transform="translate(110 206)">
-              <circle r="6" fill="#ffd23f"/>
-              <circle cx="9" r="5" fill="#e6007e"/><circle cx="-9" r="5" fill="#e6007e"/>
-              <circle cy="9" r="5" fill="#e6007e"/><circle cy="-9" r="5" fill="#e6007e"/>
-            </g>
-          </svg>
+        <!-- Bookshelf-of-spines hero, in the flat-collage style of the reference -->
+        <div class="shelf" aria-hidden="true">
+          <div class="spine s-magenta" style="--h:148px;--rot:-4deg"><span>CONSEJOS</span></div>
+          <div class="spine s-orange"  style="--h:170px;--rot:3deg"><span>AMOR</span></div>
+          <div class="spine s-purple"  style="--h:132px;--rot:-2deg"><span>CHISME</span></div>
+          <div class="spine s-tilt s-green" style="--h:158px;--rot:8deg"><span>FAMILIA</span></div>
+
+          <!-- abuela peeking between the books -->
+          <div class="peek">
+            <svg viewBox="0 0 120 150" role="img" aria-label="Abuela peeking from the shelf">
+              <ellipse cx="60" cy="40" rx="40" ry="32" fill="#b3a6d9"/>
+              <ellipse cx="60" cy="74" rx="34" ry="37" fill="#f4a6c6"/>
+              <circle cx="44" cy="72" r="13" fill="none" stroke="#e6007e" stroke-width="4"/>
+              <circle cx="76" cy="72" r="13" fill="none" stroke="#e6007e" stroke-width="4"/>
+              <line x1="57" y1="72" x2="63" y2="72" stroke="#e6007e" stroke-width="4"/>
+              <circle cx="44" cy="72" r="4" fill="#2f2440"/>
+              <circle cx="76" cy="72" r="4" fill="#2f2440"/>
+              <circle cx="34" cy="88" r="6" fill="#f0608f" opacity=".7"/>
+              <circle cx="86" cy="88" r="6" fill="#f0608f" opacity=".7"/>
+              <path d="M46 96 Q60 110 74 96" fill="none" stroke="#c83a6b" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="spine s-yellow"  style="--h:166px;--rot:-3deg"><span>DINERO</span></div>
+          <div class="spine s-pink"     style="--h:140px;--rot:5deg"><span>LA VIDA</span></div>
+          <div class="spine s-teal s-tilt" style="--h:154px;--rot:-7deg"><span>SUERTE</span></div>
         </div>
 
         <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
