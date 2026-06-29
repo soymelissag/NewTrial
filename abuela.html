@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Abuela 8 Ball &middot; La Bola de la Abuela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Ask Abuela anything. She has seen it all, mija, and she is not afraid to tell you the truth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/abuela.css">
+</head>
+<body>
+  <!-- ===================== APP SHELL ===================== -->
+  <main id="app">
+
+    <!-- ===================== 1. INTRO SCREEN ===================== -->
+    <section class="screen screen--intro is-active" id="screen-intro" data-screen="intro">
+      <div class="wrap">
+        <p class="kicker">La Bola de la Abuela &middot; Est. Siempre</p>
+        <h1 class="title">
+          <span class="title__line c-magenta">ABUELA</span>
+          <span class="title__line c-purple">8 BALL</span>
+        </h1>
+        <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
+          Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
+
+        <div class="abuela-art" aria-hidden="true">
+          <!-- Flat-illustration abuela, drawn to match the reference palette -->
+          <svg viewBox="0 0 220 240" role="img" aria-label="Illustration of an abuela">
+            <!-- hair bun -->
+            <ellipse cx="110" cy="58" rx="62" ry="48" fill="#b3a6d9"/>
+            <circle cx="110" cy="34" r="20" fill="#b3a6d9"/>
+            <!-- face -->
+            <ellipse cx="110" cy="100" rx="52" ry="56" fill="#f4a6c6"/>
+            <!-- glasses -->
+            <circle cx="86" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
+            <circle cx="134" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
+            <line x1="106" y1="98" x2="114" y2="98" stroke="#e6007e" stroke-width="5"/>
+            <!-- eyes -->
+            <circle cx="86" cy="98" r="6" fill="#2f2440"/>
+            <circle cx="134" cy="98" r="6" fill="#2f2440"/>
+            <!-- rosy cheeks -->
+            <circle cx="70" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
+            <circle cx="150" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
+            <!-- knowing smile -->
+            <path d="M88 128 Q110 148 132 128" fill="none" stroke="#c83a6b" stroke-width="5" stroke-linecap="round"/>
+            <!-- shoulders / shawl -->
+            <path d="M44 240 Q44 168 110 168 Q176 168 176 240 Z" fill="#ff5a2b"/>
+            <path d="M64 240 Q72 196 110 196 Q148 196 156 240 Z" fill="#2e9e5b"/>
+            <!-- flower brooch -->
+            <g transform="translate(110 206)">
+              <circle r="6" fill="#ffd23f"/>
+              <circle cx="9" r="5" fill="#e6007e"/><circle cx="-9" r="5" fill="#e6007e"/>
+              <circle cy="9" r="5" fill="#e6007e"/><circle cy="-9" r="5" fill="#e6007e"/>
+            </g>
+          </svg>
+        </div>
+
+        <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
+        <p class="fineprint"><button class="linkish" data-go="about">How does this work?</button></p>
+      </div>
+    </section>
+
+    <!-- ===================== 2. ASK / BOOKING SCREEN ===================== -->
+    <section class="screen screen--ask" id="screen-ask" data-screen="ask">
+      <div class="wrap">
+        <p class="kicker c-green">Step one of one</p>
+        <h2 class="heading">Ask <span class="c-magenta">la abuela</span><br>a question.</h2>
+        <p class="lede lede--tight">Closes your eyes, mija. Think hard. Then write it down so she knows you are serious.</p>
+
+        <form id="ask-form" novalidate>
+          <label class="field-label" for="question">Your question</label>
+          <input class="field" id="question" name="question" type="text" autocomplete="off"
+                 placeholder="Should I text him back?" maxlength="140">
+
+          <div class="moods" role="group" aria-label="What kind of advice do you want?">
+            <span class="moods__label">What do you need today?</span>
+            <button type="button" class="chip is-selected" data-mood="amor">💘 Amor</button>
+            <button type="button" class="chip" data-mood="dinero">💰 Dinero</button>
+            <button type="button" class="chip" data-mood="familia">🏠 Familia</button>
+            <button type="button" class="chip" data-mood="vida">🌶️ La Vida</button>
+          </div>
+
+          <button class="btn btn--purple btn--block" type="submit" id="shake-btn">
+            Shake the bola 🔮
+          </button>
+        </form>
+        <p class="fineprint"><button class="linkish" data-go="intro">&larr; Back</button></p>
+      </div>
+    </section>
+
+    <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
+    <section class="screen screen--wait" id="screen-wait" data-screen="wait">
+      <div class="wrap">
+        <div class="ball ball--shaking" aria-hidden="true"><span class="ball__star">★</span></div>
+        <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
+      </div>
+    </section>
+
+    <!-- ===================== 4. ANSWER SCREEN ===================== -->
+    <section class="screen screen--answer" id="screen-answer" data-screen="answer">
+      <div class="wrap">
+        <p class="kicker c-orange">La abuela has spoken</p>
+        <p class="your-q" id="echo-q"></p>
+        <blockquote class="advice" id="advice-text">…</blockquote>
+        <p class="advice-en" id="advice-en"></p>
+        <div class="btn-row">
+          <button class="btn btn--magenta" data-go="ask">Ask again 🔮</button>
+          <button class="btn btn--ghost" id="share-btn" type="button">Share her wisdom</button>
+        </div>
+        <p class="fineprint" id="share-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ===================== 5. ABOUT SCREEN ===================== -->
+    <section class="screen screen--about" id="screen-about" data-screen="about">
+      <div class="wrap">
+        <p class="kicker c-purple">The legend</p>
+        <h2 class="heading">About <span class="c-green">la abuela</span></h2>
+        <p class="lede">Abuela 8 Ball is the world's most opinionated fortune teller. Ask any
+          question, pick what is weighing on your heart, and shake the bola. She answers in her
+          own words — half blessing, half regañada (scolding), always with love.</p>
+        <ul class="steps">
+          <li><b>1.</b> Write your question. Be honest, she always knows when you're not.</li>
+          <li><b>2.</b> Pick a topic: amor, dinero, familia, or la vida.</li>
+          <li><b>3.</b> Shake the bola and receive your consejo.</li>
+        </ul>
+        <p class="lede lede--tight">Not a substitute for actually calling your real grandmother. Llámala. She misses you.</p>
+        <button class="btn btn--magenta" data-go="intro">&larr; Take me to abuela</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">Hecho con 💛 &middot; Abuela 8 Ball</footer>
+
+  <script src="js/abuela.js"></script>
+</body>
+</html>

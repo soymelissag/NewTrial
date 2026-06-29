@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Abuela 8 Ball &middot; La Bola de la Abuela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Ask Abuela anything. She has seen it all, mija, and she is not afraid to tell you the truth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+  <style>
+/* ===========================================================
+   ABUELA 8 BALL — styles
+   Palette pulled from the reference art:
+   orange/red, magenta, purple, green, light pink, cream.
+   Type: Anton (chunky uppercase display) + Fraunces (body).
+   =========================================================== */
+
+:root {
+  --cream:   #fff7e9;
+  --ink:     #2f2440;
+  --magenta: #e6007e;
+  --purple:  #6c4bd1;
+  --lilac:   #b3a6d9;
+  --orange:  #ff5a2b;
+  --green:   #2e9e5b;
+  --pink:    #f4a6c6;
+  --yellow:  #ffd23f;
+  --shadow:  0 10px 0 rgba(47,36,64,.12);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  /* playful confetti dots like the busy illustration background */
+  background-image:
+    radial-gradient(var(--pink) 8%, transparent 9%),
+    radial-gradient(var(--lilac) 8%, transparent 9%);
+  background-size: 64px 64px, 64px 64px;
+  background-position: 0 0, 32px 32px;
+}
+
+/* ---------- App shell / screen switching ---------- */
+#app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 18px 72px;
+}
+
+.screen { display: none; width: 100%; }
+.screen.is-active { display: block; animation: pop .35s ease both; }
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  background: #fff;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  box-shadow: 14px 14px 0 var(--ink);
+  padding: 34px 30px 38px;
+  text-align: center;
+}
+
+/* ---------- Type ---------- */
+.kicker {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 13px;
+  margin: 0 0 14px;
+  color: var(--orange);
+}
+
+.title {
+  margin: 0 0 18px;
+  line-height: .86;
+}
+.title__line {
+  display: block;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: clamp(58px, 16vw, 104px);
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--ink);
+}
+
+.heading {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(34px, 9vw, 56px);
+  line-height: .92;
+  margin: 0 0 14px;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 auto 24px;
+  max-width: 42ch;
+}
+.lede--tight { margin-bottom: 18px; font-size: 16px; }
+
+/* color helpers */
+.c-magenta { color: var(--magenta); }
+.c-purple  { color: var(--purple); }
+.c-green   { color: var(--green); }
+.c-orange  { color: var(--orange); }
+
+/* ---------- Abuela illustration ---------- */
+.abuela-art {
+  width: 200px;
+  margin: 6px auto 26px;
+}
+.abuela-art svg { width: 100%; height: auto; display: block; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: 20px;
+  color: #fff;
+  background: var(--magenta);
+  border: 4px solid var(--ink);
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--ink);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
+.btn:active { transform: translateY(4px);  box-shadow: 0 2px 0 var(--ink); }
+
+.btn--magenta { background: var(--magenta); }
+.btn--purple  { background: var(--purple); }
+.btn--block   { display: block; width: 100%; margin-top: 6px; }
+.btn--ghost   { background: var(--green); }
+
+.btn-row {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  margin-top: 8px;
+}
+
+/* ---------- Form ---------- */
+#ask-form { text-align: left; margin-top: 8px; }
+.field-label, .moods__label {
+  display: block;
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 13px;
+  color: var(--purple);
+  margin: 0 0 8px;
+}
+.field {
+  width: 100%;
+  font-family: "Fraunces", serif;
+  font-size: 18px;
+  padding: 14px 16px;
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  background: var(--cream);
+  margin-bottom: 22px;
+}
+.field:focus { outline: none; box-shadow: 0 0 0 4px var(--yellow); }
+
+.moods { margin-bottom: 24px; }
+.moods__label { margin-bottom: 12px; }
+.chip {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 15px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 16px;
+  margin: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+.chip.is-selected { background: var(--purple); color: #fff; }
+
+/* ---------- Waiting / shaking ball ---------- */
+.screen--wait .wrap { padding-top: 56px; padding-bottom: 56px; }
+.ball {
+  width: 160px; height: 160px; margin: 0 auto 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #5a4a8f, var(--purple) 60%, #3a2a6b);
+  border: 5px solid var(--ink);
+  display: grid; place-items: center;
+  box-shadow: inset -10px -14px 0 rgba(0,0,0,.18), 0 8px 0 var(--ink);
+}
+.ball__star {
+  font-family: "Anton", sans-serif;
+  color: var(--yellow);
+  font-size: 64px;
+  text-shadow: 0 3px 0 var(--ink);
+}
+.ball--shaking { animation: shake .5s infinite; }
+@keyframes shake {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  20% { transform: translate(-8px,4px) rotate(-6deg); }
+  40% { transform: translate(8px,-4px) rotate(5deg); }
+  60% { transform: translate(-6px,-3px) rotate(-4deg); }
+  80% { transform: translate(6px,3px) rotate(4deg); }
+}
+.waiting-text {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--purple);
+  font-size: 20px;
+  margin: 0;
+}
+
+/* ---------- Answer ---------- */
+.your-q {
+  font-style: italic;
+  color: var(--purple);
+  font-size: 17px;
+  margin: 0 0 18px;
+}
+.advice {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(26px, 7vw, 40px);
+  line-height: 1.02;
+  color: var(--magenta);
+  margin: 0 0 14px;
+  border: none;
+  padding: 0;
+}
+.advice-en {
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+/* ---------- Misc ---------- */
+.steps {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 4px auto 26px;
+  max-width: 44ch;
+}
+.steps li { font-size: 16px; margin-bottom: 12px; line-height: 1.45; }
+.steps b { color: var(--orange); font-family: "Anton", sans-serif; }
+
+.fineprint { margin: 18px 0 0; font-size: 14px; min-height: 1em; }
+.linkish {
+  background: none; border: none; cursor: pointer;
+  color: var(--purple); font: inherit; text-decoration: underline;
+  font-size: 14px;
+}
+
+.app-footer {
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: 12px;
+  color: var(--ink);
+  padding: 16px;
+  opacity: .7;
+}
+
+@media (max-width: 480px) {
+  .wrap { box-shadow: 8px 8px 0 var(--ink); padding: 26px 20px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ball--shaking { animation: none; }
+  .screen.is-active { animation: none; }
+}
+
+</style>
+</head>
+<body>
+  <!-- ===================== APP SHELL ===================== -->
+  <main id="app">
+
+    <!-- ===================== 1. INTRO SCREEN ===================== -->
+    <section class="screen screen--intro is-active" id="screen-intro" data-screen="intro">
+      <div class="wrap">
+        <p class="kicker">La Bola de la Abuela &middot; Est. Siempre</p>
+        <h1 class="title">
+          <span class="title__line c-magenta">ABUELA</span>
+          <span class="title__line c-purple">8 BALL</span>
+        </h1>
+        <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
+          Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
+
+        <div class="abuela-art" aria-hidden="true">
+          <!-- Flat-illustration abuela, drawn to match the reference palette -->
+          <svg viewBox="0 0 220 240" role="img" aria-label="Illustration of an abuela">
+            <!-- hair bun -->
+            <ellipse cx="110" cy="58" rx="62" ry="48" fill="#b3a6d9"/>
+            <circle cx="110" cy="34" r="20" fill="#b3a6d9"/>
+            <!-- face -->
+            <ellipse cx="110" cy="100" rx="52" ry="56" fill="#f4a6c6"/>
+            <!-- glasses -->
+            <circle cx="86" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
+            <circle cx="134" cy="98" r="20" fill="none" stroke="#e6007e" stroke-width="5"/>
+            <line x1="106" y1="98" x2="114" y2="98" stroke="#e6007e" stroke-width="5"/>
+            <!-- eyes -->
+            <circle cx="86" cy="98" r="6" fill="#2f2440"/>
+            <circle cx="134" cy="98" r="6" fill="#2f2440"/>
+            <!-- rosy cheeks -->
+            <circle cx="70" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
+            <circle cx="150" cy="120" r="9" fill="#f0608f" opacity="0.7"/>
+            <!-- knowing smile -->
+            <path d="M88 128 Q110 148 132 128" fill="none" stroke="#c83a6b" stroke-width="5" stroke-linecap="round"/>
+            <!-- shoulders / shawl -->
+            <path d="M44 240 Q44 168 110 168 Q176 168 176 240 Z" fill="#ff5a2b"/>
+            <path d="M64 240 Q72 196 110 196 Q148 196 156 240 Z" fill="#2e9e5b"/>
+            <!-- flower brooch -->
+            <g transform="translate(110 206)">
+              <circle r="6" fill="#ffd23f"/>
+              <circle cx="9" r="5" fill="#e6007e"/><circle cx="-9" r="5" fill="#e6007e"/>
+              <circle cy="9" r="5" fill="#e6007e"/><circle cy="-9" r="5" fill="#e6007e"/>
+            </g>
+          </svg>
+        </div>
+
+        <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
+        <p class="fineprint"><button class="linkish" data-go="about">How does this work?</button></p>
+      </div>
+    </section>
+
+    <!-- ===================== 2. ASK / BOOKING SCREEN ===================== -->
+    <section class="screen screen--ask" id="screen-ask" data-screen="ask">
+      <div class="wrap">
+        <p class="kicker c-green">Step one of one</p>
+        <h2 class="heading">Ask <span class="c-magenta">la abuela</span><br>a question.</h2>
+        <p class="lede lede--tight">Closes your eyes, mija. Think hard. Then write it down so she knows you are serious.</p>
+
+        <form id="ask-form" novalidate>
+          <label class="field-label" for="question">Your question</label>
+          <input class="field" id="question" name="question" type="text" autocomplete="off"
+                 placeholder="Should I text him back?" maxlength="140">
+
+          <div class="moods" role="group" aria-label="What kind of advice do you want?">
+            <span class="moods__label">What do you need today?</span>
+            <button type="button" class="chip is-selected" data-mood="amor">💘 Amor</button>
+            <button type="button" class="chip" data-mood="dinero">💰 Dinero</button>
+            <button type="button" class="chip" data-mood="familia">🏠 Familia</button>
+            <button type="button" class="chip" data-mood="vida">🌶️ La Vida</button>
+          </div>
+
+          <button class="btn btn--purple btn--block" type="submit" id="shake-btn">
+            Shake the bola 🔮
+          </button>
+        </form>
+        <p class="fineprint"><button class="linkish" data-go="intro">&larr; Back</button></p>
+      </div>
+    </section>
+
+    <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
+    <section class="screen screen--wait" id="screen-wait" data-screen="wait">
+      <div class="wrap">
+        <div class="ball ball--shaking" aria-hidden="true"><span class="ball__star">★</span></div>
+        <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
+      </div>
+    </section>
+
+    <!-- ===================== 4. ANSWER SCREEN ===================== -->
+    <section class="screen screen--answer" id="screen-answer" data-screen="answer">
+      <div class="wrap">
+        <p class="kicker c-orange">La abuela has spoken</p>
+        <p class="your-q" id="echo-q"></p>
+        <blockquote class="advice" id="advice-text">…</blockquote>
+        <p class="advice-en" id="advice-en"></p>
+        <div class="btn-row">
+          <button class="btn btn--magenta" data-go="ask">Ask again 🔮</button>
+          <button class="btn btn--ghost" id="share-btn" type="button">Share her wisdom</button>
+        </div>
+        <p class="fineprint" id="share-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ===================== 5. ABOUT SCREEN ===================== -->
+    <section class="screen screen--about" id="screen-about" data-screen="about">
+      <div class="wrap">
+        <p class="kicker c-purple">The legend</p>
+        <h2 class="heading">About <span class="c-green">la abuela</span></h2>
+        <p class="lede">Abuela 8 Ball is the world's most opinionated fortune teller. Ask any
+          question, pick what is weighing on your heart, and shake the bola. She answers in her
+          own words — half blessing, half regañada (scolding), always with love.</p>
+        <ul class="steps">
+          <li><b>1.</b> Write your question. Be honest, she always knows when you're not.</li>
+          <li><b>2.</b> Pick a topic: amor, dinero, familia, or la vida.</li>
+          <li><b>3.</b> Shake the bola and receive your consejo.</li>
+        </ul>
+        <p class="lede lede--tight">Not a substitute for actually calling your real grandmother. Llámala. She misses you.</p>
+        <button class="btn btn--magenta" data-go="intro">&larr; Take me to abuela</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">Hecho con 💛 &middot; Abuela 8 Ball</footer>
+
+  <script>
+/* ===========================================================
+   ABUELA 8 BALL — logic
+   Screen routing + abuela's bilingual fortune engine.
+   =========================================================== */
+(function () {
+  "use strict";
+
+  /* ---------- Abuela's wisdom, by mood ----------
+     Each consejo: { es } = her words (shown big, uppercase),
+                    { en } = the soft translation underneath.   */
+  var FORTUNES = {
+    amor: [
+      { es: "Si tiene que pensarlo tanto, la respuesta es no.", en: "If you have to think about it this hard, the answer is no, mija." },
+      { es: "No le ruegues a nadie. Tú eres el premio.", en: "Don't beg anyone. You are the prize." },
+      { es: "Bloquéalo. La paz vale más que la curiosidad.", en: "Block him. Your peace is worth more than your curiosity." },
+      { es: "El amor bueno no te quita el sueño, te lo da.", en: "Good love doesn't steal your sleep — it gives it to you." },
+      { es: "Primero quiérete tú, lo demás llega solo.", en: "Love yourself first. The rest arrives on its own." },
+      { es: "Esa persona ya te dijo quién es. Créele.", en: "That person already told you who they are. Believe them." }
+    ],
+    dinero: [
+      { es: "Guarda algo, que la suerte es coqueta.", en: "Save a little — luck is a flirt, she comes and goes." },
+      { es: "No presumas lo que todavía debes.", en: "Don't show off what you still owe on." },
+      { es: "Trabaja callada y deja que el cheque hable.", en: "Work quietly and let the paycheck do the talking." },
+      { es: "Cómprate el aguacate. La vida es corta.", en: "Buy the avocado. Life is short, mija." },
+      { es: "Lo barato sale caro. Págalo bien una vez.", en: "Cheap things cost more later. Pay well once." },
+      { es: "El dinero va y viene; tu palabra se queda.", en: "Money comes and goes — your word stays." }
+    ],
+    familia: [
+      { es: "Llama a tu mamá. Hoy. No mañana.", en: "Call your mother. Today. Not tomorrow." },
+      { es: "La familia se aguanta, pero los límites también.", en: "Family endures — but so do healthy boundaries." },
+      { es: "Perdona, pero no olvides la receta del caldo.", en: "Forgive — but never forget who taught you the soup." },
+      { es: "Esa tía chismosa no paga tus cuentas. Ignórala.", en: "That gossiping aunt doesn't pay your bills. Ignore her." },
+      { es: "Siéntate a la mesa. Las paces se hacen comiendo.", en: "Sit at the table. Peace is made over food." },
+      { es: "Tus raíces son fuertes. No las cortes por orgullo.", en: "Your roots are strong. Don't cut them over pride." }
+    ],
+    vida: [
+      { es: "Lo que es para ti, ni aunque te quites.", en: "What is meant for you won't pass you by." },
+      { es: "Descansa. El mundo gira sin tu permiso.", en: "Rest. The world keeps spinning without your permission." },
+      { es: "Ponte los tenis buenos y camina hacia adelante.", en: "Put on your good shoes and walk forward." },
+      { es: "No cargues piedras que no son tuyas.", en: "Don't carry stones that were never yours to carry." },
+      { es: "Ríete más. Las arrugas de risa son las bonitas.", en: "Laugh more. Smile lines are the pretty wrinkles." },
+      { es: "Reza si quieres, pero también muévete.", en: "Pray if you want — but get up and move too." }
+    ]
+  };
+
+  var WAITING_LINES = [
+    "Abuela is consulting the spirits…",
+    "Abuela is reading the coffee grounds…",
+    "Abuela put down her novela for this…",
+    "Abuela is lighting a candle for you…",
+    "Abuela says: ay, déjame pensar…"
+  ];
+
+  /* ---------- State ---------- */
+  var selectedMood = "amor";
+  var lastFortune = null;
+  var lastQuestion = "";
+
+  /* ---------- Tiny helpers ---------- */
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function showScreen(name) {
+    $all(".screen").forEach(function (s) {
+      s.classList.toggle("is-active", s.dataset.screen === name);
+    });
+    window.scrollTo(0, 0);
+    if (history && history.replaceState) {
+      history.replaceState(null, "", "#" + name);
+    }
+  }
+
+  /* ---------- Navigation (any element with data-go) ---------- */
+  $all("[data-go]").forEach(function (el) {
+    el.addEventListener("click", function () { showScreen(el.dataset.go); });
+  });
+
+  /* ---------- Mood chips ---------- */
+  $all(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      $all(".chip").forEach(function (c) { c.classList.remove("is-selected"); });
+      chip.classList.add("is-selected");
+      selectedMood = chip.dataset.mood;
+    });
+  });
+
+  /* ---------- Ask form -> shake -> answer ---------- */
+  var form = $("#ask-form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var q = $("#question").value.trim();
+    lastQuestion = q;
+
+    // Roll a consejo for the chosen mood; avoid repeating the last one.
+    var pool = FORTUNES[selectedMood] || FORTUNES.vida;
+    var next = pick(pool);
+    if (pool.length > 1) {
+      while (next === lastFortune) { next = pick(pool); }
+    }
+    lastFortune = next;
+
+    // Show the shaking screen, then reveal.
+    $("#waiting-text").textContent = pick(WAITING_LINES);
+    showScreen("wait");
+
+    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 350 : 1900;
+    window.setTimeout(function () {
+      $("#echo-q").textContent = q ? "“" + q + "”" : "You came empty-handed, but abuela still answers.";
+      $("#advice-text").textContent = next.es;
+      $("#advice-en").textContent = next.en;
+      $("#share-status").textContent = "";
+      showScreen("answer");
+    }, delay);
+  });
+
+  /* ---------- Share ---------- */
+  $("#share-btn").addEventListener("click", function () {
+    if (!lastFortune) { return; }
+    var text = "Abuela 8 Ball says: “" + lastFortune.es + "” — " + lastFortune.en;
+    var status = $("#share-status");
+
+    if (navigator.share) {
+      navigator.share({ title: "Abuela 8 Ball", text: text }).catch(function () {});
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = "Copied! Now go share abuela's wisdom. 💛";
+      }, function () {
+        status.textContent = text;
+      });
+    } else {
+      status.textContent = text;
+    }
+  });
+
+  /* ---------- Honor an incoming hash (deep link / refresh) ---------- */
+  var valid = ["intro", "ask", "wait", "answer", "about"];
+  var initial = (location.hash || "").replace("#", "");
+  // Never land directly on the transient wait/answer screens on load.
+  if (valid.indexOf(initial) !== -1 && initial !== "wait" && initial !== "answer") {
+    showScreen(initial);
+  }
+})();
+
+</script>
+</body>
+</html>
