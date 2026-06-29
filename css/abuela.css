@@ -1,0 +1,279 @@
+/* ===========================================================
+   ABUELA 8 BALL — styles
+   Palette pulled from the reference art:
+   orange/red, magenta, purple, green, light pink, cream.
+   Type: Anton (chunky uppercase display) + Fraunces (body).
+   =========================================================== */
+
+:root {
+  --cream:   #fff7e9;
+  --ink:     #2f2440;
+  --magenta: #e6007e;
+  --purple:  #6c4bd1;
+  --lilac:   #b3a6d9;
+  --orange:  #ff5a2b;
+  --green:   #2e9e5b;
+  --pink:    #f4a6c6;
+  --yellow:  #ffd23f;
+  --shadow:  0 10px 0 rgba(47,36,64,.12);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  /* playful confetti dots like the busy illustration background */
+  background-image:
+    radial-gradient(var(--pink) 8%, transparent 9%),
+    radial-gradient(var(--lilac) 8%, transparent 9%);
+  background-size: 64px 64px, 64px 64px;
+  background-position: 0 0, 32px 32px;
+}
+
+/* ---------- App shell / screen switching ---------- */
+#app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 18px 72px;
+}
+
+.screen { display: none; width: 100%; }
+.screen.is-active { display: block; animation: pop .35s ease both; }
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  background: #fff;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  box-shadow: 14px 14px 0 var(--ink);
+  padding: 34px 30px 38px;
+  text-align: center;
+}
+
+/* ---------- Type ---------- */
+.kicker {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 13px;
+  margin: 0 0 14px;
+  color: var(--orange);
+}
+
+.title {
+  margin: 0 0 18px;
+  line-height: .86;
+}
+.title__line {
+  display: block;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: clamp(58px, 16vw, 104px);
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--ink);
+}
+
+.heading {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(34px, 9vw, 56px);
+  line-height: .92;
+  margin: 0 0 14px;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 auto 24px;
+  max-width: 42ch;
+}
+.lede--tight { margin-bottom: 18px; font-size: 16px; }
+
+/* color helpers */
+.c-magenta { color: var(--magenta); }
+.c-purple  { color: var(--purple); }
+.c-green   { color: var(--green); }
+.c-orange  { color: var(--orange); }
+
+/* ---------- Abuela illustration ---------- */
+.abuela-art {
+  width: 200px;
+  margin: 6px auto 26px;
+}
+.abuela-art svg { width: 100%; height: auto; display: block; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: 20px;
+  color: #fff;
+  background: var(--magenta);
+  border: 4px solid var(--ink);
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--ink);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
+.btn:active { transform: translateY(4px);  box-shadow: 0 2px 0 var(--ink); }
+
+.btn--magenta { background: var(--magenta); }
+.btn--purple  { background: var(--purple); }
+.btn--block   { display: block; width: 100%; margin-top: 6px; }
+.btn--ghost   { background: var(--green); }
+
+.btn-row {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  margin-top: 8px;
+}
+
+/* ---------- Form ---------- */
+#ask-form { text-align: left; margin-top: 8px; }
+.field-label, .moods__label {
+  display: block;
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 13px;
+  color: var(--purple);
+  margin: 0 0 8px;
+}
+.field {
+  width: 100%;
+  font-family: "Fraunces", serif;
+  font-size: 18px;
+  padding: 14px 16px;
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  background: var(--cream);
+  margin-bottom: 22px;
+}
+.field:focus { outline: none; box-shadow: 0 0 0 4px var(--yellow); }
+
+.moods { margin-bottom: 24px; }
+.moods__label { margin-bottom: 12px; }
+.chip {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 15px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 16px;
+  margin: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+.chip.is-selected { background: var(--purple); color: #fff; }
+
+/* ---------- Waiting / shaking ball ---------- */
+.screen--wait .wrap { padding-top: 56px; padding-bottom: 56px; }
+.ball {
+  width: 160px; height: 160px; margin: 0 auto 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #5a4a8f, var(--purple) 60%, #3a2a6b);
+  border: 5px solid var(--ink);
+  display: grid; place-items: center;
+  box-shadow: inset -10px -14px 0 rgba(0,0,0,.18), 0 8px 0 var(--ink);
+}
+.ball__star {
+  font-family: "Anton", sans-serif;
+  color: var(--yellow);
+  font-size: 64px;
+  text-shadow: 0 3px 0 var(--ink);
+}
+.ball--shaking { animation: shake .5s infinite; }
+@keyframes shake {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  20% { transform: translate(-8px,4px) rotate(-6deg); }
+  40% { transform: translate(8px,-4px) rotate(5deg); }
+  60% { transform: translate(-6px,-3px) rotate(-4deg); }
+  80% { transform: translate(6px,3px) rotate(4deg); }
+}
+.waiting-text {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--purple);
+  font-size: 20px;
+  margin: 0;
+}
+
+/* ---------- Answer ---------- */
+.your-q {
+  font-style: italic;
+  color: var(--purple);
+  font-size: 17px;
+  margin: 0 0 18px;
+}
+.advice {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(26px, 7vw, 40px);
+  line-height: 1.02;
+  color: var(--magenta);
+  margin: 0 0 14px;
+  border: none;
+  padding: 0;
+}
+.advice-en {
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+/* ---------- Misc ---------- */
+.steps {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 4px auto 26px;
+  max-width: 44ch;
+}
+.steps li { font-size: 16px; margin-bottom: 12px; line-height: 1.45; }
+.steps b { color: var(--orange); font-family: "Anton", sans-serif; }
+
+.fineprint { margin: 18px 0 0; font-size: 14px; min-height: 1em; }
+.linkish {
+  background: none; border: none; cursor: pointer;
+  color: var(--purple); font: inherit; text-decoration: underline;
+  font-size: 14px;
+}
+
+.app-footer {
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: 12px;
+  color: var(--ink);
+  padding: 16px;
+  opacity: .7;
+}
+
+@media (max-width: 480px) {
+  .wrap { box-shadow: 8px 8px 0 var(--ink); padding: 26px 20px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ball--shaking { animation: none; }
+  .screen.is-active { animation: none; }
+}
