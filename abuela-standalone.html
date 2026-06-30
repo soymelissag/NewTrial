@@ -236,23 +236,22 @@ body::before {
 .focus-ball:active { transform: scale(0.95); }
 .focus-ball:hover .orb__fig { transform: translateY(8px); }
 
-/* revealed header (top) */
-.focus-header {
+/* title block (always visible) */
+.focus-top {
   position: absolute;
-  top: 40px;
+  top: 44px;
   left: 0; right: 0;
-  margin: 0;
   text-align: center;
+}
+.focus-kicker {
+  margin: 0 0 8px;
   font-family: "Space Mono", monospace;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .3em;
+  letter-spacing: .26em;
   font-size: 9px;
-  color: rgba(15,15,19,0.40);
-  opacity: 0;
-  transition: opacity .7s ease;
+  color: rgba(15,15,19,0.45);
 }
-.focus.revealed .focus-header { opacity: 1; }
 
 /* tap hint */
 .focus-hint {
@@ -295,10 +294,11 @@ body::before {
 .focus-title {
   font-family: "Syne", sans-serif;
   font-weight: 800;
-  font-size: 28px;
-  line-height: 1.1;
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--dark);
-  margin: 0 0 8px;
+  margin: 0;
 }
 .focus-tagline {
   font-family: "Fraunces", serif;
@@ -615,8 +615,11 @@ body::before {
     <section class="screen screen--focus is-active" id="screen-intro" data-screen="intro">
       <div class="focus" id="focus-root">
 
-        <!-- revealed header -->
-        <p class="focus-header">La Bola de la Abuela</p>
+        <!-- title (always visible) -->
+        <div class="focus-top">
+          <p class="focus-kicker">La Bola de la Abuela &middot; Est. Siempre</p>
+          <h1 class="focus-title">ABUELA <span class="c-orange">8 BALL</span></h1>
+        </div>
 
         <!-- the orb -->
         <div class="focus-orb-area">
@@ -632,11 +635,8 @@ body::before {
 
         <!-- revealed UI -->
         <div class="focus-ui" id="ui-reveal">
-          <div class="focus-ui__text">
-            <h1 class="focus-title">ABUELA <span class="c-orange">8 BALL</span></h1>
-            <p class="focus-tagline">"She has survived seven decades and one bad telenovela.
-              She will tell you what you need to hear."</p>
-          </div>
+          <p class="focus-tagline">"She has survived seven decades and one bad telenovela.
+            She will tell you what you need to hear."</p>
           <button class="focus-cta" data-go="ask">
             <span>Pídele Consejo</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
