@@ -16,6 +16,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "TAYMisprint";
+  src: url("../fonts/TAYMisprint-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --paper:  #f3ecda;   /* warm cream ground */
@@ -33,7 +40,8 @@
   --skin:   #f1e6cf;   /* illustration skin */
   --white:  #fdfaf2;
   --cream:  #f4efe6;   /* focused-view ground */
-  --o:      #f94a29;   /* brand orange */
+  --grape:  #7b3fe4;   /* brand purple (replaces orange accent) */
+  --grape-dark: #6a2fd0;
   --dark:   #0f0f13;   /* brand dark ink */
 }
 
@@ -193,8 +201,11 @@ body::before {
   width: 100%;
   min-height: calc(100vh - 52px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 22px;
+  text-align: center;
 }
 
 .focus-orb-area { position: relative; display: grid; place-items: center; }
@@ -214,8 +225,8 @@ body::before {
 .focus-orb-area:active .focus-glow { opacity: 0.6; }
 
 .focus-ball {
-  width: min(82vw, 360px);
-  height: min(82vw, 360px);
+  width: min(76vw, 330px);
+  height: min(76vw, 330px);
   padding: 0;
   cursor: pointer;
   transition: transform .7s cubic-bezier(.2,.8,.2,1);
@@ -225,15 +236,10 @@ body::before {
 .focus-ball:active { transform: scale(0.95); }
 .focus-ball:hover .orb__fig { transform: translateY(8px); }
 
-/* title block (always visible) */
-.focus-top {
-  position: absolute;
-  top: 44px;
-  left: 0; right: 0;
-  text-align: center;
-}
+/* title block (always visible, directly above the orb) */
+.focus-top { margin: 0; }
 .focus-kicker {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-family: "Space Mono", monospace;
   font-weight: 700;
   text-transform: uppercase;
@@ -241,14 +247,20 @@ body::before {
   font-size: 9px;
   color: rgba(15,15,19,0.45);
 }
-
-/* tap hint */
-.focus-hint {
-  position: absolute;
-  bottom: 96px;
-  left: 0; right: 0;
+.focus-title {
+  font-family: "TAYMisprint", "Syne", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 0.96;
+  letter-spacing: 0;
+  color: var(--dark);
   margin: 0;
-  text-align: center;
+}
+.focus-accent { display: block; color: var(--grape); }
+
+/* tap hint (in flow, below the orb; keeps its space when revealed) */
+.focus-hint {
+  margin: 0;
   font-family: "Fraunces", serif;
   font-style: italic;
   font-size: 16px;
@@ -259,35 +271,26 @@ body::before {
 @keyframes hintPulse { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
 .focus.revealed .focus-hint { opacity: 0; animation: none; }
 
-/* revealed UI (bottom) */
+/* revealed UI (slides in below the orb) */
 .focus-ui {
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
   width: min(88%, 320px);
-  transform: translateX(-50%) translateY(40px);
+  margin-top: -6px;
+  transform: translateY(16px);
   opacity: 0;
+  max-height: 0;
+  overflow: hidden;
   pointer-events: none;
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity .8s ease, transform .8s ease, max-height .8s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
-  text-align: center;
+  gap: 20px;
 }
 .focus.revealed .focus-ui {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+  max-height: 320px;
   pointer-events: auto;
-}
-.focus-title {
-  font-family: "Syne", sans-serif;
-  font-weight: 800;
-  font-size: 40px;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--dark);
-  margin: 0;
 }
 .focus-tagline {
   font-family: "Fraunces", serif;
@@ -300,7 +303,7 @@ body::before {
 .focus-cta {
   width: 100%;
   height: 56px;
-  background: var(--o);
+  background: var(--grape);
   color: #fff;
   border: none;
   border-radius: 999px;
@@ -309,10 +312,10 @@ body::before {
   justify-content: center;
   gap: 12px;
   cursor: pointer;
-  box-shadow: 0 10px 25px -8px rgba(249,74,41,0.55);
+  box-shadow: 0 10px 25px -8px rgba(123,63,228,0.55);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.focus-cta:hover { background: #f23a16; transform: translateY(-1px); box-shadow: 0 14px 30px -8px rgba(249,74,41,0.6); }
+.focus-cta:hover { background: var(--grape-dark); transform: translateY(-1px); box-shadow: 0 14px 30px -8px rgba(123,63,228,0.6); }
 .focus-cta:active { transform: translateY(2px); box-shadow: none; }
 .focus-cta span {
   font-family: "Syne", sans-serif;
