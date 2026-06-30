@@ -76,6 +76,15 @@
     el.addEventListener("click", function () { showScreen(el.dataset.go); });
   });
 
+  /* ---------- Focused landing: tap the orb to reveal the UI ---------- */
+  var focusBall = $("#focus-ball");
+  var focusRoot = $("#focus-root");
+  if (focusBall && focusRoot) {
+    focusBall.addEventListener("click", function () {
+      focusRoot.classList.toggle("revealed");
+    });
+  }
+
   /* ---------- Mood chips ---------- */
   $all(".chip").forEach(function (chip) {
     chip.addEventListener("click", function () {
