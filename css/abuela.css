@@ -18,16 +18,19 @@
 }
 
 :root {
-  --paper:  #efe7d6;   /* neutral ground behind the card */
-  --ink:    #3a3450;   /* soft deep plum-navy text */
-  --blue:   #8fb0e3;   /* cornflower */
-  --rose:   #d98c9d;   /* dusty rose */
-  --butter: #e7e58f;   /* soft yellow */
-  --sage:   #88a06b;   /* muted green */
-  --terra:  #cf855a;   /* warm terracotta accent */
-  --plum:   #6f5c9c;   /* muted plum (replaces hot pink) */
-  --lilac:  #c7bbe2;   /* soft lilac */
-  --navy:   #41598f;   /* deep cornflower */
+  --paper:  #f3ecda;   /* warm cream ground */
+  --ink:    #211a12;   /* warm near-black (ink-line look) */
+  --blue:   #7c9fe0;   /* cornflower */
+  --rose:   #db7d92;   /* rose */
+  --butter: #f1cf4c;   /* warm yellow */
+  --sage:   #2f9d57;   /* kelly green (sweater) */
+  --terra:  #ef6f3c;   /* warm orange */
+  --plum:   #6f5c9c;   /* plum */
+  --lilac:  #bcaee0;   /* soft lilac */
+  --navy:   #3a57a0;   /* deep cornflower */
+  --marigold:#f2a01d;  /* halo gold */
+  --red:    #e5402a;   /* tomato (lips/accents) */
+  --skin:   #f1e6cf;   /* illustration skin */
   --white:  #fdfaf2;
 }
 
@@ -93,7 +96,7 @@ body {
   letter-spacing: .28em;
   font-size: 12px;
   margin: 0 0 18px;
-  color: var(--plum);
+  color: var(--red);
 }
 
 .title { margin: 0 0 14px; line-height: .9; }
@@ -104,8 +107,8 @@ body {
   line-height: .92;
   letter-spacing: .01em;
 }
-.title__line:first-child { color: var(--plum); }
-.title__line:last-child  { color: var(--terra); }
+.title__line:first-child { color: var(--ink); }
+.title__line:last-child  { color: var(--red); }
 
 .heading {
   font-family: "TAYBirdie", "Anton", serif;
@@ -130,7 +133,39 @@ body {
 .c-orange  { color: var(--terra); }
 
 /* ===========================================================
-   BOOKSHELF HERO
+   ABUELA PORTRAIT HERO
+   =========================================================== */
+.abuela-hero {
+  width: 250px;
+  margin: 4px auto 24px;
+}
+.abuela-hero svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: bob 4s ease-in-out infinite;
+}
+@keyframes bob {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%     { transform: translateY(-6px) rotate(1deg); }
+}
+.abuela-caption {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  display: inline-block;
+  padding: 6px 16px;
+  margin: -6px 0 0;
+  transform: rotate(-3deg);
+}
+
+/* ===========================================================
+   BOOKSHELF (used as secondary decor)
    =========================================================== */
 .shelf {
   position: relative;
@@ -201,17 +236,18 @@ body {
   letter-spacing: .06em;
   font-size: 19px;
   color: var(--white);
-  background: var(--terra);
-  border: none;
+  background: var(--red);
+  border: 3px solid var(--ink);
   border-radius: 999px;
   padding: 15px 34px;
   cursor: pointer;
-  transition: transform .1s ease, filter .1s ease;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform .1s ease, box-shadow .1s ease;
 }
-.btn:hover  { transform: translateY(-2px); filter: brightness(1.05); }
-.btn:active { transform: translateY(1px); }
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
 
-.btn--magenta { background: var(--terra); }  /* legacy hook */
+.btn--magenta { background: var(--red); }  /* legacy hook */
 .btn--purple  { background: var(--plum); }
 .btn--block   { display: block; width: 100%; margin-top: 6px; }
 .btn--ghost   { background: var(--sage); }
@@ -237,12 +273,12 @@ body {
   font-family: "Fraunces", serif;
   font-size: 18px;
   padding: 14px 16px;
-  border: 2px solid var(--ink);
+  border: 3px solid var(--ink);
   border-radius: 12px;
-  background: rgba(253,250,242,.85);
+  background: rgba(253,250,242,.9);
   margin-bottom: 24px;
 }
-.field:focus { outline: none; border-color: var(--plum); }
+.field:focus { outline: none; box-shadow: 0 0 0 3px var(--marigold); }
 
 .moods { margin-bottom: 26px; }
 .moods__label { margin-bottom: 12px; }
@@ -251,16 +287,16 @@ body {
   letter-spacing: .04em;
   text-transform: uppercase;
   font-size: 15px;
-  background: transparent;
+  background: var(--white);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 3px solid var(--ink);
   border-radius: 999px;
   padding: 9px 16px;
   margin: 0 8px 10px 0;
   cursor: pointer;
-  transition: background .12s ease, color .12s ease, border-color .12s ease;
+  transition: background .12s ease, color .12s ease;
 }
-.chip.is-selected { background: var(--plum); border-color: var(--plum); color: var(--white); }
+.chip.is-selected { background: var(--plum); color: var(--white); }
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {

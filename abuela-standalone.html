@@ -29,16 +29,19 @@
 }
 
 :root {
-  --paper:  #efe7d6;   /* neutral ground behind the card */
-  --ink:    #3a3450;   /* soft deep plum-navy text */
-  --blue:   #8fb0e3;   /* cornflower */
-  --rose:   #d98c9d;   /* dusty rose */
-  --butter: #e7e58f;   /* soft yellow */
-  --sage:   #88a06b;   /* muted green */
-  --terra:  #cf855a;   /* warm terracotta accent */
-  --plum:   #6f5c9c;   /* muted plum (replaces hot pink) */
-  --lilac:  #c7bbe2;   /* soft lilac */
-  --navy:   #41598f;   /* deep cornflower */
+  --paper:  #f3ecda;   /* warm cream ground */
+  --ink:    #211a12;   /* warm near-black (ink-line look) */
+  --blue:   #7c9fe0;   /* cornflower */
+  --rose:   #db7d92;   /* rose */
+  --butter: #f1cf4c;   /* warm yellow */
+  --sage:   #2f9d57;   /* kelly green (sweater) */
+  --terra:  #ef6f3c;   /* warm orange */
+  --plum:   #6f5c9c;   /* plum */
+  --lilac:  #bcaee0;   /* soft lilac */
+  --navy:   #3a57a0;   /* deep cornflower */
+  --marigold:#f2a01d;  /* halo gold */
+  --red:    #e5402a;   /* tomato (lips/accents) */
+  --skin:   #f1e6cf;   /* illustration skin */
   --white:  #fdfaf2;
 }
 
@@ -104,7 +107,7 @@ body {
   letter-spacing: .28em;
   font-size: 12px;
   margin: 0 0 18px;
-  color: var(--plum);
+  color: var(--red);
 }
 
 .title { margin: 0 0 14px; line-height: .9; }
@@ -115,8 +118,8 @@ body {
   line-height: .92;
   letter-spacing: .01em;
 }
-.title__line:first-child { color: var(--plum); }
-.title__line:last-child  { color: var(--terra); }
+.title__line:first-child { color: var(--ink); }
+.title__line:last-child  { color: var(--red); }
 
 .heading {
   font-family: "TAYBirdie", "Anton", serif;
@@ -141,7 +144,39 @@ body {
 .c-orange  { color: var(--terra); }
 
 /* ===========================================================
-   BOOKSHELF HERO
+   ABUELA PORTRAIT HERO
+   =========================================================== */
+.abuela-hero {
+  width: 250px;
+  margin: 4px auto 24px;
+}
+.abuela-hero svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: bob 4s ease-in-out infinite;
+}
+@keyframes bob {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%     { transform: translateY(-6px) rotate(1deg); }
+}
+.abuela-caption {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  display: inline-block;
+  padding: 6px 16px;
+  margin: -6px 0 0;
+  transform: rotate(-3deg);
+}
+
+/* ===========================================================
+   BOOKSHELF (used as secondary decor)
    =========================================================== */
 .shelf {
   position: relative;
@@ -212,17 +247,18 @@ body {
   letter-spacing: .06em;
   font-size: 19px;
   color: var(--white);
-  background: var(--terra);
-  border: none;
+  background: var(--red);
+  border: 3px solid var(--ink);
   border-radius: 999px;
   padding: 15px 34px;
   cursor: pointer;
-  transition: transform .1s ease, filter .1s ease;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform .1s ease, box-shadow .1s ease;
 }
-.btn:hover  { transform: translateY(-2px); filter: brightness(1.05); }
-.btn:active { transform: translateY(1px); }
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
 
-.btn--magenta { background: var(--terra); }  /* legacy hook */
+.btn--magenta { background: var(--red); }  /* legacy hook */
 .btn--purple  { background: var(--plum); }
 .btn--block   { display: block; width: 100%; margin-top: 6px; }
 .btn--ghost   { background: var(--sage); }
@@ -248,12 +284,12 @@ body {
   font-family: "Fraunces", serif;
   font-size: 18px;
   padding: 14px 16px;
-  border: 2px solid var(--ink);
+  border: 3px solid var(--ink);
   border-radius: 12px;
-  background: rgba(253,250,242,.85);
+  background: rgba(253,250,242,.9);
   margin-bottom: 24px;
 }
-.field:focus { outline: none; border-color: var(--plum); }
+.field:focus { outline: none; box-shadow: 0 0 0 3px var(--marigold); }
 
 .moods { margin-bottom: 26px; }
 .moods__label { margin-bottom: 12px; }
@@ -262,16 +298,16 @@ body {
   letter-spacing: .04em;
   text-transform: uppercase;
   font-size: 15px;
-  background: transparent;
+  background: var(--white);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 3px solid var(--ink);
   border-radius: 999px;
   padding: 9px 16px;
   margin: 0 8px 10px 0;
   cursor: pointer;
-  transition: background .12s ease, color .12s ease, border-color .12s ease;
+  transition: background .12s ease, color .12s ease;
 }
-.chip.is-selected { background: var(--plum); border-color: var(--plum); color: var(--white); }
+.chip.is-selected { background: var(--plum); color: var(--white); }
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {
@@ -385,32 +421,61 @@ body {
         <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
           Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
 
-        <!-- Bookshelf-of-spines hero, in the flat-collage style of the reference -->
-        <div class="shelf" aria-hidden="true">
-          <div class="spine s-terra" style="--h:148px;--rot:-4deg"><span>CONSEJOS</span></div>
-          <div class="spine s-rose"  style="--h:170px;--rot:3deg"><span>AMOR</span></div>
-          <div class="spine s-plum"  style="--h:132px;--rot:-2deg"><span>CHISME</span></div>
-          <div class="spine s-tilt s-sage" style="--h:158px;--rot:8deg"><span>FAMILIA</span></div>
-
-          <!-- abuela peeking between the books -->
-          <div class="peek">
-            <svg viewBox="0 0 120 150" role="img" aria-label="Abuela peeking from the shelf">
-              <ellipse cx="60" cy="40" rx="40" ry="32" fill="#c7bbe2"/>
-              <ellipse cx="60" cy="74" rx="34" ry="37" fill="#e7c6c9"/>
-              <circle cx="44" cy="72" r="13" fill="none" stroke="#41598f" stroke-width="4"/>
-              <circle cx="76" cy="72" r="13" fill="none" stroke="#41598f" stroke-width="4"/>
-              <line x1="57" y1="72" x2="63" y2="72" stroke="#41598f" stroke-width="4"/>
-              <circle cx="44" cy="72" r="4" fill="#3a3450"/>
-              <circle cx="76" cy="72" r="4" fill="#3a3450"/>
-              <circle cx="34" cy="88" r="6" fill="#d98c9d" opacity=".7"/>
-              <circle cx="86" cy="88" r="6" fill="#d98c9d" opacity=".7"/>
-              <path d="M46 96 Q60 110 74 96" fill="none" stroke="#cf855a" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-          </div>
-
-          <div class="spine s-butter"  style="--h:166px;--rot:-3deg"><span>DINERO</span></div>
-          <div class="spine s-navy"     style="--h:140px;--rot:5deg"><span>LA VIDA</span></div>
-          <div class="spine s-lilac s-tilt" style="--h:154px;--rot:-7deg"><span>SUERTE</span></div>
+        <!-- Hand-drawn abuela portrait: halo, curls, glasses, green sweater -->
+        <div class="abuela-hero" aria-hidden="true">
+          <svg viewBox="0 0 300 290" role="img" aria-label="Illustration of an abuela with a halo and green sweater">
+            <g fill="none" stroke="#211a12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <!-- halo -->
+              <circle cx="150" cy="118" r="92" fill="#f2a01d"/>
+              <!-- sweater -->
+              <path d="M150 244 C92 242 54 276 50 290 L250 290 C246 276 208 242 150 244 Z" fill="#2f9d57"/>
+              <!-- gold square collar -->
+              <path d="M124 250 L110 290 L150 290 L150 250 Z M176 250 L190 290 L150 290 L150 250 Z" fill="#f2a01d" stroke-width="3"/>
+              <!-- neck -->
+              <path d="M128 206 L128 250 Q150 260 172 250 L172 206 Z" fill="#f1e6cf" stroke-width="3"/>
+              <path d="M138 244 q12 8 24 0 M134 250 q16 9 32 0" stroke-width="2"/>
+              <!-- face -->
+              <ellipse cx="150" cy="150" rx="62" ry="76" fill="#f1e6cf"/>
+              <!-- hair: forehead band + bobbly curls -->
+              <path d="M90 168 C80 92 150 62 150 62 C150 62 220 92 210 168 C202 140 182 116 150 116 C118 116 98 140 90 168 Z" fill="#211a12"/>
+            </g>
+            <g fill="#211a12">
+              <circle cx="112" cy="86" r="18"/><circle cx="138" cy="74" r="18"/>
+              <circle cx="165" cy="74" r="18"/><circle cx="190" cy="88" r="17"/>
+              <circle cx="90" cy="120" r="17"/><circle cx="212" cy="118" r="17"/>
+              <circle cx="88" cy="158" r="18"/><circle cx="96" cy="190" r="17"/>
+              <circle cx="110" cy="214" r="15"/><circle cx="214" cy="156" r="18"/>
+              <circle cx="206" cy="188" r="17"/><circle cx="192" cy="214" r="15"/>
+            </g>
+            <!-- earrings -->
+            <g fill="#f2a01d" stroke="#211a12" stroke-width="3">
+              <circle cx="90" cy="182" r="7"/><circle cx="210" cy="180" r="7"/>
+            </g>
+            <!-- glasses + features -->
+            <g fill="none" stroke="#211a12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="124" cy="148" r="27" fill="#fffdf5"/>
+              <circle cx="176" cy="146" r="27" fill="#fffdf5"/>
+              <path d="M151 147 q-1 -4 -27 -3 M151 147 q1 -4 26 -3" stroke-width="3"/>
+              <!-- eyes -->
+              <path d="M112 150 q12 -12 24 0 q-12 9 -24 0 Z" fill="#fff"/>
+              <path d="M164 148 q12 -12 24 0 q-12 9 -24 0 Z" fill="#fff"/>
+              <circle cx="124" cy="149" r="5" fill="#211a12" stroke="none"/>
+              <circle cx="176" cy="147" r="5" fill="#211a12" stroke="none"/>
+              <path d="M114 142 l4 -3 M122 139 l3 -2 M166 140 l4 -3 M174 137 l3 -2" stroke-width="2"/>
+              <!-- nose -->
+              <path d="M150 152 q-8 18 -4 24 q8 5 16 -1" stroke-width="3"/>
+              <!-- cheek/laugh lines -->
+              <path d="M138 176 q-5 9 -2 16 M162 174 q5 9 2 16" stroke-width="2"/>
+            </g>
+            <!-- lips -->
+            <path d="M134 192 q16 -7 32 0 q-9 5 -16 5 q-7 0 -16 -5 Z" fill="#e5402a" stroke="#211a12" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M134 192 q16 6 32 0" fill="none" stroke="#211a12" stroke-width="2"/>
+            <!-- red necklace beads -->
+            <g fill="#e5402a" stroke="#211a12" stroke-width="3">
+              <circle cx="150" cy="284" r="10"/><circle cx="132" cy="290" r="8"/><circle cx="168" cy="290" r="8"/>
+            </g>
+          </svg>
+          <p class="abuela-caption">« Ponte un suéter »</p>
         </div>
 
         <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
