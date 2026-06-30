@@ -17,10 +17,10 @@
     <!-- Reusable "Abuela 8-ball": abuela masked into a glossy purple sphere, white outlines -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <defs>
-        <radialGradient id="ballGrad" cx="38%" cy="32%" r="72%">
-          <stop offset="0%"  stop-color="#8267d6"/>
-          <stop offset="52%" stop-color="#5a3bb0"/>
-          <stop offset="100%" stop-color="#34206e"/>
+        <radialGradient id="ballGrad" cx="0.5" cy="1.12" r="0.95">
+          <stop offset="0%"  stop-color="#7B3FE4"/>
+          <stop offset="40%" stop-color="#46237A"/>
+          <stop offset="100%" stop-color="#2A1054"/>
         </radialGradient>
         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="7"/>
@@ -39,74 +39,80 @@
             values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 9 -5.2"/>
         </filter>
         <symbol id="abuelaBall" viewBox="0 0 300 300">
-          <!-- glossy purple sphere -->
+          <!-- glossy purple sphere (bottom-lit) -->
           <circle cx="150" cy="150" r="139" fill="url(#ballGrad)"/>
-          <ellipse cx="112" cy="104" rx="46" ry="29" fill="#cdbcf2" opacity="0.45" filter="url(#glow)" transform="rotate(-25 112 104)"/>
+          <!-- top sheen -->
+          <ellipse cx="150" cy="58" rx="96" ry="28" fill="#ffffff" opacity="0.20" filter="url(#glow)" transform="rotate(-8 150 58)"/>
 
-          <!-- abuela, masked into the ball, dark navy fills + WHITE outlines -->
+          <!-- sparkles -->
+          <path d="M232 70 l3.6 9.4 9.4 3.6 -9.4 3.6 -3.6 9.4 -3.6 -9.4 -9.4 -3.6 9.4 -3.6 Z" fill="#FFE866">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <path d="M70 96 l2.4 6.2 6.2 2.4 -6.2 2.4 -2.4 6.2 -2.4 -6.2 -6.2 -2.4 6.2 -2.4 Z" fill="#ffffff">
+            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- abuela, masked into the ball (ported drawing, viewBox 0..200) -->
           <g clip-path="url(#ballClip)">
-            <g filter="url(#inkBall)" stroke-linecap="round" stroke-linejoin="round"
-               transform="translate(30,42) scale(0.82)">
-              <!-- halo (filled white) -->
-              <circle cx="150" cy="112" r="92" fill="#fdf8ee" stroke="#fdf8ee" stroke-width="3.5"/>
-              <!-- sweater -->
-              <path d="M150 250 C90 248 52 282 46 302 L254 302 C248 282 210 248 150 250 Z" fill="#14103a" stroke="#fdf8ee" stroke-width="4"/>
-              <!-- riso speckle on the sweater -->
-              <rect x="44" y="244" width="212" height="62" fill="#fdf8ee" opacity="0.85" filter="url(#speckle)" clip-path="url(#sweaterClip)"/>
-              <!-- deep square yoke collar -->
-              <path d="M123 251 Q150 247 177 251 L177 290 Q177 302 165 302 L135 302 Q123 302 123 290 Z" fill="#2a205c" stroke="#fdf8ee" stroke-width="3.5"/>
-              <!-- neck -->
-              <path d="M127 212 L127 250 Q150 260 173 250 L173 212 Z" fill="#2a205c" stroke="#fdf8ee" stroke-width="3.5"/>
-              <!-- throat W crease -->
-              <path d="M138 244 l6 9 l6 -7 l6 9 l5 -7" fill="none" stroke="#fdf8ee" stroke-width="2"/>
+            <g transform="translate(32,42) scale(1.18)" stroke-linecap="round" stroke-linejoin="round">
+              <!-- dashed halo -->
+              <circle cx="100" cy="85" r="72" fill="none" stroke="#A855F7" stroke-width="2" stroke-dasharray="8 8" opacity="0.8"/>
+              <circle cx="100" cy="85" r="64" fill="none" stroke="#D8B4FE" stroke-width="1.5" opacity="0.5"/>
+              <!-- hair + head mass -->
+              <g fill="#090412">
+                <circle cx="100" cy="40" r="32"/>
+                <circle cx="65" cy="50" r="28"/>
+                <circle cx="135" cy="50" r="28"/>
+                <circle cx="45" cy="80" r="28"/>
+                <circle cx="155" cy="80" r="28"/>
+                <circle cx="35" cy="115" r="26"/>
+                <circle cx="165" cy="115" r="26"/>
+                <circle cx="45" cy="150" r="24"/>
+                <circle cx="155" cy="150" r="24"/>
+                <circle cx="70" cy="170" r="22"/>
+                <circle cx="130" cy="170" r="22"/>
+                <circle cx="100" cy="100" r="55"/>
+                <rect x="50" y="100" width="100" height="70"/>
+              </g>
               <!-- face -->
-              <path d="M150 68 C200 68 216 110 212 150 C208 190 188 228 150 232 C112 228 92 190 88 150 C84 110 100 68 150 68 Z" fill="#2a205c" stroke="#fdf8ee" stroke-width="3.5"/>
-              <!-- hair: voluminous bumpy curls framing to the jaw -->
-              <path d="M86 158 C78 96 118 58 150 58 C182 58 222 96 214 158 C206 128 184 106 150 106 C116 106 94 128 86 158 Z" fill="#0f0a26"/>
-              <g fill="#0f0a26">
-                <circle cx="118" cy="88" r="17"/><circle cx="150" cy="76" r="18"/><circle cx="182" cy="88" r="17"/>
-                <circle cx="102" cy="80" r="17"/><circle cx="134" cy="68" r="17"/><circle cx="166" cy="68" r="17"/><circle cx="198" cy="80" r="17"/>
-                <circle cx="150" cy="98" r="15"/><circle cx="124" cy="96" r="13"/><circle cx="176" cy="96" r="13"/>
-                <circle cx="86" cy="110" r="18"/><circle cx="214" cy="108" r="18"/>
-                <circle cx="82" cy="146" r="19"/><circle cx="218" cy="144" r="19"/>
-                <circle cx="84" cy="178" r="19"/><circle cx="216" cy="176" r="19"/>
-                <circle cx="90" cy="208" r="17"/><circle cx="210" cy="206" r="17"/>
-                <circle cx="104" cy="230" r="15"/><circle cx="196" cy="228" r="15"/>
-                <circle cx="120" cy="244" r="12"/><circle cx="180" cy="242" r="12"/>
-              </g>
-              <!-- earrings -->
-              <g fill="#2a205c" stroke="#fdf8ee" stroke-width="2.5">
-                <circle cx="90" cy="184" r="6"/><circle cx="210" cy="182" r="6"/>
-              </g>
+              <path d="M 62 140 C 62 180, 138 180, 138 140 C 138 80, 62 80, 62 140 Z" fill="#D8B4FE"/>
+              <!-- neck -->
+              <rect x="88" y="170" width="24" height="20" fill="#9333EA"/>
+              <!-- sweater + collar -->
+              <path d="M 30 220 C 30 180, 65 178, 100 178 C 135 178, 170 180, 170 220 Z" fill="#4C1D95"/>
+              <path d="M 45 220 L 95 178 L 155 220" fill="none" stroke="#090412" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M 70 220 L 100 195 L 130 220" fill="none" stroke="#090412" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M 100 178 L 100 220" fill="none" stroke="#090412" stroke-width="5"/>
+              <!-- side curls accents -->
+              <path d="M 68 128 Q 75 142 82 152" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 132 128 Q 125 142 118 152" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"/>
+              <path d="M 75 92 Q 85 88 95 90" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 125 92 Q 115 88 105 90" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"/>
               <!-- glasses -->
-              <g fill="none" stroke="#fdf8ee" stroke-width="4">
-                <circle cx="121" cy="150" r="29"/>
-                <circle cx="179" cy="148" r="29"/>
-                <path d="M149 148 q1 -6 4 0" stroke-width="3"/>
+              <g stroke="#FFFFFF" stroke-width="7" fill="none">
+                <circle cx="76" cy="112" r="20"/>
+                <circle cx="124" cy="112" r="20"/>
+                <line x1="96" y1="108" x2="104" y2="108"/>
               </g>
-              <!-- eyebrows -->
-              <g fill="none" stroke="#fdf8ee" stroke-width="2.4">
-                <path d="M106 134 q14 -8 28 -2"/><path d="M166 132 q14 -6 28 2"/>
-              </g>
+              <circle cx="76" cy="112" r="16" fill="#090412" opacity="0.15"/>
+              <circle cx="124" cy="112" r="16" fill="#090412" opacity="0.15"/>
               <!-- eyes -->
-              <path d="M105 152 q16 -13 33 0 q-16 11 -33 0 Z" fill="#c3b6e6" stroke="#fdf8ee" stroke-width="2"/>
-              <path d="M161 150 q16 -13 33 0 q-16 11 -33 0 Z" fill="#c3b6e6" stroke="#fdf8ee" stroke-width="2"/>
-              <circle cx="121" cy="151" r="5.2" fill="#0f0a26"/><circle cx="179" cy="149" r="5.2" fill="#0f0a26"/>
-              <circle cx="123" cy="149" r="1.6" fill="#fdf8ee"/><circle cx="181" cy="147" r="1.6" fill="#fdf8ee"/>
-              <g fill="none" stroke="#fdf8ee" stroke-width="2">
-                <!-- lashes -->
-                <path d="M104 145 l-5 -4 M110 142 l-4 -4 M197 143 l5 -4 M191 140 l4 -4"/>
-                <!-- under-eye -->
-                <path d="M109 165 q12 4 22 1 M168 163 q12 4 22 1" stroke-width="1.6"/>
-                <!-- long hooked nose -->
-                <path d="M151 150 q-9 22 -6 31 q7 6 16 1" stroke-width="3"/>
-                <path d="M145 179 q-3 4 -1 7 M161 181 q3 3 3 6" stroke-width="1.6"/>
-                <!-- laugh lines -->
-                <path d="M133 182 q-6 11 -3 20 M167 180 q6 11 3 20" stroke-width="1.6"/>
-              </g>
-              <!-- lips, slightly parted -->
-              <path d="M132 199 q18 -7 36 0 q-9 6 -18 6 q-9 0 -18 -6 Z" fill="#3a2a64" stroke="#fdf8ee" stroke-width="3"/>
-              <path d="M132 199 q18 6 36 0" fill="none" stroke="#fdf8ee" stroke-width="2"/>
+              <path d="M 66 114 Q 76 106 86 114" fill="none" stroke="#090412" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="76" cy="115" r="4.5" fill="#090412"/>
+              <path d="M 114 114 Q 124 106 134 114" fill="none" stroke="#090412" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="124" cy="115" r="4.5" fill="#090412"/>
+              <!-- nose -->
+              <path d="M 100 115 L 93 138 L 105 138 Z" fill="none" stroke="#090412" stroke-width="3.5" stroke-linejoin="round"/>
+              <!-- mouth -->
+              <path d="M 86 154 Q 100 152 114 154" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round"/>
+              <!-- cheeks -->
+              <path d="M 70 125 Q 76 130 82 125" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <path d="M 130 125 Q 124 130 118 125" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <!-- earrings -->
+              <circle cx="52" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
+              <circle cx="148" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
+              <!-- mole -->
+              <circle cx="118" cy="165" r="2.5" fill="#090412"/>
             </g>
           </g>
         </symbol>
