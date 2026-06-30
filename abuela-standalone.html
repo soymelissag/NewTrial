@@ -413,42 +413,39 @@ body {
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
-    <!-- ===================== 1. INTRO SCREEN ===================== -->
-    <section class="screen screen--intro is-active" id="screen-intro" data-screen="intro">
-      <div class="wrap">
-        <p class="kicker">La Bola de la Abuela &middot; Est. Siempre</p>
-        <h1 class="title">
-          <span class="title__line c-magenta">ABUELA</span>
-          <span class="title__line c-purple">8 BALL</span>
-        </h1>
-        <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
-          Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
+    <!-- Reusable "Abuela 8-ball": the magic 8-ball with the abuela framed in its window -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="inkBall" x="-6%" y="-6%" width="112%" height="112%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.011 0.015" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+        </filter>
+        <clipPath id="winClip"><circle cx="150" cy="172" r="84"/></clipPath>
+        <symbol id="abuelaBall" viewBox="0 0 300 300">
+          <g filter="url(#inkBall)" stroke-linecap="round" stroke-linejoin="round">
+            <!-- inky sphere -->
+            <circle cx="150" cy="150" r="140" fill="#1d1812" stroke="#211a12" stroke-width="5"/>
+            <ellipse cx="96" cy="86" rx="34" ry="15" fill="#fdfaf2" opacity="0.8" transform="rotate(-35 96 86)"/>
+            <!-- little 8 badge up top -->
+            <circle cx="150" cy="52" r="19" fill="#fffdf5" stroke="#211a12" stroke-width="3"/>
+            <text x="150" y="61" text-anchor="middle" font-family="TAYBirdie, Anton, sans-serif" font-size="26" fill="#211a12">8</text>
+            <!-- answer window -->
+            <circle cx="150" cy="172" r="86" fill="#fffdf5" stroke="#211a12" stroke-width="4"/>
 
-        <!-- Hand-drawn abuela portrait: halo, curls, glasses, green sweater, 8-ball -->
-        <div class="abuela-hero" aria-hidden="true">
-          <svg viewBox="0 0 300 300" role="img" aria-label="Illustration of an abuela with a halo and green sweater holding a magic 8 ball">
-            <defs>
-              <filter id="inkA" x="-5%" y="-5%" width="110%" height="110%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="2" seed="7" result="n"/>
-                <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
-              </filter>
-            </defs>
-            <g filter="url(#inkA)" stroke-linecap="round" stroke-linejoin="round">
+            <!-- the abuela, framed inside the window -->
+            <g clip-path="url(#winClip)" transform="translate(57,72) scale(0.62)">
               <!-- halo -->
-              <circle cx="150" cy="116" r="93" fill="#f2a01d" stroke="#211a12" stroke-width="3.5"/>
+              <circle cx="150" cy="116" r="93" fill="#f2a01d"/>
               <!-- sweater -->
               <path d="M150 252 C92 250 54 282 48 300 L252 300 C246 282 208 250 150 252 Z" fill="#2f9d57" stroke="#211a12" stroke-width="4"/>
-              <!-- gold square yoke collar -->
               <path d="M119 256 Q150 247 181 256 L175 300 L125 300 Z" fill="#f2a01d" stroke="#211a12" stroke-width="3.5"/>
               <!-- neck -->
               <path d="M127 214 L127 252 Q150 262 173 252 L173 214 Z" fill="#f1e6cf" stroke="#211a12" stroke-width="3.5"/>
               <path d="M135 246 q15 8 30 0 M139 252 q11 6 22 0" fill="none" stroke="#211a12" stroke-width="2"/>
               <!-- face -->
-              <path d="M150 70 C198 70 214 112 210 150 C206 188 188 226 150 230 C112 226 94 188 90 150 C86 112 102 70 150 70 Z"
-                    fill="#f1e6cf" stroke="#211a12" stroke-width="3.5"/>
-              <!-- hair base behind crown -->
+              <path d="M150 70 C198 70 214 112 210 150 C206 188 188 226 150 230 C112 226 94 188 90 150 C86 112 102 70 150 70 Z" fill="#f1e6cf" stroke="#211a12" stroke-width="3.5"/>
+              <!-- hair -->
               <path d="M88 156 C82 98 120 62 150 62 C180 62 218 98 212 156 C204 132 186 110 150 110 C114 110 96 132 88 156 Z" fill="#211a12"/>
-              <!-- bobbly curls -->
               <g fill="#211a12">
                 <circle cx="120" cy="92" r="15"/><circle cx="150" cy="82" r="16"/><circle cx="180" cy="92" r="15"/>
                 <circle cx="106" cy="84" r="16"/><circle cx="134" cy="74" r="16"/><circle cx="166" cy="74" r="16"/><circle cx="194" cy="84" r="16"/>
@@ -477,41 +474,42 @@ body {
               <circle cx="124" cy="149" r="1.8" fill="#fffdf5"/><circle cx="180" cy="147" r="1.8" fill="#fffdf5"/>
               <g fill="none" stroke="#211a12" stroke-width="2">
                 <path d="M104 146 l-5 -4 M110 143 l-4 -4 M196 144 l5 -4 M190 141 l4 -4"/>
-                <!-- under-eye bags -->
                 <path d="M110 164 q12 4 22 1 M168 162 q12 4 22 1" stroke-width="1.6"/>
-                <!-- nose -->
                 <path d="M151 152 q-8 20 -5 28 q6 6 15 1" stroke-width="3"/>
                 <path d="M146 178 q-3 3 -1 6 M161 180 q3 2 3 5" stroke-width="1.6"/>
-                <!-- laugh lines -->
                 <path d="M135 180 q-6 10 -3 19 M165 178 q6 10 3 19" stroke-width="1.6"/>
               </g>
-              <!-- lips (neutral) -->
+              <!-- lips -->
               <path d="M133 198 q17 -6 34 0 q-9 5 -17 5 q-8 0 -17 -5 Z" fill="#e5402a" stroke="#211a12" stroke-width="3"/>
               <path d="M133 198 q17 5 34 0" fill="none" stroke="#211a12" stroke-width="1.8"/>
-              <!-- red necklace beads -->
+              <!-- necklace -->
               <g fill="#e5402a" stroke="#211a12" stroke-width="3">
                 <circle cx="150" cy="292" r="9"/><circle cx="132" cy="300" r="8"/><circle cx="168" cy="300" r="8"/>
               </g>
             </g>
-          </svg>
+            <!-- crisp window rim on top of the clipped art -->
+            <circle cx="150" cy="172" r="86" fill="none" stroke="#211a12" stroke-width="4"/>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
 
-          <!-- magic 8-ball, same ink style, tucked at her shoulder -->
-          <div class="mini-ball">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Magic 8 ball">
-              <defs>
-                <filter id="inkB" x="-8%" y="-8%" width="116%" height="116%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.02 0.025" numOctaves="2" seed="3" result="n"/>
-                  <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
-                </filter>
-              </defs>
-              <g filter="url(#inkB)">
-                <circle cx="60" cy="60" r="50" fill="#1d1812" stroke="#211a12" stroke-width="4"/>
-                <ellipse cx="44" cy="40" rx="16" ry="7.5" fill="#fdfaf2" opacity="0.8" transform="rotate(-35 44 40)"/>
-                <circle cx="60" cy="74" r="21" fill="#fffdf5" stroke="#211a12" stroke-width="3"/>
-                <text x="60" y="85" text-anchor="middle" font-family="TAYBirdie, Anton, sans-serif" font-size="30" fill="#211a12">8</text>
-              </g>
-            </svg>
-          </div>
+    <!-- ===================== 1. INTRO SCREEN ===================== -->
+    <section class="screen screen--intro is-active" id="screen-intro" data-screen="intro">
+      <div class="wrap">
+        <p class="kicker">La Bola de la Abuela &middot; Est. Siempre</p>
+        <h1 class="title">
+          <span class="title__line c-magenta">ABUELA</span>
+          <span class="title__line c-purple">8 BALL</span>
+        </h1>
+        <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
+          Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
+
+        <!-- The Abuela 8-ball: she is framed inside the ball's answer window -->
+        <div class="abuela-hero" aria-hidden="true">
+          <svg class="ball-svg" viewBox="0 0 300 300" role="img" aria-label="Magic 8 ball with the abuela in its window">
+            <use href="#abuelaBall"/>
+          </svg>
           <p class="abuela-caption">« Ponte un su&eacute;ter »</p>
         </div>
 
@@ -552,19 +550,8 @@ body {
     <section class="screen screen--wait" id="screen-wait" data-screen="wait">
       <div class="wrap">
         <div class="ball ball--shaking" aria-hidden="true">
-          <svg viewBox="0 0 120 120" role="img" aria-label="Magic 8 ball shaking">
-            <defs>
-              <filter id="inkC" x="-8%" y="-8%" width="116%" height="116%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.025" numOctaves="2" seed="3" result="n"/>
-                <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
-              </filter>
-            </defs>
-            <g filter="url(#inkC)">
-              <circle cx="60" cy="60" r="50" fill="#1d1812" stroke="#211a12" stroke-width="4"/>
-              <ellipse cx="44" cy="40" rx="16" ry="7.5" fill="#fdfaf2" opacity="0.8" transform="rotate(-35 44 40)"/>
-              <circle cx="60" cy="74" r="21" fill="#fffdf5" stroke="#211a12" stroke-width="3"/>
-              <text x="60" y="85" text-anchor="middle" font-family="TAYBirdie, Anton, sans-serif" font-size="30" fill="#211a12">8</text>
-            </g>
+          <svg viewBox="0 0 300 300" role="img" aria-label="Abuela 8 ball shaking">
+            <use href="#abuelaBall"/>
           </svg>
         </div>
         <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
