@@ -54,6 +54,7 @@ body {
   color: var(--ink);
   font-family: "Fraunces", Georgia, serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 /* faint blue dot-grid backdrop (from the focused design) */
 body::before {
@@ -225,8 +226,8 @@ body::before {
 .focus-orb-area:active .focus-glow { opacity: 0.6; }
 
 .focus-ball {
-  width: min(76vw, 330px);
-  height: min(76vw, 330px);
+  width: min(64vw, 280px);
+  height: min(64vw, 280px);
   padding: 0;
   cursor: pointer;
   transition: transform .7s cubic-bezier(.2,.8,.2,1);
@@ -250,13 +251,25 @@ body::before {
 .focus-title {
   font-family: "TAYMisprint", "Syne", sans-serif;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 0.96;
+  font-size: clamp(60px, 19vw, 112px);
+  line-height: 0.9;
   letter-spacing: 0;
   color: var(--dark);
   margin: 0;
+  white-space: nowrap;
 }
 .focus-accent { display: block; color: var(--grape); }
+
+.build-tag {
+  position: fixed;
+  right: 8px; bottom: 6px;
+  z-index: 50;
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: rgba(15,15,19,0.28);
+  pointer-events: none;
+}
 
 /* tap hint (in flow, below the orb; keeps its space when revealed) */
 .focus-hint {
