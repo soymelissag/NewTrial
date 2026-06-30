@@ -32,6 +32,9 @@
   --red:    #e5402a;   /* tomato (lips/accents) */
   --skin:   #f1e6cf;   /* illustration skin */
   --white:  #fdfaf2;
+  --cream:  #f4efe6;   /* focused-view ground */
+  --o:      #f94a29;   /* brand orange */
+  --dark:   #0f0f13;   /* brand dark ink */
 }
 
 * { box-sizing: border-box; }
@@ -39,14 +42,27 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
   font-family: "Fraunces", Georgia, serif;
   -webkit-font-smoothing: antialiased;
 }
+/* faint blue dot-grid backdrop (from the focused design) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(112, 157, 230, 0.10);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.55) 1.5px, transparent 0);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
 
 /* ---------- App shell / screen switching ---------- */
 #app {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -133,23 +149,192 @@ body {
 .c-orange  { color: var(--terra); }
 
 /* ===========================================================
-   ABUELA PORTRAIT HERO
+   THE ORB (glossy 3D purple sphere holding the abuela figure)
    =========================================================== */
-.abuela-hero {
+.orb {
   position: relative;
-  width: min(340px, 86%);
-  margin: 8px auto 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 20%, #7B3FE4 0%, #46237A 45%, #1A0B2E 100%);
+  box-shadow: inset 0 -15px 40px rgba(0,0,0,0.7), 0 30px 60px -15px rgba(42,16,84,0.6);
+  border: 1px solid rgba(70,35,122,0.3);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-.abuela-hero > svg {
+.orb__sheen {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 70%;
+  height: 25%;
+  transform: translateX(-50%) rotate(-15deg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.20), transparent);
+  border-radius: 100%;
+  filter: blur(4px);
+  z-index: 20;
+  pointer-events: none;
+}
+.orb__fig {
+  width: 85%;
+  height: 85%;
+  position: relative;
+  z-index: 10;
+  transform: translateY(16px);
+  transition: transform .5s ease;
+}
+
+/* ===========================================================
+   FOCUSED LANDING VIEW (tap to reveal)
+   =========================================================== */
+.screen--focus { width: 100%; }
+.focus {
+  position: relative;
   width: 100%;
-  height: auto;
-  display: block;
-  animation: bob 4s ease-in-out infinite;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@keyframes bob {
-  0%,100% { transform: translateY(0) rotate(-1deg); }
-  50%     { transform: translateY(-6px) rotate(1deg); }
+
+.focus-orb-area { position: relative; display: grid; place-items: center; }
+.focus-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--purple, #7B3FE4);
+  background: #7B3FE4;
+  filter: blur(80px);
+  opacity: 0.20;
+  transform: scale(1.5);
+  transition: opacity 1s ease;
+  pointer-events: none;
 }
+.focus-orb-area:hover .focus-glow { opacity: 0.5; }
+.focus-orb-area:active .focus-glow { opacity: 0.6; }
+
+.focus-ball {
+  width: min(82vw, 360px);
+  height: min(82vw, 360px);
+  padding: 0;
+  cursor: pointer;
+  transition: transform .7s cubic-bezier(.2,.8,.2,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.focus-ball:hover { transform: scale(1.05); }
+.focus-ball:active { transform: scale(0.95); }
+.focus-ball:hover .orb__fig { transform: translateY(8px); }
+
+/* revealed header (top) */
+.focus-header {
+  position: absolute;
+  top: 40px;
+  left: 0; right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  font-size: 9px;
+  color: rgba(15,15,19,0.40);
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+.focus.revealed .focus-header { opacity: 1; }
+
+/* tap hint */
+.focus-hint {
+  position: absolute;
+  bottom: 96px;
+  left: 0; right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(15,15,19,0.30);
+  animation: hintPulse 2s ease-in-out infinite;
+  transition: opacity .5s ease;
+}
+@keyframes hintPulse { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
+.focus.revealed .focus-hint { opacity: 0; animation: none; }
+
+/* revealed UI (bottom) */
+.focus-ui {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  width: min(88%, 320px);
+  transform: translateX(-50%) translateY(40px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease, transform 1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+.focus.revealed .focus-ui {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.focus-title {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--dark);
+  margin: 0 0 8px;
+}
+.focus-tagline {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(15,15,19,0.60);
+  margin: 0;
+}
+.focus-cta {
+  width: 100%;
+  height: 56px;
+  background: var(--o);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -8px rgba(249,74,41,0.55);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.focus-cta:hover { background: #f23a16; transform: translateY(-1px); box-shadow: 0 14px 30px -8px rgba(249,74,41,0.6); }
+.focus-cta:active { transform: translateY(2px); box-shadow: none; }
+.focus-cta span {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.focus-cta svg { width: 16px; height: 16px; }
+.focus-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 10px;
+  color: rgba(15,15,19,0.30);
+  transition: color .2s ease;
+}
+.focus-link:hover { color: var(--dark); }
 
 /* ===========================================================
    BOOKSHELF (used as secondary decor)
@@ -288,9 +473,8 @@ body {
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {
-  width: 230px; height: 230px; margin: 0 auto 30px;
+  width: 220px; height: 220px; margin: 0 auto 30px;
 }
-.ball svg { width: 100%; height: 100%; display: block; }
 .ball--shaking { animation: shake .5s infinite; }
 @keyframes shake {
   0%,100% { transform: translate(0,0) rotate(0); }

@@ -7,7 +7,7 @@
   <meta name="description" content="Ask Abuela anything. She has seen it all, mija, and she is not afraid to tell you the truth.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Mono:wght@700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
 /* ===========================================================
    ABUELA 8 BALL — styles
@@ -43,6 +43,9 @@
   --red:    #e5402a;   /* tomato (lips/accents) */
   --skin:   #f1e6cf;   /* illustration skin */
   --white:  #fdfaf2;
+  --cream:  #f4efe6;   /* focused-view ground */
+  --o:      #f94a29;   /* brand orange */
+  --dark:   #0f0f13;   /* brand dark ink */
 }
 
 * { box-sizing: border-box; }
@@ -50,14 +53,27 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
   font-family: "Fraunces", Georgia, serif;
   -webkit-font-smoothing: antialiased;
 }
+/* faint blue dot-grid backdrop (from the focused design) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(112, 157, 230, 0.10);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.55) 1.5px, transparent 0);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
 
 /* ---------- App shell / screen switching ---------- */
 #app {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -144,23 +160,192 @@ body {
 .c-orange  { color: var(--terra); }
 
 /* ===========================================================
-   ABUELA PORTRAIT HERO
+   THE ORB (glossy 3D purple sphere holding the abuela figure)
    =========================================================== */
-.abuela-hero {
+.orb {
   position: relative;
-  width: min(340px, 86%);
-  margin: 8px auto 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 20%, #7B3FE4 0%, #46237A 45%, #1A0B2E 100%);
+  box-shadow: inset 0 -15px 40px rgba(0,0,0,0.7), 0 30px 60px -15px rgba(42,16,84,0.6);
+  border: 1px solid rgba(70,35,122,0.3);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-.abuela-hero > svg {
+.orb__sheen {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 70%;
+  height: 25%;
+  transform: translateX(-50%) rotate(-15deg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.20), transparent);
+  border-radius: 100%;
+  filter: blur(4px);
+  z-index: 20;
+  pointer-events: none;
+}
+.orb__fig {
+  width: 85%;
+  height: 85%;
+  position: relative;
+  z-index: 10;
+  transform: translateY(16px);
+  transition: transform .5s ease;
+}
+
+/* ===========================================================
+   FOCUSED LANDING VIEW (tap to reveal)
+   =========================================================== */
+.screen--focus { width: 100%; }
+.focus {
+  position: relative;
   width: 100%;
-  height: auto;
-  display: block;
-  animation: bob 4s ease-in-out infinite;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@keyframes bob {
-  0%,100% { transform: translateY(0) rotate(-1deg); }
-  50%     { transform: translateY(-6px) rotate(1deg); }
+
+.focus-orb-area { position: relative; display: grid; place-items: center; }
+.focus-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--purple, #7B3FE4);
+  background: #7B3FE4;
+  filter: blur(80px);
+  opacity: 0.20;
+  transform: scale(1.5);
+  transition: opacity 1s ease;
+  pointer-events: none;
 }
+.focus-orb-area:hover .focus-glow { opacity: 0.5; }
+.focus-orb-area:active .focus-glow { opacity: 0.6; }
+
+.focus-ball {
+  width: min(82vw, 360px);
+  height: min(82vw, 360px);
+  padding: 0;
+  cursor: pointer;
+  transition: transform .7s cubic-bezier(.2,.8,.2,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.focus-ball:hover { transform: scale(1.05); }
+.focus-ball:active { transform: scale(0.95); }
+.focus-ball:hover .orb__fig { transform: translateY(8px); }
+
+/* revealed header (top) */
+.focus-header {
+  position: absolute;
+  top: 40px;
+  left: 0; right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  font-size: 9px;
+  color: rgba(15,15,19,0.40);
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+.focus.revealed .focus-header { opacity: 1; }
+
+/* tap hint */
+.focus-hint {
+  position: absolute;
+  bottom: 96px;
+  left: 0; right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(15,15,19,0.30);
+  animation: hintPulse 2s ease-in-out infinite;
+  transition: opacity .5s ease;
+}
+@keyframes hintPulse { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
+.focus.revealed .focus-hint { opacity: 0; animation: none; }
+
+/* revealed UI (bottom) */
+.focus-ui {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  width: min(88%, 320px);
+  transform: translateX(-50%) translateY(40px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease, transform 1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+.focus.revealed .focus-ui {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.focus-title {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--dark);
+  margin: 0 0 8px;
+}
+.focus-tagline {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(15,15,19,0.60);
+  margin: 0;
+}
+.focus-cta {
+  width: 100%;
+  height: 56px;
+  background: var(--o);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -8px rgba(249,74,41,0.55);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.focus-cta:hover { background: #f23a16; transform: translateY(-1px); box-shadow: 0 14px 30px -8px rgba(249,74,41,0.6); }
+.focus-cta:active { transform: translateY(2px); box-shadow: none; }
+.focus-cta span {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.focus-cta svg { width: 16px; height: 16px; }
+.focus-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 10px;
+  color: rgba(15,15,19,0.30);
+  transition: color .2s ease;
+}
+.focus-link:hover { color: var(--dark); }
 
 /* ===========================================================
    BOOKSHELF (used as secondary decor)
@@ -299,9 +484,8 @@ body {
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {
-  width: 230px; height: 230px; margin: 0 auto 30px;
+  width: 220px; height: 220px; margin: 0 auto 30px;
 }
-.ball svg { width: 100%; height: 100%; display: block; }
 .ball--shaking { animation: shake .5s infinite; }
 @keyframes shake {
   0%,100% { transform: translate(0,0) rotate(0); }
@@ -391,131 +575,77 @@ body {
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
-    <!-- Reusable "Abuela 8-ball": abuela masked into a glossy purple sphere, white outlines -->
+    <!-- Reusable abuela FIGURE (drawn to sit at the bottom of the orb, viewBox 0..200) -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <defs>
-        <radialGradient id="ballGrad" cx="0.5" cy="1.12" r="0.95">
-          <stop offset="0%"  stop-color="#7B3FE4"/>
-          <stop offset="40%" stop-color="#46237A"/>
-          <stop offset="100%" stop-color="#2A1054"/>
-        </radialGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="7"/>
-        </filter>
-        <filter id="inkBall" x="-6%" y="-6%" width="112%" height="112%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.011 0.015" numOctaves="2" seed="7" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
-        </filter>
-        <clipPath id="ballClip"><circle cx="150" cy="150" r="139"/></clipPath>
-        <clipPath id="sweaterClip">
-          <path d="M150 250 C90 248 52 282 46 302 L254 302 C248 282 210 248 150 250 Z"/>
-        </clipPath>
-        <filter id="speckle" x="0" y="0" width="100%" height="100%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="1" seed="11" result="n"/>
-          <feColorMatrix in="n" type="matrix"
-            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 9 -5.2"/>
-        </filter>
-        <symbol id="abuelaBall" viewBox="0 0 300 300">
-          <!-- glossy purple sphere (bottom-lit) -->
-          <circle cx="150" cy="150" r="139" fill="url(#ballGrad)"/>
-          <!-- top sheen -->
-          <ellipse cx="150" cy="58" rx="96" ry="28" fill="#ffffff" opacity="0.20" filter="url(#glow)" transform="rotate(-8 150 58)"/>
-
-          <!-- sparkles -->
-          <path d="M232 70 l3.6 9.4 9.4 3.6 -9.4 3.6 -3.6 9.4 -3.6 -9.4 -9.4 -3.6 9.4 -3.6 Z" fill="#FFE866">
-            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-          </path>
-          <path d="M70 96 l2.4 6.2 6.2 2.4 -6.2 2.4 -2.4 6.2 -2.4 -6.2 -6.2 -2.4 6.2 -2.4 Z" fill="#ffffff">
-            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-          </path>
-
-          <!-- abuela, masked into the ball (ported drawing, viewBox 0..200) -->
-          <g clip-path="url(#ballClip)">
-            <g transform="translate(32,42) scale(1.18)" stroke-linecap="round" stroke-linejoin="round">
-              <!-- dashed halo -->
-              <circle cx="100" cy="85" r="72" fill="none" stroke="#A855F7" stroke-width="2" stroke-dasharray="8 8" opacity="0.8"/>
-              <circle cx="100" cy="85" r="64" fill="none" stroke="#D8B4FE" stroke-width="1.5" opacity="0.5"/>
-              <!-- hair + head mass -->
-              <g fill="#090412">
-                <circle cx="100" cy="40" r="32"/>
-                <circle cx="65" cy="50" r="28"/>
-                <circle cx="135" cy="50" r="28"/>
-                <circle cx="45" cy="80" r="28"/>
-                <circle cx="155" cy="80" r="28"/>
-                <circle cx="35" cy="115" r="26"/>
-                <circle cx="165" cy="115" r="26"/>
-                <circle cx="45" cy="150" r="24"/>
-                <circle cx="155" cy="150" r="24"/>
-                <circle cx="70" cy="170" r="22"/>
-                <circle cx="130" cy="170" r="22"/>
-                <circle cx="100" cy="100" r="55"/>
-                <rect x="50" y="100" width="100" height="70"/>
-              </g>
-              <!-- face -->
-              <path d="M 62 140 C 62 180, 138 180, 138 140 C 138 80, 62 80, 62 140 Z" fill="#D8B4FE"/>
-              <!-- neck -->
-              <rect x="88" y="170" width="24" height="20" fill="#9333EA"/>
-              <!-- sweater + collar -->
-              <path d="M 30 220 C 30 180, 65 178, 100 178 C 135 178, 170 180, 170 220 Z" fill="#4C1D95"/>
-              <path d="M 45 220 L 95 178 L 155 220" fill="none" stroke="#090412" stroke-width="5" stroke-linejoin="round"/>
-              <path d="M 70 220 L 100 195 L 130 220" fill="none" stroke="#090412" stroke-width="5" stroke-linejoin="round"/>
-              <path d="M 100 178 L 100 220" fill="none" stroke="#090412" stroke-width="5"/>
-              <!-- side curls accents -->
-              <path d="M 68 128 Q 75 142 82 152" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"/>
-              <path d="M 132 128 Q 125 142 118 152" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"/>
-              <path d="M 75 92 Q 85 88 95 90" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"/>
-              <path d="M 125 92 Q 115 88 105 90" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"/>
-              <!-- glasses -->
-              <g stroke="#FFFFFF" stroke-width="7" fill="none">
-                <circle cx="76" cy="112" r="20"/>
-                <circle cx="124" cy="112" r="20"/>
-                <line x1="96" y1="108" x2="104" y2="108"/>
-              </g>
-              <circle cx="76" cy="112" r="16" fill="#090412" opacity="0.15"/>
-              <circle cx="124" cy="112" r="16" fill="#090412" opacity="0.15"/>
-              <!-- eyes -->
-              <path d="M 66 114 Q 76 106 86 114" fill="none" stroke="#090412" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="76" cy="115" r="4.5" fill="#090412"/>
-              <path d="M 114 114 Q 124 106 134 114" fill="none" stroke="#090412" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="124" cy="115" r="4.5" fill="#090412"/>
-              <!-- nose -->
-              <path d="M 100 115 L 93 138 L 105 138 Z" fill="none" stroke="#090412" stroke-width="3.5" stroke-linejoin="round"/>
-              <!-- mouth -->
-              <path d="M 86 154 Q 100 152 114 154" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round"/>
-              <!-- cheeks -->
-              <path d="M 70 125 Q 76 130 82 125" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <path d="M 130 125 Q 124 130 118 125" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <!-- earrings -->
-              <circle cx="52" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
-              <circle cx="148" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
-              <!-- mole -->
-              <circle cx="118" cy="165" r="2.5" fill="#090412"/>
-            </g>
+        <symbol id="abuelaFigure" viewBox="0 0 200 200">
+          <g fill="#090412">
+            <circle cx="100" cy="40" r="32"/>
+            <circle cx="65" cy="50" r="28"/>
+            <circle cx="135" cy="50" r="28"/>
+            <circle cx="45" cy="80" r="28"/>
+            <circle cx="155" cy="80" r="28"/>
+            <circle cx="35" cy="115" r="26"/>
+            <circle cx="165" cy="115" r="26"/>
+            <circle cx="45" cy="150" r="24"/>
+            <circle cx="155" cy="150" r="24"/>
+            <circle cx="70" cy="170" r="22"/>
+            <circle cx="130" cy="170" r="22"/>
+            <circle cx="100" cy="100" r="55"/>
+            <rect x="50" y="100" width="100" height="70"/>
           </g>
+          <path d="M 62 140 C 62 180, 138 180, 138 140 C 138 80, 62 80, 62 140 Z" fill="#D8B4FE"/>
+          <rect x="88" y="170" width="24" height="20" fill="#9333EA"/>
+          <path d="M 30 220 C 30 180, 65 178, 100 178 C 135 178, 170 180, 170 220 Z" fill="#4C1D95"/>
+          <g stroke="#FFFFFF" stroke-width="7" fill="none">
+            <circle cx="76" cy="112" r="20"/>
+            <circle cx="124" cy="112" r="20"/>
+          </g>
+          <circle cx="76" cy="115" r="4.5" fill="#090412"/>
+          <circle cx="124" cy="115" r="4.5" fill="#090412"/>
+          <path d="M 100 115 L 93 138 L 105 138 Z" fill="none" stroke="#090412" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M 86 154 Q 100 152 114 154" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="52" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
+          <circle cx="148" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
         </symbol>
       </defs>
     </svg>
 
-    <!-- ===================== 1. INTRO SCREEN ===================== -->
-    <section class="screen screen--intro is-active" id="screen-intro" data-screen="intro">
-      <div class="wrap">
-        <p class="kicker">La Bola de la Abuela &middot; Est. Siempre</p>
-        <h1 class="title">
-          <span class="title__line c-magenta">ABUELA</span>
-          <span class="title__line c-purple">8 BALL</span>
-        </h1>
-        <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
-          Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
+    <!-- ===================== 1. INTRO (FOCUSED) SCREEN ===================== -->
+    <section class="screen screen--focus is-active" id="screen-intro" data-screen="intro">
+      <div class="focus" id="focus-root">
 
-        <!-- The Abuela 8-ball: she is masked into the glossy sphere -->
-        <div class="abuela-hero" aria-hidden="true">
-          <svg class="ball-svg" viewBox="0 0 300 300" role="img" aria-label="Magic 8 ball with the abuela masked inside">
-            <use href="#abuelaBall"/>
-          </svg>
+        <!-- revealed header -->
+        <p class="focus-header">La Bola de la Abuela</p>
+
+        <!-- the orb -->
+        <div class="focus-orb-area">
+          <span class="focus-glow" aria-hidden="true"></span>
+          <button class="orb focus-ball" id="focus-ball" type="button" aria-label="Tap to consult the spirits">
+            <span class="orb__sheen" aria-hidden="true"></span>
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+          </button>
         </div>
 
-        <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
-        <p class="fineprint"><button class="linkish" data-go="about">How does this work?</button></p>
+        <!-- tap hint -->
+        <p class="focus-hint" id="tap-hint">Tap to consult the spirits</p>
+
+        <!-- revealed UI -->
+        <div class="focus-ui" id="ui-reveal">
+          <div class="focus-ui__text">
+            <h1 class="focus-title">ABUELA <span class="c-orange">8 BALL</span></h1>
+            <p class="focus-tagline">"She has survived seven decades and one bad telenovela.
+              She will tell you what you need to hear."</p>
+          </div>
+          <button class="focus-cta" data-go="ask">
+            <span>Pídele Consejo</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+          <button class="focus-link" data-go="about">How does this work?</button>
+        </div>
+
       </div>
     </section>
 
@@ -550,10 +680,9 @@ body {
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
     <section class="screen screen--wait" id="screen-wait" data-screen="wait">
       <div class="wrap">
-        <div class="ball ball--shaking" aria-hidden="true">
-          <svg viewBox="0 0 300 300" role="img" aria-label="Abuela 8 ball shaking">
-            <use href="#abuelaBall"/>
-          </svg>
+        <div class="ball ball--shaking orb" aria-hidden="true">
+          <span class="orb__sheen"></span>
+          <svg class="orb__fig" viewBox="0 0 200 200"><use href="#abuelaFigure"/></svg>
         </div>
         <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
       </div>
@@ -674,6 +803,15 @@ body {
   $all("[data-go]").forEach(function (el) {
     el.addEventListener("click", function () { showScreen(el.dataset.go); });
   });
+
+  /* ---------- Focused landing: tap the orb to reveal the UI ---------- */
+  var focusBall = $("#focus-ball");
+  var focusRoot = $("#focus-root");
+  if (focusBall && focusRoot) {
+    focusBall.addEventListener("click", function () {
+      focusRoot.classList.toggle("revealed");
+    });
+  }
 
   /* ---------- Mood chips ---------- */
   $all(".chip").forEach(function (chip) {
