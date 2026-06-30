@@ -147,15 +147,25 @@ body {
    ABUELA PORTRAIT HERO
    =========================================================== */
 .abuela-hero {
-  width: 250px;
-  margin: 4px auto 24px;
+  position: relative;
+  width: 252px;
+  margin: 4px auto 26px;
 }
-.abuela-hero svg {
+.abuela-hero > svg {
   width: 100%;
   height: auto;
   display: block;
   animation: bob 4s ease-in-out infinite;
 }
+.mini-ball {
+  position: absolute;
+  width: 80px;
+  right: -10px;
+  bottom: 30px;
+  transform: rotate(10deg);
+  animation: bob 4s ease-in-out infinite .5s;
+}
+.mini-ball svg { width: 100%; height: auto; display: block; }
 @keyframes bob {
   0%,100% { transform: translateY(0) rotate(-1deg); }
   50%     { transform: translateY(-6px) rotate(1deg); }
@@ -311,16 +321,9 @@ body {
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {
-  width: 168px; height: 168px; margin: 0 auto 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, #8a78bf, var(--plum) 58%, #463a73);
-  display: grid; place-items: center;
+  width: 180px; height: 180px; margin: 0 auto 28px;
 }
-.ball__star {
-  font-family: "TAYBirdie", "Anton", sans-serif;
-  color: var(--butter);
-  font-size: 76px;
-}
+.ball svg { width: 100%; height: 100%; display: block; }
 .ball--shaking { animation: shake .5s infinite; }
 @keyframes shake {
   0%,100% { transform: translate(0,0) rotate(0); }
@@ -421,61 +424,95 @@ body {
         <p class="lede">She has survived seven decades, three husbands and one bad telenovela.
           Now she will tell you exactly what you need to hear. Whether you like it or not.</p>
 
-        <!-- Hand-drawn abuela portrait: halo, curls, glasses, green sweater -->
+        <!-- Hand-drawn abuela portrait: halo, curls, glasses, green sweater, 8-ball -->
         <div class="abuela-hero" aria-hidden="true">
-          <svg viewBox="0 0 300 290" role="img" aria-label="Illustration of an abuela with a halo and green sweater">
-            <g fill="none" stroke="#211a12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Illustration of an abuela with a halo and green sweater holding a magic 8 ball">
+            <defs>
+              <filter id="inkA" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="2" seed="7" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+              </filter>
+            </defs>
+            <g filter="url(#inkA)" stroke-linecap="round" stroke-linejoin="round">
               <!-- halo -->
-              <circle cx="150" cy="118" r="92" fill="#f2a01d"/>
+              <circle cx="150" cy="116" r="93" fill="#f2a01d" stroke="#211a12" stroke-width="3.5"/>
               <!-- sweater -->
-              <path d="M150 244 C92 242 54 276 50 290 L250 290 C246 276 208 242 150 244 Z" fill="#2f9d57"/>
-              <!-- gold square collar -->
-              <path d="M124 250 L110 290 L150 290 L150 250 Z M176 250 L190 290 L150 290 L150 250 Z" fill="#f2a01d" stroke-width="3"/>
+              <path d="M150 252 C92 250 54 282 48 300 L252 300 C246 282 208 250 150 252 Z" fill="#2f9d57" stroke="#211a12" stroke-width="4"/>
+              <!-- gold square yoke collar -->
+              <path d="M119 256 Q150 247 181 256 L175 300 L125 300 Z" fill="#f2a01d" stroke="#211a12" stroke-width="3.5"/>
               <!-- neck -->
-              <path d="M128 206 L128 250 Q150 260 172 250 L172 206 Z" fill="#f1e6cf" stroke-width="3"/>
-              <path d="M138 244 q12 8 24 0 M134 250 q16 9 32 0" stroke-width="2"/>
+              <path d="M127 214 L127 252 Q150 262 173 252 L173 214 Z" fill="#f1e6cf" stroke="#211a12" stroke-width="3.5"/>
+              <path d="M135 246 q15 8 30 0 M139 252 q11 6 22 0" fill="none" stroke="#211a12" stroke-width="2"/>
               <!-- face -->
-              <ellipse cx="150" cy="150" rx="62" ry="76" fill="#f1e6cf"/>
-              <!-- hair: forehead band + bobbly curls -->
-              <path d="M90 168 C80 92 150 62 150 62 C150 62 220 92 210 168 C202 140 182 116 150 116 C118 116 98 140 90 168 Z" fill="#211a12"/>
-            </g>
-            <g fill="#211a12">
-              <circle cx="112" cy="86" r="18"/><circle cx="138" cy="74" r="18"/>
-              <circle cx="165" cy="74" r="18"/><circle cx="190" cy="88" r="17"/>
-              <circle cx="90" cy="120" r="17"/><circle cx="212" cy="118" r="17"/>
-              <circle cx="88" cy="158" r="18"/><circle cx="96" cy="190" r="17"/>
-              <circle cx="110" cy="214" r="15"/><circle cx="214" cy="156" r="18"/>
-              <circle cx="206" cy="188" r="17"/><circle cx="192" cy="214" r="15"/>
-            </g>
-            <!-- earrings -->
-            <g fill="#f2a01d" stroke="#211a12" stroke-width="3">
-              <circle cx="90" cy="182" r="7"/><circle cx="210" cy="180" r="7"/>
-            </g>
-            <!-- glasses + features -->
-            <g fill="none" stroke="#211a12" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="124" cy="148" r="27" fill="#fffdf5"/>
-              <circle cx="176" cy="146" r="27" fill="#fffdf5"/>
-              <path d="M151 147 q-1 -4 -27 -3 M151 147 q1 -4 26 -3" stroke-width="3"/>
+              <path d="M150 70 C198 70 214 112 210 150 C206 188 188 226 150 230 C112 226 94 188 90 150 C86 112 102 70 150 70 Z"
+                    fill="#f1e6cf" stroke="#211a12" stroke-width="3.5"/>
+              <!-- hair base behind crown -->
+              <path d="M88 156 C82 98 120 62 150 62 C180 62 218 98 212 156 C204 132 186 110 150 110 C114 110 96 132 88 156 Z" fill="#211a12"/>
+              <!-- bobbly curls -->
+              <g fill="#211a12">
+                <circle cx="120" cy="92" r="15"/><circle cx="150" cy="82" r="16"/><circle cx="180" cy="92" r="15"/>
+                <circle cx="106" cy="84" r="16"/><circle cx="134" cy="74" r="16"/><circle cx="166" cy="74" r="16"/><circle cx="194" cy="84" r="16"/>
+                <circle cx="90" cy="112" r="17"/><circle cx="210" cy="110" r="17"/>
+                <circle cx="86" cy="146" r="18"/><circle cx="214" cy="144" r="18"/>
+                <circle cx="88" cy="178" r="17"/><circle cx="212" cy="176" r="17"/>
+                <circle cx="96" cy="206" r="15"/><circle cx="204" cy="204" r="15"/>
+                <circle cx="112" cy="226" r="13"/><circle cx="188" cy="224" r="13"/>
+                <circle cx="124" cy="100" r="11"/><circle cx="176" cy="100" r="11"/>
+              </g>
+              <!-- earrings -->
+              <g fill="#f2a01d" stroke="#211a12" stroke-width="2.5">
+                <circle cx="92" cy="178" r="5.5"/><circle cx="92" cy="192" r="6.5"/>
+                <circle cx="208" cy="176" r="5.5"/><circle cx="208" cy="190" r="6.5"/>
+              </g>
+              <!-- glasses -->
+              <g fill="none" stroke="#211a12" stroke-width="4">
+                <circle cx="122" cy="150" r="28" fill="#fffdf5"/>
+                <circle cx="178" cy="148" r="28" fill="#fffdf5"/>
+                <path d="M148 148 q2 -6 6 0" stroke-width="3"/>
+              </g>
               <!-- eyes -->
-              <path d="M112 150 q12 -12 24 0 q-12 9 -24 0 Z" fill="#fff"/>
-              <path d="M164 148 q12 -12 24 0 q-12 9 -24 0 Z" fill="#fff"/>
-              <circle cx="124" cy="149" r="5" fill="#211a12" stroke="none"/>
-              <circle cx="176" cy="147" r="5" fill="#211a12" stroke="none"/>
-              <path d="M114 142 l4 -3 M122 139 l3 -2 M166 140 l4 -3 M174 137 l3 -2" stroke-width="2"/>
-              <!-- nose -->
-              <path d="M150 152 q-8 18 -4 24 q8 5 16 -1" stroke-width="3"/>
-              <!-- cheek/laugh lines -->
-              <path d="M138 176 q-5 9 -2 16 M162 174 q5 9 2 16" stroke-width="2"/>
-            </g>
-            <!-- lips -->
-            <path d="M134 192 q16 -7 32 0 q-9 5 -16 5 q-7 0 -16 -5 Z" fill="#e5402a" stroke="#211a12" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M134 192 q16 6 32 0" fill="none" stroke="#211a12" stroke-width="2"/>
-            <!-- red necklace beads -->
-            <g fill="#e5402a" stroke="#211a12" stroke-width="3">
-              <circle cx="150" cy="284" r="10"/><circle cx="132" cy="290" r="8"/><circle cx="168" cy="290" r="8"/>
+              <path d="M106 152 q16 -13 32 0 q-16 11 -32 0 Z" fill="#fffdf5" stroke="#211a12" stroke-width="2"/>
+              <path d="M162 150 q16 -13 32 0 q-16 11 -32 0 Z" fill="#fffdf5" stroke="#211a12" stroke-width="2"/>
+              <circle cx="122" cy="151" r="6" fill="#211a12"/><circle cx="178" cy="149" r="6" fill="#211a12"/>
+              <circle cx="124" cy="149" r="1.8" fill="#fffdf5"/><circle cx="180" cy="147" r="1.8" fill="#fffdf5"/>
+              <g fill="none" stroke="#211a12" stroke-width="2">
+                <path d="M104 146 l-5 -4 M110 143 l-4 -4 M196 144 l5 -4 M190 141 l4 -4"/>
+                <!-- under-eye bags -->
+                <path d="M110 164 q12 4 22 1 M168 162 q12 4 22 1" stroke-width="1.6"/>
+                <!-- nose -->
+                <path d="M151 152 q-8 20 -5 28 q6 6 15 1" stroke-width="3"/>
+                <path d="M146 178 q-3 3 -1 6 M161 180 q3 2 3 5" stroke-width="1.6"/>
+                <!-- laugh lines -->
+                <path d="M135 180 q-6 10 -3 19 M165 178 q6 10 3 19" stroke-width="1.6"/>
+              </g>
+              <!-- lips (neutral) -->
+              <path d="M133 198 q17 -6 34 0 q-9 5 -17 5 q-8 0 -17 -5 Z" fill="#e5402a" stroke="#211a12" stroke-width="3"/>
+              <path d="M133 198 q17 5 34 0" fill="none" stroke="#211a12" stroke-width="1.8"/>
+              <!-- red necklace beads -->
+              <g fill="#e5402a" stroke="#211a12" stroke-width="3">
+                <circle cx="150" cy="292" r="9"/><circle cx="132" cy="300" r="8"/><circle cx="168" cy="300" r="8"/>
+              </g>
             </g>
           </svg>
-          <p class="abuela-caption">« Ponte un suéter »</p>
+
+          <!-- magic 8-ball, same ink style, tucked at her shoulder -->
+          <div class="mini-ball">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Magic 8 ball">
+              <defs>
+                <filter id="inkB" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.02 0.025" numOctaves="2" seed="3" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+                </filter>
+              </defs>
+              <g filter="url(#inkB)">
+                <circle cx="60" cy="60" r="50" fill="#1d1812" stroke="#211a12" stroke-width="4"/>
+                <ellipse cx="44" cy="40" rx="16" ry="7.5" fill="#fdfaf2" opacity="0.8" transform="rotate(-35 44 40)"/>
+                <circle cx="60" cy="74" r="21" fill="#fffdf5" stroke="#211a12" stroke-width="3"/>
+                <text x="60" y="85" text-anchor="middle" font-family="TAYBirdie, Anton, sans-serif" font-size="30" fill="#211a12">8</text>
+              </g>
+            </svg>
+          </div>
+          <p class="abuela-caption">« Ponte un su&eacute;ter »</p>
         </div>
 
         <button class="btn btn--magenta" data-go="ask">Pídele consejo &rarr;</button>
@@ -514,7 +551,22 @@ body {
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
     <section class="screen screen--wait" id="screen-wait" data-screen="wait">
       <div class="wrap">
-        <div class="ball ball--shaking" aria-hidden="true"><span class="ball__star">★</span></div>
+        <div class="ball ball--shaking" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Magic 8 ball shaking">
+            <defs>
+              <filter id="inkC" x="-8%" y="-8%" width="116%" height="116%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.025" numOctaves="2" seed="3" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+              </filter>
+            </defs>
+            <g filter="url(#inkC)">
+              <circle cx="60" cy="60" r="50" fill="#1d1812" stroke="#211a12" stroke-width="4"/>
+              <ellipse cx="44" cy="40" rx="16" ry="7.5" fill="#fdfaf2" opacity="0.8" transform="rotate(-35 44 40)"/>
+              <circle cx="60" cy="74" r="21" fill="#fffdf5" stroke="#211a12" stroke-width="3"/>
+              <text x="60" y="85" text-anchor="middle" font-family="TAYBirdie, Anton, sans-serif" font-size="30" fill="#211a12">8</text>
+            </g>
+          </svg>
+        </div>
         <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
       </div>
     </section>

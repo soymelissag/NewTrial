@@ -136,15 +136,25 @@ body {
    ABUELA PORTRAIT HERO
    =========================================================== */
 .abuela-hero {
-  width: 250px;
-  margin: 4px auto 24px;
+  position: relative;
+  width: 252px;
+  margin: 4px auto 26px;
 }
-.abuela-hero svg {
+.abuela-hero > svg {
   width: 100%;
   height: auto;
   display: block;
   animation: bob 4s ease-in-out infinite;
 }
+.mini-ball {
+  position: absolute;
+  width: 80px;
+  right: -10px;
+  bottom: 30px;
+  transform: rotate(10deg);
+  animation: bob 4s ease-in-out infinite .5s;
+}
+.mini-ball svg { width: 100%; height: auto; display: block; }
 @keyframes bob {
   0%,100% { transform: translateY(0) rotate(-1deg); }
   50%     { transform: translateY(-6px) rotate(1deg); }
@@ -300,16 +310,9 @@ body {
 
 /* ---------- Waiting / shaking ball ---------- */
 .ball {
-  width: 168px; height: 168px; margin: 0 auto 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, #8a78bf, var(--plum) 58%, #463a73);
-  display: grid; place-items: center;
+  width: 180px; height: 180px; margin: 0 auto 28px;
 }
-.ball__star {
-  font-family: "TAYBirdie", "Anton", sans-serif;
-  color: var(--butter);
-  font-size: 76px;
-}
+.ball svg { width: 100%; height: 100%; display: block; }
 .ball--shaking { animation: shake .5s infinite; }
 @keyframes shake {
   0%,100% { transform: translate(0,0) rotate(0); }
