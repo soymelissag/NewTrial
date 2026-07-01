@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/abuela.css">
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v10</span>
+  <span class="build-tag" aria-hidden="true">v11</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -91,32 +91,47 @@
       </div>
     </section>
 
-    <!-- ===================== 2. ASK / BOOKING SCREEN ===================== -->
-    <section class="screen screen--ask" id="screen-ask" data-screen="ask">
-      <div class="wrap">
-        <p class="kicker c-green">Step one of one</p>
-        <h2 class="heading">Ask <span class="c-magenta">la abuela</span><br>a question.</h2>
-        <p class="lede lede--tight">Closes your eyes, mija. Think hard. Then write it down so she knows you are serious.</p>
+    <!-- ===================== 2. ASK SCREEN (share your worries) ===================== -->
+    <section class="screen screen--ask ask2" id="screen-ask" data-screen="ask">
+      <div class="ask2-bg" aria-hidden="true"></div>
+      <div class="ask2-smoke" aria-hidden="true"><span></span><span></span></div>
 
-        <form id="ask-form" novalidate>
-          <label class="field-label" for="question">Your question</label>
-          <input class="field" id="question" name="question" type="text" autocomplete="off"
-                 placeholder="Should I text him back?" maxlength="140">
+      <button class="ask2-back" data-go="intro" aria-label="Back">&larr;</button>
 
-          <div class="moods" role="group" aria-label="What kind of advice do you want?">
-            <span class="moods__label">What do you need today?</span>
-            <button type="button" class="chip is-selected" data-mood="amor">💘 Amor</button>
-            <button type="button" class="chip" data-mood="dinero">💰 Dinero</button>
-            <button type="button" class="chip" data-mood="familia">🏠 Familia</button>
-            <button type="button" class="chip" data-mood="vida">🌶️ La Vida</button>
+      <div class="ask2-inner">
+        <!-- orb with the intro abuela -->
+        <div class="ask2-orb">
+          <span class="ask2-orb-glow" aria-hidden="true"></span>
+          <div class="orb ask2-orb-ball">
+            <span class="orb__sheen" aria-hidden="true"></span>
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+          </div>
+        </div>
+
+        <h2 class="ask2-heading">What weighs on your heart?</h2>
+
+        <form id="ask-form" novalidate class="ask2-form">
+          <div class="ask2-paper">
+            <div class="ask2-paper__l1" aria-hidden="true"></div>
+            <div class="ask2-paper__l2" aria-hidden="true"></div>
+            <div class="ask2-paper__inner">
+              <textarea id="question" name="question" class="ask2-textarea"
+                        placeholder="Dear Abuela, I'm worried about..." maxlength="400"></textarea>
+              <span class="ask2-ink">Ink is drying...</span>
+            </div>
           </div>
 
-          <button class="btn btn--purple btn--block" type="submit" id="shake-btn">
-            Shake the bola 🔮
+          <button class="ask2-cta" type="submit" id="shake-btn">
+            Ask the spirits
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
           </button>
         </form>
-        <p class="fineprint"><button class="linkish" data-go="intro">&larr; Back</button></p>
       </div>
+
+      <p class="ask2-footer">Listening with love</p>
     </section>
 
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
