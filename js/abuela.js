@@ -36,7 +36,7 @@
     var cloud = $("#wait-cloud");
     if (!cloud) { return; }
     cloud.innerHTML = "";
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    // Note: reduced-motion still gets the cloud — CSS swaps drift for a gentle fade.
     var pool = CLOUD_WORDS.slice();
     for (var i = pool.length - 1; i > 0; i--) {           // shuffle
       var j = Math.floor(Math.random() * (i + 1));
@@ -161,7 +161,8 @@
     $("#waiting-text").textContent = pick(WAITING_LINES);
     showScreen("wait");
 
-    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 400 : 3400;
+    // Keep a visible loading beat even for reduced-motion users (was 400ms → felt broken).
+    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1900 : 3400;
     window.setTimeout(function () {
       $("#echo-q").textContent = q ? "“" + q + "”" : "You came empty-handed, but abuela still answers.";
       renderWordmark($("#advice-text"), next);
