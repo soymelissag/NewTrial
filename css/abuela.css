@@ -230,7 +230,9 @@ body {
 .focus-ball:active { transform: scale(0.95); }
 .focus-ball:hover .orb__fig { transform: scale(1.03); }
 
-/* blinking eyelids */
+/* blink: abuela's own closed-eyes artwork, faded in over the open figure.
+   The overlay registers 1:1 with #abuelaFigure (same 1255 viewBox), so
+   toggling its opacity reads as a clean blink. */
 .blink-overlay {
   position: absolute;
   inset: 0;
@@ -238,23 +240,18 @@ body {
   height: 100%;
   z-index: 11;
   pointer-events: none;
+  opacity: 0;
+  animation: blink 4.6s steps(1, end) infinite;
 }
-.blink-overlay .lid {
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scaleY(0);
-  animation: blink 4.6s ease-in-out infinite;
-}
-.blink-overlay .lid--r { animation-delay: 25ms; }
 /* a single blink, then an occasional double-blink each cycle */
 @keyframes blink {
-  0%, 30%   { transform: scaleY(0); }   /* eyes open */
-  35%, 44%  { transform: scaleY(1); }   /* single blink (long hold) */
-  50%, 70%  { transform: scaleY(0); }   /* open */
-  73%, 77%  { transform: scaleY(1); }   /* double — first */
-  80%       { transform: scaleY(0); }   /* brief open */
-  83%, 88%  { transform: scaleY(1); }   /* double — second */
-  93%, 100% { transform: scaleY(0); }   /* open */
+  0%, 30%   { opacity: 0; }   /* eyes open */
+  35%, 44%  { opacity: 1; }   /* single blink (long hold) */
+  50%, 70%  { opacity: 0; }   /* open */
+  73%, 77%  { opacity: 1; }   /* double — first */
+  80%       { opacity: 0; }   /* brief open */
+  83%, 88%  { opacity: 1; }   /* double — second */
+  93%, 100% { opacity: 0; }   /* open */
 }
 
 /* intro animation */
@@ -900,5 +897,5 @@ body {
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
   .warm-smoke span, .warm-orb-glow { animation: none; }
   .wm-flower .pk-flower { animation: none; }
-  .blink-overlay .lid { animation: none; }
+  .blink-overlay { animation: none; opacity: 0; }
 }
