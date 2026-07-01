@@ -890,6 +890,7 @@ body {
   font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
   white-space: nowrap;
   opacity: 0;
+  transform: translate(-50%, -50%);   /* centre on point (used by the fade fallback) */
   will-change: transform, opacity;
   animation: cloudWord var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
 }
@@ -900,8 +901,13 @@ body {
   74%  { opacity: .55; }
   100% { opacity: 0; transform: translate(-50%, -50%) translateY(-24px) scale(.92); }
 }
+/* motion-safe cross-fade (no drift/scale) */
+@keyframes cloudFade { 0% { opacity: 0; } 28%, 72% { opacity: .85; } 100% { opacity: 0; } }
+/* gentle "thinking" opacity pulse for the badge (no motion) */
+@keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
 @media (prefers-reduced-motion: reduce) {
-  .wait-cloud { display: none; }
+  /* keep the loading state alive, just without drift */
+  .wait-word { animation-name: cloudFade; }
 }
 
 /* small badge (about) */
@@ -1203,7 +1209,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ball--shaking { animation: none; }
+  /* swap the shake for a motion-free opacity pulse so the loader still reads */
+  .ball--shaking { animation: softPulse 1.5s ease-in-out infinite; }
   .screen.is-active { animation: none; }
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
   .warm-smoke span, .warm-orb-glow { animation: none; }
@@ -1214,7 +1221,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v40</span>
+  <span class="build-tag" aria-hidden="true">v41</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -4829,7 +4836,7 @@ body {
     var cloud = $("#wait-cloud");
     if (!cloud) { return; }
     cloud.innerHTML = "";
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    // Note: reduced-motion still gets the cloud — CSS swaps drift for a gentle fade.
     var pool = CLOUD_WORDS.slice();
     for (var i = pool.length - 1; i > 0; i--) {           // shuffle
       var j = Math.floor(Math.random() * (i + 1));
@@ -4954,7 +4961,8 @@ body {
     $("#waiting-text").textContent = pick(WAITING_LINES);
     showScreen("wait");
 
-    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 400 : 3400;
+    // Keep a visible loading beat even for reduced-motion users (was 400ms → felt broken).
+    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1900 : 3400;
     window.setTimeout(function () {
       $("#echo-q").textContent = q ? "“" + q + "”" : "You came empty-handed, but abuela still answers.";
       renderWordmark($("#advice-text"), next);
