@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/abuela.css">
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v11</span>
+  <span class="build-tag" aria-hidden="true">v12</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -50,6 +50,38 @@
           <path d="M 86 154 Q 100 152 114 154" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round"/>
           <circle cx="52" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
           <circle cx="148" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
+        </symbol>
+
+        <!-- Warm-palette variant (same shape, terracotta glasses) for the interior screens -->
+        <symbol id="abuelaFigureWarm" viewBox="0 0 200 200">
+          <g fill="#1a1716">
+            <circle cx="100" cy="40" r="32"/>
+            <circle cx="65" cy="50" r="28"/>
+            <circle cx="135" cy="50" r="28"/>
+            <circle cx="45" cy="80" r="28"/>
+            <circle cx="155" cy="80" r="28"/>
+            <circle cx="35" cy="115" r="26"/>
+            <circle cx="165" cy="115" r="26"/>
+            <circle cx="45" cy="150" r="24"/>
+            <circle cx="155" cy="150" r="24"/>
+            <circle cx="70" cy="170" r="22"/>
+            <circle cx="130" cy="170" r="22"/>
+            <circle cx="100" cy="100" r="55"/>
+            <rect x="50" y="100" width="100" height="70"/>
+          </g>
+          <path d="M 62 140 C 62 180, 138 180, 138 140 C 138 80, 62 80, 62 140 Z" fill="#e5d4c3"/>
+          <rect x="88" y="170" width="24" height="20" fill="#d6c5b4"/>
+          <path d="M 30 220 C 30 180, 65 178, 100 178 C 135 178, 170 180, 170 220 Z" fill="#da5a2a"/>
+          <g stroke="#da5a2a" stroke-width="7" fill="none">
+            <circle cx="76" cy="112" r="20"/>
+            <circle cx="124" cy="112" r="20"/>
+          </g>
+          <circle cx="76" cy="115" r="4.5" fill="#211e1d"/>
+          <circle cx="124" cy="115" r="4.5" fill="#211e1d"/>
+          <path d="M 100 115 L 93 138 L 105 138 Z" fill="none" stroke="#211e1d" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M 86 155 Q 100 158 114 155" fill="none" stroke="#da5a2a" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="52" cy="142" r="7" fill="#e5d4c3" stroke="#211e1d" stroke-width="3"/>
+          <circle cx="148" cy="142" r="7" fill="#e5d4c3" stroke="#211e1d" stroke-width="3"/>
         </symbol>
       </defs>
     </svg>
@@ -92,36 +124,35 @@
     </section>
 
     <!-- ===================== 2. ASK SCREEN (share your worries) ===================== -->
-    <section class="screen screen--ask ask2" id="screen-ask" data-screen="ask">
-      <div class="ask2-bg" aria-hidden="true"></div>
-      <div class="ask2-smoke" aria-hidden="true"><span></span><span></span></div>
+    <section class="screen screen--ask warm" id="screen-ask" data-screen="ask">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
 
-      <button class="ask2-back" data-go="intro" aria-label="Back">&larr;</button>
+      <button class="warm-back" data-go="intro" aria-label="Back">&larr;</button>
 
-      <div class="ask2-inner">
-        <!-- orb with the intro abuela -->
-        <div class="ask2-orb">
-          <span class="ask2-orb-glow" aria-hidden="true"></span>
-          <div class="orb ask2-orb-ball">
-            <span class="orb__sheen" aria-hidden="true"></span>
-            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+      <div class="warm-inner">
+        <!-- orb with the warm abuela -->
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
           </div>
         </div>
 
-        <h2 class="ask2-heading">What weighs on your heart?</h2>
+        <h2 class="warm-heading">What weighs on your heart?</h2>
 
-        <form id="ask-form" novalidate class="ask2-form">
-          <div class="ask2-paper">
-            <div class="ask2-paper__l1" aria-hidden="true"></div>
-            <div class="ask2-paper__l2" aria-hidden="true"></div>
-            <div class="ask2-paper__inner">
-              <textarea id="question" name="question" class="ask2-textarea"
+        <form id="ask-form" novalidate class="warm-form">
+          <div class="warm-paper">
+            <div class="warm-paper__l1" aria-hidden="true"></div>
+            <div class="warm-paper__l2" aria-hidden="true"></div>
+            <div class="warm-paper__inner">
+              <textarea id="question" name="question" class="warm-textarea"
                         placeholder="Dear Abuela, I'm worried about..." maxlength="400"></textarea>
-              <span class="ask2-ink">Ink is drying...</span>
+              <span class="warm-ink">Ink is drying...</span>
             </div>
           </div>
 
-          <button class="ask2-cta" type="submit" id="shake-btn">
+          <button class="warm-cta" type="submit" id="shake-btn">
             Ask the spirits
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -131,50 +162,98 @@
         </form>
       </div>
 
-      <p class="ask2-footer">Listening with love</p>
+      <p class="warm-footer">Listening with love</p>
     </section>
 
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
-    <section class="screen screen--wait" id="screen-wait" data-screen="wait">
-      <div class="wrap">
-        <div class="ball ball--shaking orb" aria-hidden="true">
-          <span class="orb__sheen"></span>
-          <svg class="orb__fig" viewBox="0 0 200 200"><use href="#abuelaFigure"/></svg>
+    <section class="screen screen--wait warm" id="screen-wait" data-screen="wait">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <div class="warm-inner warm-inner--center">
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="ball ball--shaking orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200"><use href="#abuelaFigureWarm"/></svg>
+          </div>
         </div>
-        <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
+        <p class="warm-waiting" id="waiting-text">Abuela is consulting the spirits…</p>
       </div>
     </section>
 
     <!-- ===================== 4. ANSWER SCREEN ===================== -->
-    <section class="screen screen--answer" id="screen-answer" data-screen="answer">
-      <div class="wrap">
-        <p class="kicker c-orange">La abuela has spoken</p>
-        <p class="your-q" id="echo-q"></p>
-        <blockquote class="advice" id="advice-text">…</blockquote>
-        <p class="advice-en" id="advice-en"></p>
-        <div class="btn-row">
-          <button class="btn btn--magenta" data-go="ask">Ask again 🔮</button>
-          <button class="btn btn--ghost" id="share-btn" type="button">Share her wisdom</button>
+    <section class="screen screen--answer warm" id="screen-answer" data-screen="answer">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <div class="warm-inner">
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
+          </div>
         </div>
-        <p class="fineprint" id="share-status" aria-live="polite"></p>
+
+        <p class="warm-eyebrow">La abuela has spoken</p>
+
+        <div class="warm-paper warm-paper--answer">
+          <div class="warm-paper__l1" aria-hidden="true"></div>
+          <div class="warm-paper__l2" aria-hidden="true"></div>
+          <div class="warm-paper__inner warm-paper__inner--answer">
+            <p class="warm-your-q" id="echo-q"></p>
+            <blockquote class="warm-advice" id="advice-text">…</blockquote>
+            <p class="warm-advice-en" id="advice-en"></p>
+          </div>
+        </div>
+
+        <div class="warm-btnrow">
+          <button class="warm-cta" data-go="ask">Ask again
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </button>
+          <button class="warm-cta warm-cta--ghost" id="share-btn" type="button">Share her wisdom</button>
+        </div>
+        <p class="warm-share-status" id="share-status" aria-live="polite"></p>
       </div>
     </section>
 
     <!-- ===================== 5. ABOUT SCREEN ===================== -->
-    <section class="screen screen--about" id="screen-about" data-screen="about">
-      <div class="wrap">
-        <p class="kicker c-purple">The legend</p>
-        <h2 class="heading">About <span class="c-green">la abuela</span></h2>
-        <p class="lede">Abuela 8 Ball is the world's most opinionated fortune teller. Ask any
-          question, pick what is weighing on your heart, and shake the bola. She answers in her
-          own words — half blessing, half regañada (scolding), always with love.</p>
-        <ul class="steps">
-          <li><b>1.</b> Write your question. Be honest, she always knows when you're not.</li>
-          <li><b>2.</b> Pick a topic: amor, dinero, familia, or la vida.</li>
-          <li><b>3.</b> Shake the bola and receive your consejo.</li>
-        </ul>
-        <p class="lede lede--tight">Not a substitute for actually calling your real grandmother. Llámala. She misses you.</p>
-        <button class="btn btn--magenta" data-go="intro">&larr; Take me to abuela</button>
+    <section class="screen screen--about warm" id="screen-about" data-screen="about">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <button class="warm-back" data-go="intro" aria-label="Back">&larr;</button>
+      <div class="warm-inner">
+        <div class="warm-orb warm-orb--sm">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball warm-orb-ball--sm">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
+          </div>
+        </div>
+
+        <h2 class="warm-heading">About la abuela</h2>
+
+        <div class="warm-paper warm-paper--answer">
+          <div class="warm-paper__l1" aria-hidden="true"></div>
+          <div class="warm-paper__l2" aria-hidden="true"></div>
+          <div class="warm-paper__inner warm-paper__inner--answer warm-about">
+            <p>Abuela 8 Ball is the world's most opinionated fortune teller. Write down what
+              weighs on your heart, tap <em>Ask the spirits</em>, and she answers in her own
+              words — half blessing, half regañada, always with love.</p>
+            <ul class="warm-steps">
+              <li><b>1.</b> Write your worry. Be honest — she always knows when you're not.</li>
+              <li><b>2.</b> Tap <em>Ask the spirits</em> and let her consult them.</li>
+              <li><b>3.</b> Receive your consejo.</li>
+            </ul>
+            <p class="warm-about__fine">Not a substitute for calling your real grandmother. Llámala. She misses you.</p>
+          </div>
+        </div>
+
+        <button class="warm-cta" data-go="intro">Take me to abuela
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14m-7-7 7 7-7 7"/>
+          </svg>
+        </button>
       </div>
     </section>
 
