@@ -877,6 +877,33 @@ body {
   text-align: center;
 }
 
+/* wait-screen word cloud — sample consejos whispered by the spirits */
+.wait-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;             /* above cream bg, behind the orb/text (z-index 5) */
+  overflow: hidden;
+  pointer-events: none;
+}
+.wait-word {
+  position: absolute;
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: cloudWord var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes cloudWord {
+  0%   { opacity: 0; transform: translate(-50%, -50%) translateY(14px) scale(.86); }
+  22%  { opacity: .85; }
+  50%  { transform: translate(-50%, -50%) translateY(-6px) scale(1); }
+  74%  { opacity: .55; }
+  100% { opacity: 0; transform: translate(-50%, -50%) translateY(-24px) scale(.92); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wait-cloud { display: none; }
+}
+
 /* small badge (about) */
 .warm-orb--sm { margin: 4px 0 16px; }
 .warm-orb-ball--sm { width: 108px; height: 108px; }
@@ -1187,7 +1214,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v37</span>
+  <span class="build-tag" aria-hidden="true">v38</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -4689,6 +4716,8 @@ body {
     <section class="screen screen--wait warm" id="screen-wait" data-screen="wait">
       <div class="warm-bg" aria-hidden="true"></div>
       <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <!-- spirits whispering: animated cloud of sample consejos -->
+      <div class="wait-cloud" id="wait-cloud" aria-hidden="true"></div>
       <div class="warm-inner warm-inner--center">
         <div class="warm-orb">
           <span class="warm-orb-glow" aria-hidden="true"></span>
@@ -4805,6 +4834,39 @@ body {
     "var(--pk-sky-deep)", "var(--pk-pink-deep)", "var(--pk-yellow-deep)"
   ];
 
+  /* short fragments of her sayings, whispered as a word cloud while she "thinks" */
+  var CLOUD_WORDS = [
+    "tiki tiki", "…FUACATA!", "sana, sana", "culito de rana",
+    "no me jodas", "que se yo", "oigo…", "oye, ven acá",
+    "no andes descalsa", "despabílate", "ni empieces", "ay, mija"
+  ];
+
+  /* Scatter animated cloud words across the wait screen. */
+  function populateWaitCloud() {
+    var cloud = $("#wait-cloud");
+    if (!cloud) { return; }
+    cloud.innerHTML = "";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var pool = CLOUD_WORDS.slice();
+    for (var i = pool.length - 1; i > 0; i--) {           // shuffle
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+    }
+    var count = Math.min(pool.length, 11);
+    for (var k = 0; k < count; k++) {
+      var w = document.createElement("span");
+      w.className = "wait-word";
+      w.textContent = pool[k];
+      w.style.color = WM_COLORS[k % WM_COLORS.length];
+      w.style.left = (10 + Math.random() * 80).toFixed(1) + "%";
+      w.style.top = (12 + Math.random() * 76).toFixed(1) + "%";
+      w.style.fontSize = (16 + Math.random() * 18).toFixed(0) + "px";
+      w.style.setProperty("--dur", (3.2 + Math.random() * 2.4).toFixed(2) + "s");
+      w.style.setProperty("--delay", (Math.random() * 1.6).toFixed(2) + "s");
+      cloud.appendChild(w);
+    }
+  }
+
   /* Render text into el as multicolour Dandelion letters (spaces preserved). */
   function renderWordmark(el, text) {
     el.textContent = "";
@@ -4866,6 +4928,8 @@ body {
         }, 60);
       }
     }
+    // On the wait screen, whisper a fresh cloud of consejos while she thinks.
+    if (name === "wait") { populateWaitCloud(); }
   }
 
   /* ---------- Navigation (any element with data-go) ---------- */
