@@ -388,6 +388,183 @@ body::before {
 .focus-link:hover { color: var(--dark); }
 
 /* ===========================================================
+   ASK SCREEN — "share your worries" (parchment)
+   =========================================================== */
+.ask2 {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 52px);
+}
+.screen--ask.is-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* warm full-bleed background: grid + top glow */
+.ask2-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 75% -5%, rgba(255,163,77,0.55), transparent 55%),
+    linear-gradient(to right, rgba(218,90,42,0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(218,90,42,0.10) 1px, transparent 1px),
+    #e5d4c3;
+  background-size: auto, 25% 25%, 25% 25%, auto;
+}
+/* drifting smoke wisps */
+.ask2-smoke { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.ask2-smoke span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  filter: blur(40px);
+  background: linear-gradient(90deg, transparent, rgba(218,90,42,0.12), transparent);
+  animation: drift 9s linear infinite;
+}
+.ask2-smoke span:nth-child(1) { top: 26%; }
+.ask2-smoke span:nth-child(2) { top: 72%; height: 90px; animation-delay: -4.5s; }
+@keyframes drift {
+  0%   { transform: translateX(-100%) translateY(0) rotate(0); opacity: 0; }
+  20%  { opacity: .5; }
+  80%  { opacity: .5; }
+  100% { transform: translateX(100%) translateY(-40px) rotate(12deg); opacity: 0; }
+}
+
+.ask2-inner {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 400px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 26px 0;
+}
+
+/* orb (same intro abuela) */
+.ask2-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
+.ask2-orb-glow {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: #da5a2a; filter: blur(60px); opacity: .2;
+  transform: scale(1.2);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { opacity: .18; transform: scale(1.2); }
+  50%     { opacity: .34; transform: scale(1.45); }
+}
+.ask2-orb-ball { width: 168px; height: 168px; }
+
+.ask2-heading {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 23px;
+  color: #211e1d;
+  text-align: center;
+  margin: 0 0 22px;
+}
+
+.ask2-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
+
+/* stacked parchment note */
+.ask2-paper { position: relative; flex: 1; min-height: 300px; margin-bottom: 26px; }
+.ask2-paper__l1, .ask2-paper__l2 {
+  position: absolute; inset: 0; border-radius: 16px; background: #f2e8dc;
+}
+.ask2-paper__l1 {
+  transform: rotate(1deg);
+  box-shadow: 0 14px 30px rgba(26,23,22,0.16);
+  border-left: 4px solid rgba(218,90,42,0.2);
+}
+.ask2-paper__l2 {
+  transform: rotate(-1deg);
+  box-shadow: 0 8px 18px rgba(26,23,22,0.10);
+  border: 1px solid rgba(218,90,42,0.10);
+}
+.ask2-paper__inner { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; }
+.ask2-textarea {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(33,30,29,0.82);
+}
+.ask2-textarea::placeholder { color: rgba(33,30,29,0.38); }
+.ask2-textarea:focus { outline: none; }
+.ask2-textarea::-webkit-scrollbar { width: 4px; }
+.ask2-textarea::-webkit-scrollbar-thumb { background: rgba(218,90,42,0.27); border-radius: 10px; }
+.ask2-ink {
+  align-self: flex-end;
+  margin-top: 12px;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: 10px;
+  color: rgba(218,90,42,0.5);
+}
+
+/* dark pill CTA */
+.ask2-cta {
+  width: 100%;
+  padding: 18px;
+  margin-bottom: 26px;
+  background: #211e1d;
+  color: #e5d4c3;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 18px 40px -12px rgba(26,23,22,0.6);
+  transition: background .3s ease, transform .1s ease;
+}
+.ask2-cta:hover { background: #da5a2a; }
+.ask2-cta:active { transform: scale(0.97); }
+
+.ask2-footer {
+  position: relative;
+  z-index: 5;
+  margin: 4px 0 18px;
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4em;
+  font-size: 10px;
+  color: rgba(218,90,42,0.55);
+  text-align: center;
+}
+
+.ask2-back {
+  position: absolute;
+  top: 16px; left: 16px;
+  z-index: 6;
+  width: 38px; height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(33,30,29,0.06);
+  color: #211e1d;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.ask2-back:hover { background: rgba(33,30,29,0.12); }
+
+/* ===========================================================
    BOOKSHELF (used as secondary decor)
    =========================================================== */
 .shelf {
@@ -608,12 +785,13 @@ body::before {
   .ball--shaking { animation: none; }
   .screen.is-active { animation: none; }
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
+  .ask2-smoke span, .ask2-orb-glow { animation: none; }
 }
 
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v10</span>
+  <span class="build-tag" aria-hidden="true">v11</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -690,32 +868,47 @@ body::before {
       </div>
     </section>
 
-    <!-- ===================== 2. ASK / BOOKING SCREEN ===================== -->
-    <section class="screen screen--ask" id="screen-ask" data-screen="ask">
-      <div class="wrap">
-        <p class="kicker c-green">Step one of one</p>
-        <h2 class="heading">Ask <span class="c-magenta">la abuela</span><br>a question.</h2>
-        <p class="lede lede--tight">Closes your eyes, mija. Think hard. Then write it down so she knows you are serious.</p>
+    <!-- ===================== 2. ASK SCREEN (share your worries) ===================== -->
+    <section class="screen screen--ask ask2" id="screen-ask" data-screen="ask">
+      <div class="ask2-bg" aria-hidden="true"></div>
+      <div class="ask2-smoke" aria-hidden="true"><span></span><span></span></div>
 
-        <form id="ask-form" novalidate>
-          <label class="field-label" for="question">Your question</label>
-          <input class="field" id="question" name="question" type="text" autocomplete="off"
-                 placeholder="Should I text him back?" maxlength="140">
+      <button class="ask2-back" data-go="intro" aria-label="Back">&larr;</button>
 
-          <div class="moods" role="group" aria-label="What kind of advice do you want?">
-            <span class="moods__label">What do you need today?</span>
-            <button type="button" class="chip is-selected" data-mood="amor">💘 Amor</button>
-            <button type="button" class="chip" data-mood="dinero">💰 Dinero</button>
-            <button type="button" class="chip" data-mood="familia">🏠 Familia</button>
-            <button type="button" class="chip" data-mood="vida">🌶️ La Vida</button>
+      <div class="ask2-inner">
+        <!-- orb with the intro abuela -->
+        <div class="ask2-orb">
+          <span class="ask2-orb-glow" aria-hidden="true"></span>
+          <div class="orb ask2-orb-ball">
+            <span class="orb__sheen" aria-hidden="true"></span>
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+          </div>
+        </div>
+
+        <h2 class="ask2-heading">What weighs on your heart?</h2>
+
+        <form id="ask-form" novalidate class="ask2-form">
+          <div class="ask2-paper">
+            <div class="ask2-paper__l1" aria-hidden="true"></div>
+            <div class="ask2-paper__l2" aria-hidden="true"></div>
+            <div class="ask2-paper__inner">
+              <textarea id="question" name="question" class="ask2-textarea"
+                        placeholder="Dear Abuela, I'm worried about..." maxlength="400"></textarea>
+              <span class="ask2-ink">Ink is drying...</span>
+            </div>
           </div>
 
-          <button class="btn btn--purple btn--block" type="submit" id="shake-btn">
-            Shake the bola 🔮
+          <button class="ask2-cta" type="submit" id="shake-btn">
+            Ask the spirits
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
           </button>
         </form>
-        <p class="fineprint"><button class="linkish" data-go="intro">&larr; Back</button></p>
       </div>
+
+      <p class="ask2-footer">Listening with love</p>
     </section>
 
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
@@ -870,8 +1063,8 @@ body::before {
     var q = $("#question").value.trim();
     lastQuestion = q;
 
-    // Roll a consejo for the chosen mood; avoid repeating the last one.
-    var pool = FORTUNES[selectedMood] || FORTUNES.vida;
+    // Roll a consejo from a random topic; avoid repeating the last one.
+    var pool = FORTUNES[pick(Object.keys(FORTUNES))];
     var next = pick(pool);
     if (pool.length > 1) {
       while (next === lastFortune) { next = pick(pool); }

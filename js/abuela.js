@@ -101,8 +101,8 @@
     var q = $("#question").value.trim();
     lastQuestion = q;
 
-    // Roll a consejo for the chosen mood; avoid repeating the last one.
-    var pool = FORTUNES[selectedMood] || FORTUNES.vida;
+    // Roll a consejo from a random topic; avoid repeating the last one.
+    var pool = FORTUNES[pick(Object.keys(FORTUNES))];
     var next = pick(pool);
     if (pool.length > 1) {
       while (next === lastFortune) { next = pick(pool); }
