@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/abuela.css">
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v24</span>
+  <span class="build-tag" aria-hidden="true">v25</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -1170,13 +1170,21 @@
             <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
             <!-- blinking eyelids (positioned over her eyes) -->
             <svg class="blink-overlay" viewBox="0 0 1255 1255" aria-hidden="true">
-              <g class="lid">
-                <ellipse cx="500" cy="624" rx="36" ry="25" fill="#F5E8D5"/>
-                <path d="M466 622 Q500 644 534 622" fill="none" stroke="#6B342A" stroke-width="8" stroke-linecap="round"/>
+              <defs>
+                <clipPath id="eyeClipL"><circle cx="500" cy="623" r="52"/></clipPath>
+                <clipPath id="eyeClipR"><circle cx="658" cy="608" r="52"/></clipPath>
+              </defs>
+              <g clip-path="url(#eyeClipL)">
+                <g class="lid">
+                  <rect x="438" y="561" width="124" height="124" fill="#F5E8D5"/>
+                  <path d="M470 626 Q500 645 530 626" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+                </g>
               </g>
-              <g class="lid lid--r">
-                <ellipse cx="658" cy="609" rx="36" ry="25" fill="#F5E8D5"/>
-                <path d="M624 607 Q658 629 692 607" fill="none" stroke="#6B342A" stroke-width="8" stroke-linecap="round"/>
+              <g clip-path="url(#eyeClipR)">
+                <g class="lid lid--r">
+                  <rect x="596" y="546" width="124" height="124" fill="#F5E8D5"/>
+                  <path d="M628 611 Q658 630 688 611" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+                </g>
               </g>
             </svg>
           </button>
