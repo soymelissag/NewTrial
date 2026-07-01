@@ -442,13 +442,13 @@ body {
   transform-box: fill-box;
   transform-origin: center;
   transform: scaleY(0);
-  animation: blink 4.8s ease-in-out infinite;
+  animation: blink 3s ease-in-out infinite;
 }
-.blink-overlay .lid--r { animation-delay: 40ms; }
+.blink-overlay .lid--r { animation-delay: 30ms; }
 @keyframes blink {
-  0%, 89%   { transform: scaleY(0); }
-  92%, 95%  { transform: scaleY(1); }
-  99%, 100% { transform: scaleY(0); }
+  0%, 78%   { transform: scaleY(0); }
+  85%, 93%  { transform: scaleY(1); }
+  100%      { transform: scaleY(0); }
 }
 
 /* intro animation */
@@ -1100,7 +1100,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v22</span>
+  <span class="build-tag" aria-hidden="true">v23</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -2255,12 +2255,12 @@ body {
             <!-- blinking eyelids (positioned over her eyes) -->
             <svg class="blink-overlay" viewBox="0 0 1255 1255" aria-hidden="true">
               <g class="lid">
-                <ellipse cx="502" cy="623" rx="47" ry="31" fill="#F5E8D5"/>
-                <path d="M457 623 Q502 643 547 623" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+                <ellipse cx="500" cy="624" rx="35" ry="23" fill="#F5E8D5"/>
+                <path d="M470 623 Q500 639 530 623" fill="none" stroke="#6B342A" stroke-width="6" stroke-linecap="round"/>
               </g>
               <g class="lid lid--r">
-                <ellipse cx="659" cy="608" rx="47" ry="31" fill="#F5E8D5"/>
-                <path d="M614 608 Q659 628 704 608" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+                <ellipse cx="658" cy="609" rx="35" ry="23" fill="#F5E8D5"/>
+                <path d="M628 608 Q658 624 688 608" fill="none" stroke="#6B342A" stroke-width="6" stroke-linecap="round"/>
               </g>
             </svg>
           </button>

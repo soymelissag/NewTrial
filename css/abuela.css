@@ -236,13 +236,13 @@ body {
   transform-box: fill-box;
   transform-origin: center;
   transform: scaleY(0);
-  animation: blink 4.8s ease-in-out infinite;
+  animation: blink 3s ease-in-out infinite;
 }
-.blink-overlay .lid--r { animation-delay: 40ms; }
+.blink-overlay .lid--r { animation-delay: 30ms; }
 @keyframes blink {
-  0%, 89%   { transform: scaleY(0); }
-  92%, 95%  { transform: scaleY(1); }
-  99%, 100% { transform: scaleY(0); }
+  0%, 78%   { transform: scaleY(0); }
+  85%, 93%  { transform: scaleY(1); }
+  100%      { transform: scaleY(0); }
 }
 
 /* intro animation */
