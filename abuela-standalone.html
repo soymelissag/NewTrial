@@ -442,13 +442,18 @@ body {
   transform-box: fill-box;
   transform-origin: center;
   transform: scaleY(0);
-  animation: blink 3s ease-in-out infinite;
+  animation: blink 4.6s ease-in-out infinite;
 }
-.blink-overlay .lid--r { animation-delay: 30ms; }
+.blink-overlay .lid--r { animation-delay: 25ms; }
+/* a single blink, then an occasional double-blink each cycle */
 @keyframes blink {
-  0%, 78%   { transform: scaleY(0); }
-  85%, 93%  { transform: scaleY(1); }
-  100%      { transform: scaleY(0); }
+  0%, 30%   { transform: scaleY(0); }   /* eyes open */
+  35%, 44%  { transform: scaleY(1); }   /* single blink (long hold) */
+  50%, 70%  { transform: scaleY(0); }   /* open */
+  73%, 77%  { transform: scaleY(1); }   /* double — first */
+  80%       { transform: scaleY(0); }   /* brief open */
+  83%, 88%  { transform: scaleY(1); }   /* double — second */
+  93%, 100% { transform: scaleY(0); }   /* open */
 }
 
 /* intro animation */
@@ -1100,7 +1105,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v23</span>
+  <span class="build-tag" aria-hidden="true">v24</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -2255,12 +2260,12 @@ body {
             <!-- blinking eyelids (positioned over her eyes) -->
             <svg class="blink-overlay" viewBox="0 0 1255 1255" aria-hidden="true">
               <g class="lid">
-                <ellipse cx="500" cy="624" rx="35" ry="23" fill="#F5E8D5"/>
-                <path d="M470 623 Q500 639 530 623" fill="none" stroke="#6B342A" stroke-width="6" stroke-linecap="round"/>
+                <ellipse cx="500" cy="624" rx="36" ry="25" fill="#F5E8D5"/>
+                <path d="M466 622 Q500 644 534 622" fill="none" stroke="#6B342A" stroke-width="8" stroke-linecap="round"/>
               </g>
               <g class="lid lid--r">
-                <ellipse cx="658" cy="609" rx="35" ry="23" fill="#F5E8D5"/>
-                <path d="M628 608 Q658 624 688 608" fill="none" stroke="#6B342A" stroke-width="6" stroke-linecap="round"/>
+                <ellipse cx="658" cy="609" rx="36" ry="25" fill="#F5E8D5"/>
+                <path d="M624 607 Q658 629 692 607" fill="none" stroke="#6B342A" stroke-width="8" stroke-linecap="round"/>
               </g>
             </svg>
           </button>
