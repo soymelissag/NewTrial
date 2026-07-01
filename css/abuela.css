@@ -179,11 +179,11 @@ body {
   pointer-events: none;
 }
 .orb__fig {
-  width: 85%;
-  height: 85%;
-  position: relative;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
   z-index: 10;
-  transform: translateY(16px);
   transition: transform .5s ease;
 }
 
@@ -221,7 +221,7 @@ body {
 }
 .focus-ball:hover { transform: scale(1.05); }
 .focus-ball:active { transform: scale(0.95); }
-.focus-ball:hover .orb__fig { transform: translateY(8px); }
+.focus-ball:hover .orb__fig { transform: scale(1.03); }
 
 /* intro animation */
 @keyframes introTitle {
