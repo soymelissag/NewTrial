@@ -209,7 +209,12 @@ body::before {
   text-align: center;
 }
 
-.focus-orb-area { position: relative; display: grid; place-items: center; }
+.focus-orb-area {
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: introPop .85s cubic-bezier(.18,.9,.28,1.2) .3s both;
+}
 .focus-glow {
   position: absolute;
   inset: 0;
@@ -226,8 +231,8 @@ body::before {
 .focus-orb-area:active .focus-glow { opacity: 0.6; }
 
 .focus-ball {
-  width: min(94vw, 560px);
-  height: min(94vw, 560px);
+  width: min(86vw, 500px);
+  height: min(86vw, 500px);
   padding: 0;
   cursor: pointer;
   transition: transform .7s cubic-bezier(.2,.8,.2,1);
@@ -237,8 +242,24 @@ body::before {
 .focus-ball:active { transform: scale(0.95); }
 .focus-ball:hover .orb__fig { transform: translateY(8px); }
 
+/* intro animation */
+@keyframes introTitle {
+  from { opacity: 0; transform: translateY(-26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes introPop {
+  0%   { opacity: 0; transform: scale(.35); }
+  55%  { opacity: 1; transform: scale(1.06); }
+  75%  { transform: scale(.97); }
+  100% { transform: scale(1); }
+}
+@keyframes introFade { from { opacity: 0; } to { opacity: 1; } }
+
 /* title block (always visible, directly above the orb) */
-.focus-top { margin: 0; }
+.focus-top {
+  margin: 0;
+  animation: introTitle .7s ease-out .05s both;
+}
 .focus-kicker {
   margin: 0 0 6px;
   font-family: "Space Mono", monospace;
@@ -278,7 +299,7 @@ body::before {
   font-style: italic;
   font-size: 16px;
   color: rgba(15,15,19,0.30);
-  animation: hintPulse 2s ease-in-out infinite;
+  animation: introFade .6s ease 1s both, hintPulse 2s ease-in-out 1.6s infinite;
   transition: opacity .5s ease;
 }
 @keyframes hintPulse { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
@@ -572,4 +593,5 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .ball--shaking { animation: none; }
   .screen.is-active { animation: none; }
+  .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
 }
