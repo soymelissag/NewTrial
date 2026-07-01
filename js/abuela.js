@@ -83,8 +83,7 @@
     "Abuela is consulting the spirits…",
     "Abuela is reading the coffee grounds…",
     "Abuela put down her novela for this…",
-    "Abuela is lighting a candle for you…",
-    "Abuela says: ay, déjame pensar…"
+    "Abuela is lighting a candle for you…"
   ];
 
   /* ---------- State ---------- */
