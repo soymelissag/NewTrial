@@ -514,6 +514,60 @@ body {
   color: var(--pk-ink); border: none; padding: 0; margin: 0;
 }
 .warm-paper__inner--svg .warm-advice-en { font-style: italic; color: var(--pk-ink-muted); margin-top: 4.506cqw; }
+
+/* doily note variant — lace doily image with text centred in the open middle */
+.warm-paper--doily {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  margin-bottom: 20px;
+  container-type: inline-size;
+}
+.warm-paper__doily {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 5px 6px rgba(107, 52, 42, .18));
+}
+/* the doily is ~4:3; keep text inside the clear oval centre, away from the lace */
+.warm-paper__inner--doily {
+  position: absolute;
+  inset: 21% 21%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.warm-paper__inner--doily .doily-write {
+  font-family: var(--pk-font-text);
+  font-size: 4cqw;
+  line-height: 1.4;
+  color: var(--pk-ink);
+  margin: 0;
+  width: 100%;
+}
+/* ask: the worry, typed on the doily */
+.warm-paper--doily .warm-textarea {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  padding: 0;
+  text-align: center;
+}
+.warm-paper--doily .warm-textarea::placeholder { color: var(--pk-ink-muted); opacity: .7; }
+.warm-paper--doily .warm-textarea:focus { outline: none; }
+/* answer: abuela's consejo, centred on the doily */
+.warm-paper__inner--doily .warm-your-q { font-style: italic; color: var(--pk-ink-muted); margin-bottom: 3cqw; }
+.warm-paper__inner--doily .warm-advice {
+  font-family: var(--pk-font-text); font-weight: 700; font-size: 4.6cqw; line-height: 1.35;
+  color: var(--pk-ink); border: none; padding: 0; margin: 0;
+}
+.warm-paper__inner--doily .warm-advice-en { font-style: italic; color: var(--pk-ink-muted); margin-top: 3cqw; }
 .warm-textarea {
   flex: 1;
   width: 100%;
