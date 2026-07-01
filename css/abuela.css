@@ -451,6 +451,13 @@ body {
   text-align: center;
   margin: 0 0 22px;
 }
+/* multicolour Dandelion heading, matching the intro wordmark */
+.warm-heading--wm {
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  font-size: clamp(52px, 15vw, 84px);
+  line-height: 0.92;
+  letter-spacing: var(--pk-tracking-tight);
+}
 
 .warm-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
 
