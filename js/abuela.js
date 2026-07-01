@@ -50,7 +50,7 @@
       w.style.color = WM_COLORS[k % WM_COLORS.length];
       w.style.left = (10 + Math.random() * 80).toFixed(1) + "%";
       w.style.top = (12 + Math.random() * 76).toFixed(1) + "%";
-      w.style.fontSize = (16 + Math.random() * 18).toFixed(0) + "px";
+      w.style.fontSize = (22 + Math.random() * 18).toFixed(0) + "px";
       w.style.setProperty("--dur", (3.2 + Math.random() * 2.4).toFixed(2) + "s");
       w.style.setProperty("--delay", (Math.random() * 1.6).toFixed(2) + "s");
       cloud.appendChild(w);
@@ -161,7 +161,7 @@
     $("#waiting-text").textContent = pick(WAITING_LINES);
     showScreen("wait");
 
-    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 350 : 1900;
+    var delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 400 : 3400;
     window.setTimeout(function () {
       $("#echo-q").textContent = q ? "“" + q + "”" : "You came empty-handed, but abuela still answers.";
       renderWordmark($("#advice-text"), next);
