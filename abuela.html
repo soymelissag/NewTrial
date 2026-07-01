@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/abuela.css">
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v20</span>
+  <span class="build-tag" aria-hidden="true">v21</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -1168,6 +1168,17 @@
           <button class="orb focus-ball" id="focus-ball" type="button" aria-label="Tap to consult the spirits">
             <span class="orb__sheen" aria-hidden="true"></span>
             <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+            <!-- blinking eyelids (positioned over her eyes) -->
+            <svg class="blink-overlay" viewBox="0 0 1255 1255" aria-hidden="true">
+              <g class="lid">
+                <ellipse cx="502" cy="623" rx="47" ry="31" fill="#F5E8D5"/>
+                <path d="M457 623 Q502 643 547 623" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+              </g>
+              <g class="lid lid--r">
+                <ellipse cx="659" cy="608" rx="47" ry="31" fill="#F5E8D5"/>
+                <path d="M614 608 Q659 628 704 608" fill="none" stroke="#6B342A" stroke-width="7" stroke-linecap="round"/>
+              </g>
+            </svg>
           </button>
         </div>
 
