@@ -110,10 +110,15 @@
     if (q === QUESTION_PREFIX.trim()) { q = ""; }
     lastQuestion = q;
 
-    // Pick one of abuela's responses; avoid repeating the last one.
-    var next = pick(RESPONSES);
-    if (RESPONSES.length > 1) {
-      while (next === lastResponse) { next = pick(RESPONSES); }
+    // No worry written? Abuela scolds. Otherwise pick a response (no repeats).
+    var next;
+    if (!q) {
+      next = "Despabilate!";
+    } else {
+      next = pick(RESPONSES);
+      if (RESPONSES.length > 1) {
+        while (next === lastResponse) { next = pick(RESPONSES); }
+      }
     }
     lastResponse = next;
 

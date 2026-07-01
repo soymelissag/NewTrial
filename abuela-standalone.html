@@ -810,44 +810,31 @@ body {
   color: var(--pk-ink-muted);
 }
 
-/* orange sticker pill CTA */
+/* small, outline-only (no-fill) pill CTA */
 .warm-cta {
-  width: 100%;
-  padding: 0.9em 1.4em;
-  margin-bottom: 24px;
-  background: var(--pk-orange);
+  width: auto;
+  align-self: center;
+  padding: 0.5em 1.15em;
+  margin-bottom: 16px;
+  background: transparent;
   color: var(--pk-ink);
   border: var(--pk-outline);
   border-radius: var(--pk-r-pill);
   cursor: pointer;
   font-family: var(--pk-font-display);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  box-shadow: var(--pk-shadow-sticker);
-  transition: transform var(--pk-dur-quick) var(--pk-ease-bounce), box-shadow var(--pk-dur-quick) var(--pk-ease-out);
-}
-.warm-cta:hover { transform: translate(-2px,-2px); box-shadow: var(--pk-shadow-sticker-lg); }
-.warm-cta:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--pk-ink); }
-.warm-cta--sky    { background: var(--pk-sky); }
-.warm-cta--olive  { background: var(--pk-olive); }
-.warm-cta--yellow { background: var(--pk-yellow); }
-/* small, no-fill (outline) CTA */
-.warm-cta--bare {
-  width: auto;
-  align-self: center;
-  padding: 0.5em 1.15em;
-  font-size: 0.92rem;
   gap: 8px;
-  background: transparent;
   box-shadow: none;
-  margin-bottom: 16px;
+  transition: transform var(--pk-dur-quick) var(--pk-ease-bounce);
 }
-.warm-cta--bare:hover { background: transparent; transform: translate(-1px,-1px); box-shadow: none; }
-.warm-cta--bare:active { transform: translate(1px,1px); box-shadow: none; }
+.warm-cta:hover { transform: translate(-1px,-1px); box-shadow: none; }
+.warm-cta:active { transform: translate(1px,1px); box-shadow: none; }
+/* colour modifiers kept as no-ops so existing markup stays valid — all no-fill now */
+.warm-cta--sky, .warm-cta--olive, .warm-cta--yellow, .warm-cta--bare { background: transparent; }
 
 .warm-footer {
   position: relative;
@@ -1199,7 +1186,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v35</span>
+  <span class="build-tag" aria-hidden="true">v36</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -4904,10 +4891,15 @@ body {
     if (q === QUESTION_PREFIX.trim()) { q = ""; }
     lastQuestion = q;
 
-    // Pick one of abuela's responses; avoid repeating the last one.
-    var next = pick(RESPONSES);
-    if (RESPONSES.length > 1) {
-      while (next === lastResponse) { next = pick(RESPONSES); }
+    // No worry written? Abuela scolds. Otherwise pick a response (no repeats).
+    var next;
+    if (!q) {
+      next = "Despabilate!";
+    } else {
+      next = pick(RESPONSES);
+      if (RESPONSES.length > 1) {
+        while (next === lastResponse) { next = pick(RESPONSES); }
+      }
     }
     lastResponse = next;
 
