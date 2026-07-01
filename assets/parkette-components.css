@@ -1,0 +1,100 @@
+/* ============================================================
+   PARKETTE — Components  ·  "June Colors" scheme
+   Requires parkette-tokens.css. Class prefix: .pk-
+   Cocoa ink reads on every accent, so text stays ink except on
+   ink/orange-deep fills, where it flips to cream.
+   ============================================================ */
+
+.pk-body {
+  background: var(--pk-bg); color: var(--pk-text);
+  font-family: var(--pk-font-text); font-size: var(--pk-text-body);
+  line-height: var(--pk-leading-body); -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Type helpers ------------------------------------------ */
+.pk-display  { font-family: var(--pk-font-display); font-weight: 600; letter-spacing: var(--pk-tracking-tight); line-height: var(--pk-leading-tight); }
+.pk-wordmark { font-family: var(--pk-font-display); font-weight: 600; letter-spacing: -0.03em; }
+.pk-eyebrow  { font-family: var(--pk-font-text); font-weight: 700; font-size: var(--pk-text-eyebrow); letter-spacing: var(--pk-tracking-eyebrow); text-transform: uppercase; color: var(--pk-text-muted); }
+.pk-h1 { font-family: var(--pk-font-display); font-weight: 600; font-size: var(--pk-text-h1); line-height: var(--pk-leading-tight); letter-spacing: var(--pk-tracking-tight); }
+.pk-h2 { font-family: var(--pk-font-display); font-weight: 600; font-size: var(--pk-text-h2); line-height: 1.1; }
+.pk-h3 { font-family: var(--pk-font-display); font-weight: 500; font-size: var(--pk-text-h3); line-height: 1.15; }
+.pk-muted { color: var(--pk-text-muted); }
+
+/* ---- Button: the sticker pill ------------------------------ */
+.pk-btn {
+  --_bg: var(--pk-orange); --_fg: var(--pk-ink);
+  display: inline-flex; align-items: center; gap: var(--pk-space-2);
+  font-family: var(--pk-font-display); font-weight: 600; font-size: 1rem;
+  color: var(--_fg); background: var(--_bg);
+  border: var(--pk-outline); border-radius: var(--pk-r-pill);
+  padding: 0.7em 1.4em; cursor: pointer; box-shadow: var(--pk-shadow-sticker);
+  transition: transform var(--pk-dur-quick) var(--pk-ease-bounce),
+              box-shadow var(--pk-dur-quick) var(--pk-ease-out);
+}
+.pk-btn:hover  { transform: translate(-2px, -2px); box-shadow: var(--pk-shadow-sticker-lg); }
+.pk-btn:active { transform: translate(4px, 4px);  box-shadow: 0 0 0 var(--pk-ink); }
+.pk-btn:focus-visible { outline: none; box-shadow: var(--pk-shadow-sticker), var(--pk-focus-ring); }
+.pk-btn--pink   { --_bg: var(--pk-pink); }
+.pk-btn--sky    { --_bg: var(--pk-sky); }
+.pk-btn--yellow { --_bg: var(--pk-yellow); }
+.pk-btn--olive  { --_bg: var(--pk-olive); }
+.pk-btn--cocoa  { --_bg: var(--pk-ink); --_fg: var(--pk-paper); }
+.pk-btn--ghost  { --_bg: transparent; box-shadow: none; }
+.pk-btn--ghost:hover { --_bg: var(--pk-masa); transform: none; box-shadow: none; }
+
+/* ---- Chip / tag -------------------------------------------- */
+.pk-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--pk-font-text); font-weight: 700; font-size: var(--pk-text-sm);
+  color: var(--pk-ink); background: var(--pk-masa);
+  border: 2px solid var(--pk-ink); border-radius: var(--pk-r-pill); padding: 0.35em 0.85em;
+}
+.pk-chip--pink { background: var(--pk-pink); }
+.pk-chip--sky  { background: var(--pk-sky); }
+.pk-chip--orange { background: var(--pk-orange); }
+.pk-chip--yellow { background: var(--pk-yellow); }
+.pk-chip--olive  { background: var(--pk-olive); }
+
+/* ---- Card -------------------------------------------------- */
+.pk-card { background: var(--pk-masa); border: var(--pk-outline); border-radius: var(--pk-r-lg); padding: var(--pk-space-6); box-shadow: var(--pk-shadow-sticker-lg); }
+.pk-card--flat { box-shadow: var(--pk-shadow-soft); border-color: var(--pk-hairline); }
+
+/* ---- Input ------------------------------------------------- */
+.pk-input {
+  font-family: var(--pk-font-text); font-size: var(--pk-text-body);
+  color: var(--pk-ink); background: var(--pk-paper);
+  border: var(--pk-outline); border-radius: var(--pk-r-md);
+  padding: 0.7em 1em; width: 100%;
+  transition: box-shadow var(--pk-dur-quick) var(--pk-ease-out);
+}
+.pk-input::placeholder { color: var(--pk-ink-faint); }
+.pk-input:focus { outline: none; box-shadow: var(--pk-shadow-sticker); }
+
+/* ---- Abuela badge + halo frame ----------------------------- */
+.pk-badge {
+  --_size: 96px; width: var(--_size); height: var(--_size);
+  border-radius: 50%; border: var(--pk-outline);
+  background: var(--pk-sky) center/cover no-repeat;
+  box-shadow: var(--pk-shadow-sticker); display: inline-block;
+}
+.pk-halo { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.pk-halo::before { content: ""; position: absolute; inset: -14%; border-radius: 50%; background: var(--pk-sky); border: var(--pk-outline); z-index: 0; }
+.pk-halo > * { position: relative; z-index: 1; }
+
+/* ---- Pixel flower: the June accent motif ------------------- */
+/* A 3x3 plus of squares. Set --p (petal) and --c (center) colors.
+   Usage: <span class="pk-flower" style="--p:var(--pk-sky);--c:var(--pk-orange)"></span> */
+.pk-flower {
+  --p: var(--pk-sky); --c: var(--pk-orange); --u: 8px;
+  display: inline-grid; grid-template: repeat(3, var(--u)) / repeat(3, var(--u));
+  vertical-align: middle;
+}
+.pk-flower::before {
+  content: ""; grid-column: 1 / 4; grid-row: 1 / 4;
+  background:
+    linear-gradient(var(--p) 0 0) center top / var(--u) var(--u) no-repeat,
+    linear-gradient(var(--p) 0 0) left center / var(--u) var(--u) no-repeat,
+    linear-gradient(var(--c) 0 0) center center / var(--u) var(--u) no-repeat,
+    linear-gradient(var(--p) 0 0) right center / var(--u) var(--u) no-repeat,
+    linear-gradient(var(--p) 0 0) center bottom / var(--u) var(--u) no-repeat;
+}
