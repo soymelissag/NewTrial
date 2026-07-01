@@ -439,7 +439,7 @@ body::before {
 .warm-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
 .warm-orb-glow {
   position: absolute; inset: 0; border-radius: 50%;
-  background: #da5a2a; filter: blur(60px); opacity: .2;
+  background: #7b3fe4; filter: blur(60px); opacity: .22;
   transform: scale(1.2);
   animation: glowPulse 4s ease-in-out infinite;
 }
