@@ -519,9 +519,13 @@ body {
 .warm-paper--doily {
   position: relative;
   flex: 0 0 auto;
-  min-height: 0;
-  width: 100%;
-  margin-bottom: 20px;
+  /* break out of the ~400px column so the doily reads big; align-self:center
+     keeps it centred in both the ask form and the answer column, overflowing
+     symmetrically, and it never exceeds the viewport */
+  width: min(100vw - 20px, 640px);
+  align-self: center;
+  margin-top: -6px;
+  margin-bottom: 10px;
   container-type: inline-size;
 }
 .warm-paper__doily {
@@ -543,7 +547,7 @@ body {
 }
 .warm-paper__inner--doily .doily-write {
   font-family: var(--pk-font-text);
-  font-size: 4cqw;
+  font-size: 4.8cqw;
   line-height: 1.4;
   color: var(--pk-ink);
   margin: 0;
@@ -564,7 +568,7 @@ body {
 /* answer: abuela's consejo, centred on the doily */
 .warm-paper__inner--doily .warm-your-q { font-style: italic; color: var(--pk-ink-muted); margin-bottom: 3cqw; }
 .warm-paper__inner--doily .warm-advice {
-  font-family: var(--pk-font-text); font-weight: 700; font-size: 4.6cqw; line-height: 1.35;
+  font-family: var(--pk-font-text); font-weight: 700; font-size: 5.4cqw; line-height: 1.35;
   color: var(--pk-ink); border: none; padding: 0; margin: 0;
 }
 .warm-paper__inner--doily .warm-advice-en { font-style: italic; color: var(--pk-ink-muted); margin-top: 3cqw; }
@@ -619,6 +623,19 @@ body {
 .warm-cta--sky    { background: var(--pk-sky); }
 .warm-cta--olive  { background: var(--pk-olive); }
 .warm-cta--yellow { background: var(--pk-yellow); }
+/* small, no-fill (outline) CTA */
+.warm-cta--bare {
+  width: auto;
+  align-self: center;
+  padding: 0.5em 1.15em;
+  font-size: 0.92rem;
+  gap: 8px;
+  background: transparent;
+  box-shadow: none;
+  margin-bottom: 16px;
+}
+.warm-cta--bare:hover { background: transparent; transform: translate(-1px,-1px); box-shadow: none; }
+.warm-cta--bare:active { transform: translate(1px,1px); box-shadow: none; }
 
 .warm-footer {
   position: relative;
