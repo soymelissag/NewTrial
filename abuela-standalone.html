@@ -465,7 +465,19 @@ body {
   color: var(--pk-ink);
   margin: 0;
 }
+.wm-line { display: block; }
+.wm { display: inline-block; }
+.wm-sp { width: .28em; }
 .focus-accent { display: block; color: var(--pk-orange); }
+
+/* pixel-flower accent row under the wordmark */
+.wm-flowers {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.wm-flowers .pk-flower { --u: 7px; }
 
 .build-tag {
   position: fixed;
@@ -662,6 +674,9 @@ body {
 }
 .warm-cta:hover { transform: translate(-2px,-2px); box-shadow: var(--pk-shadow-sticker-lg); }
 .warm-cta:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--pk-ink); }
+.warm-cta--sky    { background: var(--pk-sky); }
+.warm-cta--olive  { background: var(--pk-olive); }
+.warm-cta--yellow { background: var(--pk-yellow); }
 
 .warm-footer {
   position: relative;
@@ -1011,7 +1026,7 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v16</span>
+  <span class="build-tag" aria-hidden="true">v17</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -1060,9 +1075,21 @@ body {
     <section class="screen screen--focus is-active" id="screen-intro" data-screen="intro">
       <div class="focus" id="focus-root">
 
-        <!-- title (always visible) -->
+        <!-- title (always visible) — multicolor June wordmark -->
         <div class="focus-top">
-          <h1 class="focus-title">ABUELA <span class="focus-accent">8 BALL</span></h1>
+          <h1 class="focus-title" aria-label="Abuela 8 Ball">
+            <span class="wm-line" aria-hidden="true">
+              <span class="wm" style="color:var(--pk-olive)">A</span><span class="wm" style="color:var(--pk-orange)">B</span><span class="wm" style="color:var(--pk-ink)">U</span><span class="wm" style="color:var(--pk-sky-deep)">E</span><span class="wm" style="color:var(--pk-pink-deep)">L</span><span class="wm" style="color:var(--pk-yellow-deep)">A</span>
+            </span>
+            <span class="wm-line" aria-hidden="true">
+              <span class="wm" style="color:var(--pk-orange)">8</span><span class="wm wm-sp">&nbsp;</span><span class="wm" style="color:var(--pk-olive)">B</span><span class="wm" style="color:var(--pk-sky-deep)">A</span><span class="wm" style="color:var(--pk-pink-deep)">L</span><span class="wm" style="color:var(--pk-ink)">L</span>
+            </span>
+          </h1>
+          <div class="wm-flowers" aria-hidden="true">
+            <span class="pk-flower" style="--p:var(--pk-pink);--c:var(--pk-orange)"></span>
+            <span class="pk-flower" style="--p:var(--pk-sky);--c:var(--pk-yellow)"></span>
+            <span class="pk-flower" style="--p:var(--pk-olive);--c:var(--pk-pink)"></span>
+          </div>
         </div>
 
         <!-- the orb -->
@@ -1133,7 +1160,11 @@ body {
         </form>
       </div>
 
-      <p class="warm-footer">Listening with love</p>
+      <p class="warm-footer">
+        <span class="pk-flower" style="--p:var(--pk-pink);--c:var(--pk-orange);--u:5px" aria-hidden="true"></span>
+        Listening with love
+        <span class="pk-flower" style="--p:var(--pk-sky);--c:var(--pk-yellow);--u:5px" aria-hidden="true"></span>
+      </p>
     </section>
 
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
@@ -1184,7 +1215,7 @@ body {
               <path d="M5 12h14m-7-7 7 7-7 7"/>
             </svg>
           </button>
-          <button class="warm-cta warm-cta--ghost" id="share-btn" type="button">Share her wisdom</button>
+          <button class="warm-cta warm-cta--sky" id="share-btn" type="button">Share her wisdom</button>
         </div>
         <p class="warm-share-status" id="share-status" aria-live="polite"></p>
       </div>
@@ -1222,7 +1253,7 @@ body {
           </div>
         </div>
 
-        <button class="warm-cta" data-go="intro">Take me to abuela
+        <button class="warm-cta warm-cta--olive" data-go="intro">Take me to abuela
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14m-7-7 7 7-7 7"/>

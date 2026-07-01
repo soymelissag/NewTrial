@@ -259,7 +259,19 @@ body {
   color: var(--pk-ink);
   margin: 0;
 }
+.wm-line { display: block; }
+.wm { display: inline-block; }
+.wm-sp { width: .28em; }
 .focus-accent { display: block; color: var(--pk-orange); }
+
+/* pixel-flower accent row under the wordmark */
+.wm-flowers {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.wm-flowers .pk-flower { --u: 7px; }
 
 .build-tag {
   position: fixed;
@@ -456,6 +468,9 @@ body {
 }
 .warm-cta:hover { transform: translate(-2px,-2px); box-shadow: var(--pk-shadow-sticker-lg); }
 .warm-cta:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--pk-ink); }
+.warm-cta--sky    { background: var(--pk-sky); }
+.warm-cta--olive  { background: var(--pk-olive); }
+.warm-cta--yellow { background: var(--pk-yellow); }
 
 .warm-footer {
   position: relative;
