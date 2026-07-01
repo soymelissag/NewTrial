@@ -223,6 +223,28 @@ body {
 .focus-ball:active { transform: scale(0.95); }
 .focus-ball:hover .orb__fig { transform: scale(1.03); }
 
+/* blinking eyelids */
+.blink-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  pointer-events: none;
+}
+.blink-overlay .lid {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(0);
+  animation: blink 4.8s ease-in-out infinite;
+}
+.blink-overlay .lid--r { animation-delay: 40ms; }
+@keyframes blink {
+  0%, 89%   { transform: scaleY(0); }
+  92%, 95%  { transform: scaleY(1); }
+  99%, 100% { transform: scaleY(0); }
+}
+
 /* intro animation */
 @keyframes introTitle {
   from { opacity: 0; transform: translateY(-26px); }
@@ -272,7 +294,18 @@ body {
 
 /* pixel-flowers flanking the wordmark */
 .wm-flower { flex: 0 0 auto; }
-.wm-flower .pk-flower { --u: clamp(6px, 2.2vw, 10px); }
+.wm-flower .pk-flower {
+  --u: clamp(6px, 2.2vw, 10px);
+  transform-origin: center;
+  animation: flowerPop 2.4s var(--pk-ease-bounce, ease-in-out) infinite;
+}
+.focus-top .wm-flower:last-child .pk-flower { animation-delay: 1.2s; }
+@keyframes flowerPop {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25%      { transform: scale(1.28) rotate(90deg); }
+  50%      { transform: scale(1) rotate(180deg); }
+  75%      { transform: scale(1.28) rotate(270deg); }
+}
 
 .build-tag {
   position: fixed;
@@ -854,4 +887,6 @@ body {
   .screen.is-active { animation: none; }
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
   .warm-smoke span, .warm-orb-glow { animation: none; }
+  .wm-flower .pk-flower { animation: none; }
+  .blink-overlay .lid { animation: none; }
 }
