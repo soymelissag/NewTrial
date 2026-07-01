@@ -565,13 +565,19 @@ body {
 }
 .warm-paper--doily .warm-textarea::placeholder { color: var(--pk-ink-muted); opacity: .7; }
 .warm-paper--doily .warm-textarea:focus { outline: none; }
-/* answer: abuela's consejo, centred on the doily */
-.warm-paper__inner--doily .warm-your-q { font-style: italic; color: var(--pk-ink-muted); margin-bottom: 3cqw; }
-.warm-paper__inner--doily .warm-advice {
-  font-family: var(--pk-font-text); font-weight: 700; font-size: 5.4cqw; line-height: 1.35;
-  color: var(--pk-ink); border: none; padding: 0; margin: 0;
+/* answer: abuela's response, centred on the doily */
+.warm-paper__inner--doily .warm-your-q { font-style: italic; color: var(--pk-ink-muted); margin-bottom: 4cqw; }
+/* multicolour Dandelion response (font-size set per-length in JS) */
+.warm-advice--wm {
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: var(--pk-tracking-tight);
+  color: var(--pk-ink);
+  border: none; padding: 0; margin: 0;
+  width: 100%;
 }
-.warm-paper__inner--doily .warm-advice-en { font-style: italic; color: var(--pk-ink-muted); margin-top: 3cqw; }
+.warm-advice--wm .wm { line-height: 1.05; }
 .warm-textarea {
   flex: 1;
   width: 100%;
