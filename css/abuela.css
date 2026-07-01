@@ -376,31 +376,32 @@ body {
   margin: 0;
 }
 .focus-cta {
-  width: 100%;
-  padding: 0.9em 1.4em;
-  background: var(--pk-orange);
+  width: auto;
+  align-self: center;
+  padding: 0.5em 1.15em;
+  background: transparent;
   color: var(--pk-ink);
   border: var(--pk-outline);
   border-radius: var(--pk-r-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
-  box-shadow: var(--pk-shadow-sticker);
+  box-shadow: none;
   font-family: var(--pk-font-display);
   font-weight: 600;
-  font-size: 1.05rem;
-  transition: transform var(--pk-dur-quick) var(--pk-ease-bounce), box-shadow var(--pk-dur-quick) var(--pk-ease-out);
+  font-size: 0.92rem;
+  transition: transform var(--pk-dur-quick) var(--pk-ease-bounce);
 }
-.focus-cta:hover { transform: translate(-2px,-2px); box-shadow: var(--pk-shadow-sticker-lg); }
-.focus-cta:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--pk-ink); }
+.focus-cta:hover { transform: translate(-1px,-1px); box-shadow: none; }
+.focus-cta:active { transform: translate(1px,1px); box-shadow: none; }
 .focus-cta span {
   font-family: var(--pk-font-display);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
 }
-.focus-cta svg { width: 18px; height: 18px; }
+.focus-cta svg { width: 16px; height: 16px; }
 .focus-link {
   background: none;
   border: none;
@@ -547,7 +548,7 @@ body {
 }
 .warm-paper__inner--doily .doily-write {
   font-family: var(--pk-font-text);
-  font-size: 4.8cqw;
+  font-size: 4.1cqw;
   line-height: 1.4;
   color: var(--pk-ink);
   margin: 0;
@@ -731,8 +732,8 @@ body {
 .warm-about__fine { font-style: italic; color: var(--pk-ink-muted) !important; font-size: 13px !important; }
 
 /* button row + ghost + share status */
-.warm-btnrow { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-.warm-btnrow .warm-cta { margin-bottom: 0; }
+.warm-btnrow { width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; gap: 8px; }
+.warm-btnrow .warm-cta { margin-bottom: 0; padding: 0.5em 0.9em; white-space: nowrap; flex: 0 1 auto; }
 .warm-cta--ghost {
   background: transparent;
   color: var(--pk-ink);
