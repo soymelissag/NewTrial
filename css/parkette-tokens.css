@@ -1,0 +1,86 @@
+/* ============================================================
+   PARKETTE — Design Tokens  ·  "June Colors" scheme
+   Brand character: ABUELA (recolored to the June palette).
+   Warm cocoa ink + cream, with six sun-washed accents.
+   Drop this file in and reference the variables anywhere.
+   ============================================================ */
+
+:root {
+  /* ---- Core ------------------------------------------------- */
+  --pk-paper:      #FDF8EC;  /* primary background (warm cream)    */
+  --pk-masa:       #F5E8D5;  /* her skin -> warm raised surface    */
+  --pk-ink:        #6B342A;  /* cocoa brown — text, outlines, hair */
+
+  /* ---- The six June accents (all sampled from the reference) - */
+  --pk-pink:       #F8B1B9;  /* her lips                            */
+  --pk-sky:        #9CCBED;
+  --pk-orange:     #F9A24A;  /* her halo — the hero fill / CTA      */
+  --pk-yellow:     #F4C816;
+  --pk-olive:      #B1B735;  /* her dress — the "green"             */
+
+  /* Deeper variants — hover, pressed, borders on same hue         */
+  --pk-pink-deep:      #EF8FA0;
+  --pk-sky-deep:       #6FA8D4;
+  --pk-orange-deep:    #F1831E;   /* the reference's darker orange  */
+  --pk-yellow-deep:    #E0B00A;
+  --pk-olive-deep:     #8F9520;
+  --pk-ink-deep:       #4E2319;   /* pressed cocoa                  */
+
+  /* Text tones (warm)                                             */
+  --pk-ink-muted:      #936A4E;   /* secondary text on cream        */
+  --pk-ink-faint:      #C3AE92;   /* placeholder / disabled         */
+  --pk-hairline:       #EBDFC8;   /* dividers                       */
+
+  /* ---- Semantic roles (build with these, not raw hues) -------- */
+  --pk-bg:             var(--pk-paper);
+  --pk-surface:        var(--pk-masa);
+  --pk-text:           var(--pk-ink);
+  --pk-text-muted:     var(--pk-ink-muted);
+  --pk-border:         var(--pk-ink);
+  --pk-accent:         var(--pk-orange);   /* default call-to-action */
+
+  /* ---- Radius ----------------------------------------------- */
+  --pk-r-xs: 8px; --pk-r-sm: 14px; --pk-r-md: 20px;
+  --pk-r-lg: 30px; --pk-r-xl: 44px; --pk-r-pill: 999px;
+  --pk-r-blob: 42% 58% 62% 38% / 46% 42% 58% 54%;
+
+  /* ---- Spacing — 4px base ----------------------------------- */
+  --pk-space-1: 4px;  --pk-space-2: 8px;  --pk-space-3: 12px;
+  --pk-space-4: 16px; --pk-space-5: 24px; --pk-space-6: 32px;
+  --pk-space-7: 48px; --pk-space-8: 64px; --pk-space-9: 96px;
+
+  /* ---- Type ------------------------------------------------- */
+  --pk-font-display: "Fredoka", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --pk-font-text:    "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --pk-text-eyebrow: 0.75rem;   --pk-text-sm: 0.875rem;
+  --pk-text-body:    1.0625rem; --pk-text-lg: 1.25rem;
+  --pk-text-h3:   clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+  --pk-text-h2:   clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  --pk-text-h1:   clamp(2.8rem, 1.8rem + 4.6vw, 4.75rem);
+  --pk-text-hero: clamp(3.6rem, 2rem + 8vw, 8rem);
+
+  --pk-tracking-eyebrow: 0.22em;
+  --pk-tracking-tight:  -0.02em;
+  --pk-leading-tight:    1.05;
+  --pk-leading-body:     1.55;
+
+  /* ---- Elevation — the SIGNATURE chunky offset shadow -------- */
+  --pk-shadow-sticker:       4px 4px 0 var(--pk-ink);
+  --pk-shadow-sticker-lg:    6px 6px 0 var(--pk-ink);
+  --pk-shadow-sticker-orange:5px 5px 0 var(--pk-orange);
+  --pk-shadow-soft:          0 10px 30px rgba(107, 52, 42, 0.14);
+  --pk-outline:              2.5px solid var(--pk-ink);
+
+  /* ---- Motion ----------------------------------------------- */
+  --pk-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pk-ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --pk-dur-quick: 140ms; --pk-dur: 240ms; --pk-dur-slow: 420ms;
+
+  /* ---- Focus ------------------------------------------------ */
+  --pk-focus-ring: 0 0 0 3px var(--pk-paper), 0 0 0 6px var(--pk-orange);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
