@@ -422,10 +422,43 @@ body {
 .warm-paper__l2 { display: none; }
 .warm-paper__inner { position: absolute; inset: 0; padding: 28px; display: flex; flex-direction: column; }
 
-/* paper.svg note variant */
-.warm-paper--svg { position: relative; flex: 0 0 auto; min-height: 0; width: 100%; margin-bottom: 20px; }
+/* paper.svg note variant — text sits on the ruled lines via container units.
+   Rules: every 24.35 units from y=100.6, on a 540.4-wide viewBox. */
+.warm-paper--svg {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  margin-bottom: 20px;
+  container-type: inline-size;
+}
 .warm-paper__svg { width: 100%; height: auto; display: block; filter: drop-shadow(4px 4px 0 var(--pk-ink)); }
-.warm-paper__inner--svg { padding: 20% 15% 15%; }
+.warm-paper__inner--svg {
+  padding: 16cqw 7cqw 10cqw 21cqw;   /* top lands on first rule; left clears the red margin */
+  text-align: left;
+}
+/* one text line per ruled line */
+.warm-paper__inner--svg .paper-write,
+.warm-paper__inner--svg .warm-textarea {
+  font-family: var(--pk-font-text);
+  font-size: 3.5cqw;
+  line-height: 4.506cqw;
+  color: var(--pk-ink);
+  margin: 0;
+}
+.warm-paper--svg .warm-textarea {
+  flex: 1; width: 100%; border: none; background: transparent; resize: none; padding: 0;
+}
+.warm-paper--svg .warm-textarea::placeholder { color: var(--pk-ink-muted); opacity: .7; }
+.warm-paper--svg .warm-textarea:focus { outline: none; }
+
+/* answer written on the paper */
+.warm-paper__inner--svg .warm-your-q { font-style: italic; color: var(--pk-ink-muted); margin-bottom: 4.506cqw; }
+.warm-paper__inner--svg .warm-advice {
+  font-family: var(--pk-font-text); font-weight: 700; font-size: 3.9cqw; line-height: 4.506cqw;
+  color: var(--pk-ink); border: none; padding: 0; margin: 0;
+}
+.warm-paper__inner--svg .warm-advice-en { font-style: italic; color: var(--pk-ink-muted); margin-top: 4.506cqw; }
 .warm-textarea {
   flex: 1;
   width: 100%;

@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/abuela.css">
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v19</span>
+  <span class="build-tag" aria-hidden="true">v20</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -1213,9 +1213,8 @@
           <div class="warm-paper warm-paper--svg">
             <svg class="warm-paper__svg" viewBox="0 0 540.4 681.74" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#paperNote"/></svg>
             <div class="warm-paper__inner warm-paper__inner--svg">
-              <textarea id="question" name="question" class="warm-textarea"
+              <textarea id="question" name="question" class="warm-textarea paper-write"
                         placeholder="Dear Abuela, I'm worried about..." maxlength="400"></textarea>
-              <span class="warm-ink">Ink is drying...</span>
             </div>
           </div>
 
@@ -1267,13 +1266,12 @@
 
         <p class="warm-eyebrow">La abuela has spoken</p>
 
-        <div class="warm-paper warm-paper--answer">
-          <div class="warm-paper__l1" aria-hidden="true"></div>
-          <div class="warm-paper__l2" aria-hidden="true"></div>
-          <div class="warm-paper__inner warm-paper__inner--answer">
-            <p class="warm-your-q" id="echo-q"></p>
-            <blockquote class="warm-advice" id="advice-text">…</blockquote>
-            <p class="warm-advice-en" id="advice-en"></p>
+        <div class="warm-paper warm-paper--svg">
+          <svg class="warm-paper__svg" viewBox="0 0 540.4 681.74" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#paperNote"/></svg>
+          <div class="warm-paper__inner warm-paper__inner--svg">
+            <p class="warm-your-q paper-write" id="echo-q"></p>
+            <blockquote class="warm-advice paper-write" id="advice-text">…</blockquote>
+            <p class="warm-advice-en paper-write" id="advice-en"></p>
           </div>
         </div>
 
