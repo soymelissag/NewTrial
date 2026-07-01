@@ -24,6 +24,39 @@
     "var(--pk-sky-deep)", "var(--pk-pink-deep)", "var(--pk-yellow-deep)"
   ];
 
+  /* short fragments of her sayings, whispered as a word cloud while she "thinks" */
+  var CLOUD_WORDS = [
+    "tiki tiki", "…FUACATA!", "sana, sana", "culito de rana",
+    "no me jodas", "que se yo", "oigo…", "oye, ven acá",
+    "no andes descalsa", "despabílate", "ni empieces", "ay, mija"
+  ];
+
+  /* Scatter animated cloud words across the wait screen. */
+  function populateWaitCloud() {
+    var cloud = $("#wait-cloud");
+    if (!cloud) { return; }
+    cloud.innerHTML = "";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var pool = CLOUD_WORDS.slice();
+    for (var i = pool.length - 1; i > 0; i--) {           // shuffle
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+    }
+    var count = Math.min(pool.length, 11);
+    for (var k = 0; k < count; k++) {
+      var w = document.createElement("span");
+      w.className = "wait-word";
+      w.textContent = pool[k];
+      w.style.color = WM_COLORS[k % WM_COLORS.length];
+      w.style.left = (10 + Math.random() * 80).toFixed(1) + "%";
+      w.style.top = (12 + Math.random() * 76).toFixed(1) + "%";
+      w.style.fontSize = (16 + Math.random() * 18).toFixed(0) + "px";
+      w.style.setProperty("--dur", (3.2 + Math.random() * 2.4).toFixed(2) + "s");
+      w.style.setProperty("--delay", (Math.random() * 1.6).toFixed(2) + "s");
+      cloud.appendChild(w);
+    }
+  }
+
   /* Render text into el as multicolour Dandelion letters (spaces preserved). */
   function renderWordmark(el, text) {
     el.textContent = "";
@@ -85,6 +118,8 @@
         }, 60);
       }
     }
+    // On the wait screen, whisper a fresh cloud of consejos while she thinks.
+    if (name === "wait") { populateWaitCloud(); }
   }
 
   /* ---------- Navigation (any element with data-go) ---------- */

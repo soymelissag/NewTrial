@@ -671,6 +671,33 @@ body {
   text-align: center;
 }
 
+/* wait-screen word cloud — sample consejos whispered by the spirits */
+.wait-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;             /* above cream bg, behind the orb/text (z-index 5) */
+  overflow: hidden;
+  pointer-events: none;
+}
+.wait-word {
+  position: absolute;
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: cloudWord var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes cloudWord {
+  0%   { opacity: 0; transform: translate(-50%, -50%) translateY(14px) scale(.86); }
+  22%  { opacity: .85; }
+  50%  { transform: translate(-50%, -50%) translateY(-6px) scale(1); }
+  74%  { opacity: .55; }
+  100% { opacity: 0; transform: translate(-50%, -50%) translateY(-24px) scale(.92); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wait-cloud { display: none; }
+}
+
 /* small badge (about) */
 .warm-orb--sm { margin: 4px 0 16px; }
 .warm-orb-ball--sm { width: 108px; height: 108px; }
