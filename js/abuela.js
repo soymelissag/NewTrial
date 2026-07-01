@@ -61,6 +61,8 @@
   function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
+  var QUESTION_PREFIX = "Dear abuela... ";
+
   function showScreen(name) {
     $all(".screen").forEach(function (s) {
       s.classList.toggle("is-active", s.dataset.screen === name);
@@ -68,6 +70,18 @@
     window.scrollTo(0, 0);
     if (history && history.replaceState) {
       history.replaceState(null, "", "#" + name);
+    }
+    // On the ask screen, start the letter with the caret live after the dots.
+    if (name === "ask") {
+      var qa = $("#question");
+      if (qa) {
+        qa.value = QUESTION_PREFIX;
+        window.setTimeout(function () {
+          qa.focus();
+          var n = qa.value.length;
+          try { qa.setSelectionRange(n, n); } catch (e) {}
+        }, 60);
+      }
     }
   }
 
@@ -99,6 +113,8 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var q = $("#question").value.trim();
+    // Treat the untouched "Dear abuela..." scaffold as no question.
+    if (q === QUESTION_PREFIX.trim()) { q = ""; }
     lastQuestion = q;
 
     // Roll a consejo from a random topic; avoid repeating the last one.
