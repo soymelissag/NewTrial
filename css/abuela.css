@@ -250,28 +250,29 @@ body {
   font-size: 9px;
   color: rgba(15,15,19,0.45);
 }
+.focus-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3.5vw, 22px);
+}
 .focus-title {
   font-family: var(--pk-font-display);
   font-weight: 600;
-  font-size: clamp(52px, 16vw, 96px);
-  line-height: 0.92;
+  font-size: var(--pk-text-h1);
+  line-height: 0.94;
   letter-spacing: var(--pk-tracking-tight);
   color: var(--pk-ink);
   margin: 0;
 }
 .wm-line { display: block; }
-.wm { display: inline-block; }
+.wm { display: inline-block; font-family: var(--pk-font-display); }
 .wm-sp { width: .28em; }
 .focus-accent { display: block; color: var(--pk-orange); }
 
-/* pixel-flower accent row under the wordmark */
-.wm-flowers {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 16px;
-}
-.wm-flowers .pk-flower { --u: 7px; }
+/* pixel-flowers flanking the wordmark */
+.wm-flower { flex: 0 0 auto; }
+.wm-flower .pk-flower { --u: clamp(6px, 2.2vw, 10px); }
 
 .build-tag {
   position: fixed;
@@ -290,7 +291,7 @@ body {
   margin: 0;
   font-family: var(--pk-font-text);
   font-style: italic;
-  font-size: 16px;
+  font-size: var(--pk-text-body);
   color: var(--pk-ink-muted);
   animation: introFade .6s ease 1s both, hintPulse 2s ease-in-out 1.6s infinite;
   transition: opacity .5s ease;
@@ -321,7 +322,7 @@ body {
 }
 .focus-tagline {
   font-family: var(--pk-font-text);
-  font-size: 15px;
+  font-size: var(--pk-text-body);
   line-height: 1.55;
   color: var(--pk-ink-muted);
   margin: 0;
@@ -420,6 +421,11 @@ body {
 .warm-paper__l1 { transform: rotate(1.2deg); box-shadow: var(--pk-shadow-sticker-lg); }
 .warm-paper__l2 { display: none; }
 .warm-paper__inner { position: absolute; inset: 0; padding: 28px; display: flex; flex-direction: column; }
+
+/* paper.svg note variant */
+.warm-paper--svg { position: relative; flex: 0 0 auto; min-height: 0; width: 100%; margin-bottom: 20px; }
+.warm-paper__svg { width: 100%; height: auto; display: block; filter: drop-shadow(4px 4px 0 var(--pk-ink)); }
+.warm-paper__inner--svg { padding: 20% 15% 15%; }
 .warm-textarea {
   flex: 1;
   width: 100%;
