@@ -293,8 +293,8 @@ body {
 .focus-title {
   font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
   font-weight: 600;
-  font-size: var(--pk-text-h1);
-  line-height: 0.94;
+  font-size: clamp(66px, 20vw, 120px);
+  line-height: 0.92;
   letter-spacing: var(--pk-tracking-tight);
   color: var(--pk-ink);
   margin: 0;
