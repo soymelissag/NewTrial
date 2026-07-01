@@ -72,7 +72,13 @@ body {
   z-index: 1;
   min-height: 100vh;
   display: grid;
-  place-items: center;
+  /* one full-width column so the active screen always spans the viewport;
+     vertical-center the screen. (Plain place-items:center let the auto
+     column size to content in some browsers, shoving everything sideways.) */
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  justify-items: stretch;
   padding: 26px 18px;
 }
 
