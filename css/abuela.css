@@ -171,6 +171,11 @@ body::before {
   align-items: flex-end;
   justify-content: center;
 }
+.orb--warm {
+  background: radial-gradient(circle at 40% 20%, #3a3533 0%, #211e1d 60%, #151312 100%);
+  box-shadow: inset 0 -8px 20px rgba(0,0,0,0.6), 0 0 40px -5px rgba(218,90,42,0.2);
+  border: 1px solid rgba(218,90,42,0.3);
+}
 .orb__sheen {
   position: absolute;
   top: 4%;
@@ -376,18 +381,18 @@ body::before {
 /* ===========================================================
    ASK SCREEN — "share your worries" (parchment)
    =========================================================== */
-.ask2 {
+.warm {
   position: relative;
   width: 100%;
   min-height: calc(100vh - 52px);
 }
-.screen--ask.is-active {
+.warm.is-active {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /* warm full-bleed background: grid + top glow */
-.ask2-bg {
+.warm-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -399,8 +404,8 @@ body::before {
   background-size: auto, 25% 25%, 25% 25%, auto;
 }
 /* drifting smoke wisps */
-.ask2-smoke { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-.ask2-smoke span {
+.warm-smoke { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.warm-smoke span {
   position: absolute;
   left: 0;
   width: 100%;
@@ -409,8 +414,8 @@ body::before {
   background: linear-gradient(90deg, transparent, rgba(218,90,42,0.12), transparent);
   animation: drift 9s linear infinite;
 }
-.ask2-smoke span:nth-child(1) { top: 26%; }
-.ask2-smoke span:nth-child(2) { top: 72%; height: 90px; animation-delay: -4.5s; }
+.warm-smoke span:nth-child(1) { top: 26%; }
+.warm-smoke span:nth-child(2) { top: 72%; height: 90px; animation-delay: -4.5s; }
 @keyframes drift {
   0%   { transform: translateX(-100%) translateY(0) rotate(0); opacity: 0; }
   20%  { opacity: .5; }
@@ -418,7 +423,7 @@ body::before {
   100% { transform: translateX(100%) translateY(-40px) rotate(12deg); opacity: 0; }
 }
 
-.ask2-inner {
+.warm-inner {
   position: relative;
   z-index: 5;
   width: 100%;
@@ -431,8 +436,8 @@ body::before {
 }
 
 /* orb (same intro abuela) */
-.ask2-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
-.ask2-orb-glow {
+.warm-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
+.warm-orb-glow {
   position: absolute; inset: 0; border-radius: 50%;
   background: #da5a2a; filter: blur(60px); opacity: .2;
   transform: scale(1.2);
@@ -442,9 +447,9 @@ body::before {
   0%,100% { opacity: .18; transform: scale(1.2); }
   50%     { opacity: .34; transform: scale(1.45); }
 }
-.ask2-orb-ball { width: 168px; height: 168px; }
+.warm-orb-ball { width: 168px; height: 168px; }
 
-.ask2-heading {
+.warm-heading {
   font-family: "Fraunces", serif;
   font-weight: 600;
   font-size: 23px;
@@ -453,25 +458,25 @@ body::before {
   margin: 0 0 22px;
 }
 
-.ask2-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
+.warm-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
 
 /* stacked parchment note */
-.ask2-paper { position: relative; flex: 1; min-height: 300px; margin-bottom: 26px; }
-.ask2-paper__l1, .ask2-paper__l2 {
+.warm-paper { position: relative; flex: 1; min-height: 300px; margin-bottom: 26px; }
+.warm-paper__l1, .warm-paper__l2 {
   position: absolute; inset: 0; border-radius: 16px; background: #f2e8dc;
 }
-.ask2-paper__l1 {
+.warm-paper__l1 {
   transform: rotate(1deg);
   box-shadow: 0 14px 30px rgba(26,23,22,0.16);
   border-left: 4px solid rgba(218,90,42,0.2);
 }
-.ask2-paper__l2 {
+.warm-paper__l2 {
   transform: rotate(-1deg);
   box-shadow: 0 8px 18px rgba(26,23,22,0.10);
   border: 1px solid rgba(218,90,42,0.10);
 }
-.ask2-paper__inner { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; }
-.ask2-textarea {
+.warm-paper__inner { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; }
+.warm-textarea {
   flex: 1;
   width: 100%;
   border: none;
@@ -483,11 +488,11 @@ body::before {
   line-height: 1.6;
   color: rgba(33,30,29,0.82);
 }
-.ask2-textarea::placeholder { color: rgba(33,30,29,0.38); }
-.ask2-textarea:focus { outline: none; }
-.ask2-textarea::-webkit-scrollbar { width: 4px; }
-.ask2-textarea::-webkit-scrollbar-thumb { background: rgba(218,90,42,0.27); border-radius: 10px; }
-.ask2-ink {
+.warm-textarea::placeholder { color: rgba(33,30,29,0.38); }
+.warm-textarea:focus { outline: none; }
+.warm-textarea::-webkit-scrollbar { width: 4px; }
+.warm-textarea::-webkit-scrollbar-thumb { background: rgba(218,90,42,0.27); border-radius: 10px; }
+.warm-ink {
   align-self: flex-end;
   margin-top: 12px;
   font-family: "Space Mono", monospace;
@@ -498,7 +503,7 @@ body::before {
 }
 
 /* dark pill CTA */
-.ask2-cta {
+.warm-cta {
   width: 100%;
   padding: 18px;
   margin-bottom: 26px;
@@ -519,10 +524,10 @@ body::before {
   box-shadow: 0 18px 40px -12px rgba(26,23,22,0.6);
   transition: background .3s ease, transform .1s ease;
 }
-.ask2-cta:hover { background: #da5a2a; }
-.ask2-cta:active { transform: scale(0.97); }
+.warm-cta:hover { background: #da5a2a; }
+.warm-cta:active { transform: scale(0.97); }
 
-.ask2-footer {
+.warm-footer {
   position: relative;
   z-index: 5;
   margin: 4px 0 18px;
@@ -535,7 +540,7 @@ body::before {
   text-align: center;
 }
 
-.ask2-back {
+.warm-back {
   position: absolute;
   top: 16px; left: 16px;
   z-index: 6;
@@ -548,7 +553,99 @@ body::before {
   cursor: pointer;
   transition: background .2s ease;
 }
-.ask2-back:hover { background: rgba(33,30,29,0.12); }
+.warm-back:hover { background: rgba(33,30,29,0.12); }
+
+/* centered variant (wait screen) */
+.warm-inner--center { justify-content: center; }
+.warm-waiting {
+  margin: 8px 0 0;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(33,30,29,0.55);
+  text-align: center;
+}
+
+/* small orb (about) */
+.warm-orb--sm { margin: 4px 0 16px; }
+.warm-orb-ball--sm { width: 120px; height: 120px; }
+
+/* answer eyebrow */
+.warm-eyebrow {
+  margin: 0 0 14px;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  font-size: 10px;
+  color: rgba(218,90,42,0.8);
+  text-align: center;
+}
+
+/* answer / about parchment content */
+.warm-paper--answer { flex: 0 1 auto; min-height: 0; width: 100%; margin-bottom: 22px; }
+.warm-paper__inner--answer {
+  position: relative;
+  padding: 30px 28px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.warm-your-q {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(33,30,29,0.5);
+  margin: 0 0 14px;
+}
+.warm-advice {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #211e1d;
+  margin: 0 0 14px;
+  border: none;
+  padding: 0;
+}
+.warm-advice-en {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(33,30,29,0.6);
+  margin: 0;
+}
+
+/* about copy */
+.warm-about { text-align: left; gap: 14px; display: flex; flex-direction: column; }
+.warm-about p { font-family: "Fraunces", serif; font-size: 15px; line-height: 1.55; color: rgba(33,30,29,0.75); margin: 0; }
+.warm-about em { color: #da5a2a; font-style: italic; }
+.warm-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.warm-steps li { font-family: "Fraunces", serif; font-size: 14px; line-height: 1.5; color: rgba(33,30,29,0.75); }
+.warm-steps b { color: #da5a2a; font-family: "Space Mono", monospace; margin-right: 4px; }
+.warm-about__fine { font-style: italic; color: rgba(33,30,29,0.5) !important; font-size: 13px !important; }
+
+/* button row + ghost + share status */
+.warm-btnrow { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.warm-btnrow .warm-cta { margin-bottom: 0; }
+.warm-cta--ghost {
+  background: transparent;
+  color: #211e1d;
+  border: 1.5px solid rgba(33,30,29,0.25);
+  box-shadow: none;
+  letter-spacing: .14em;
+}
+.warm-cta--ghost:hover { background: rgba(33,30,29,0.06); }
+.warm-share-status {
+  margin: 12px 0 0;
+  min-height: 1em;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: rgba(218,90,42,0.7);
+  text-align: center;
+}
 
 /* ===========================================================
    BOOKSHELF (used as secondary decor)
@@ -771,5 +868,5 @@ body::before {
   .ball--shaking { animation: none; }
   .screen.is-active { animation: none; }
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
-  .ask2-smoke span, .ask2-orb-glow { animation: none; }
+  .warm-smoke span, .warm-orb-glow { animation: none; }
 }

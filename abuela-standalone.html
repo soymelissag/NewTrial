@@ -185,6 +185,11 @@ body::before {
   align-items: flex-end;
   justify-content: center;
 }
+.orb--warm {
+  background: radial-gradient(circle at 40% 20%, #3a3533 0%, #211e1d 60%, #151312 100%);
+  box-shadow: inset 0 -8px 20px rgba(0,0,0,0.6), 0 0 40px -5px rgba(218,90,42,0.2);
+  border: 1px solid rgba(218,90,42,0.3);
+}
 .orb__sheen {
   position: absolute;
   top: 4%;
@@ -390,18 +395,18 @@ body::before {
 /* ===========================================================
    ASK SCREEN — "share your worries" (parchment)
    =========================================================== */
-.ask2 {
+.warm {
   position: relative;
   width: 100%;
   min-height: calc(100vh - 52px);
 }
-.screen--ask.is-active {
+.warm.is-active {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /* warm full-bleed background: grid + top glow */
-.ask2-bg {
+.warm-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -413,8 +418,8 @@ body::before {
   background-size: auto, 25% 25%, 25% 25%, auto;
 }
 /* drifting smoke wisps */
-.ask2-smoke { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-.ask2-smoke span {
+.warm-smoke { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.warm-smoke span {
   position: absolute;
   left: 0;
   width: 100%;
@@ -423,8 +428,8 @@ body::before {
   background: linear-gradient(90deg, transparent, rgba(218,90,42,0.12), transparent);
   animation: drift 9s linear infinite;
 }
-.ask2-smoke span:nth-child(1) { top: 26%; }
-.ask2-smoke span:nth-child(2) { top: 72%; height: 90px; animation-delay: -4.5s; }
+.warm-smoke span:nth-child(1) { top: 26%; }
+.warm-smoke span:nth-child(2) { top: 72%; height: 90px; animation-delay: -4.5s; }
 @keyframes drift {
   0%   { transform: translateX(-100%) translateY(0) rotate(0); opacity: 0; }
   20%  { opacity: .5; }
@@ -432,7 +437,7 @@ body::before {
   100% { transform: translateX(100%) translateY(-40px) rotate(12deg); opacity: 0; }
 }
 
-.ask2-inner {
+.warm-inner {
   position: relative;
   z-index: 5;
   width: 100%;
@@ -445,8 +450,8 @@ body::before {
 }
 
 /* orb (same intro abuela) */
-.ask2-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
-.ask2-orb-glow {
+.warm-orb { position: relative; margin: 12px 0 22px; display: grid; place-items: center; }
+.warm-orb-glow {
   position: absolute; inset: 0; border-radius: 50%;
   background: #da5a2a; filter: blur(60px); opacity: .2;
   transform: scale(1.2);
@@ -456,9 +461,9 @@ body::before {
   0%,100% { opacity: .18; transform: scale(1.2); }
   50%     { opacity: .34; transform: scale(1.45); }
 }
-.ask2-orb-ball { width: 168px; height: 168px; }
+.warm-orb-ball { width: 168px; height: 168px; }
 
-.ask2-heading {
+.warm-heading {
   font-family: "Fraunces", serif;
   font-weight: 600;
   font-size: 23px;
@@ -467,25 +472,25 @@ body::before {
   margin: 0 0 22px;
 }
 
-.ask2-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
+.warm-form { width: 100%; flex: 1; display: flex; flex-direction: column; }
 
 /* stacked parchment note */
-.ask2-paper { position: relative; flex: 1; min-height: 300px; margin-bottom: 26px; }
-.ask2-paper__l1, .ask2-paper__l2 {
+.warm-paper { position: relative; flex: 1; min-height: 300px; margin-bottom: 26px; }
+.warm-paper__l1, .warm-paper__l2 {
   position: absolute; inset: 0; border-radius: 16px; background: #f2e8dc;
 }
-.ask2-paper__l1 {
+.warm-paper__l1 {
   transform: rotate(1deg);
   box-shadow: 0 14px 30px rgba(26,23,22,0.16);
   border-left: 4px solid rgba(218,90,42,0.2);
 }
-.ask2-paper__l2 {
+.warm-paper__l2 {
   transform: rotate(-1deg);
   box-shadow: 0 8px 18px rgba(26,23,22,0.10);
   border: 1px solid rgba(218,90,42,0.10);
 }
-.ask2-paper__inner { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; }
-.ask2-textarea {
+.warm-paper__inner { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; }
+.warm-textarea {
   flex: 1;
   width: 100%;
   border: none;
@@ -497,11 +502,11 @@ body::before {
   line-height: 1.6;
   color: rgba(33,30,29,0.82);
 }
-.ask2-textarea::placeholder { color: rgba(33,30,29,0.38); }
-.ask2-textarea:focus { outline: none; }
-.ask2-textarea::-webkit-scrollbar { width: 4px; }
-.ask2-textarea::-webkit-scrollbar-thumb { background: rgba(218,90,42,0.27); border-radius: 10px; }
-.ask2-ink {
+.warm-textarea::placeholder { color: rgba(33,30,29,0.38); }
+.warm-textarea:focus { outline: none; }
+.warm-textarea::-webkit-scrollbar { width: 4px; }
+.warm-textarea::-webkit-scrollbar-thumb { background: rgba(218,90,42,0.27); border-radius: 10px; }
+.warm-ink {
   align-self: flex-end;
   margin-top: 12px;
   font-family: "Space Mono", monospace;
@@ -512,7 +517,7 @@ body::before {
 }
 
 /* dark pill CTA */
-.ask2-cta {
+.warm-cta {
   width: 100%;
   padding: 18px;
   margin-bottom: 26px;
@@ -533,10 +538,10 @@ body::before {
   box-shadow: 0 18px 40px -12px rgba(26,23,22,0.6);
   transition: background .3s ease, transform .1s ease;
 }
-.ask2-cta:hover { background: #da5a2a; }
-.ask2-cta:active { transform: scale(0.97); }
+.warm-cta:hover { background: #da5a2a; }
+.warm-cta:active { transform: scale(0.97); }
 
-.ask2-footer {
+.warm-footer {
   position: relative;
   z-index: 5;
   margin: 4px 0 18px;
@@ -549,7 +554,7 @@ body::before {
   text-align: center;
 }
 
-.ask2-back {
+.warm-back {
   position: absolute;
   top: 16px; left: 16px;
   z-index: 6;
@@ -562,7 +567,99 @@ body::before {
   cursor: pointer;
   transition: background .2s ease;
 }
-.ask2-back:hover { background: rgba(33,30,29,0.12); }
+.warm-back:hover { background: rgba(33,30,29,0.12); }
+
+/* centered variant (wait screen) */
+.warm-inner--center { justify-content: center; }
+.warm-waiting {
+  margin: 8px 0 0;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(33,30,29,0.55);
+  text-align: center;
+}
+
+/* small orb (about) */
+.warm-orb--sm { margin: 4px 0 16px; }
+.warm-orb-ball--sm { width: 120px; height: 120px; }
+
+/* answer eyebrow */
+.warm-eyebrow {
+  margin: 0 0 14px;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  font-size: 10px;
+  color: rgba(218,90,42,0.8);
+  text-align: center;
+}
+
+/* answer / about parchment content */
+.warm-paper--answer { flex: 0 1 auto; min-height: 0; width: 100%; margin-bottom: 22px; }
+.warm-paper__inner--answer {
+  position: relative;
+  padding: 30px 28px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.warm-your-q {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(33,30,29,0.5);
+  margin: 0 0 14px;
+}
+.warm-advice {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #211e1d;
+  margin: 0 0 14px;
+  border: none;
+  padding: 0;
+}
+.warm-advice-en {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(33,30,29,0.6);
+  margin: 0;
+}
+
+/* about copy */
+.warm-about { text-align: left; gap: 14px; display: flex; flex-direction: column; }
+.warm-about p { font-family: "Fraunces", serif; font-size: 15px; line-height: 1.55; color: rgba(33,30,29,0.75); margin: 0; }
+.warm-about em { color: #da5a2a; font-style: italic; }
+.warm-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.warm-steps li { font-family: "Fraunces", serif; font-size: 14px; line-height: 1.5; color: rgba(33,30,29,0.75); }
+.warm-steps b { color: #da5a2a; font-family: "Space Mono", monospace; margin-right: 4px; }
+.warm-about__fine { font-style: italic; color: rgba(33,30,29,0.5) !important; font-size: 13px !important; }
+
+/* button row + ghost + share status */
+.warm-btnrow { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.warm-btnrow .warm-cta { margin-bottom: 0; }
+.warm-cta--ghost {
+  background: transparent;
+  color: #211e1d;
+  border: 1.5px solid rgba(33,30,29,0.25);
+  box-shadow: none;
+  letter-spacing: .14em;
+}
+.warm-cta--ghost:hover { background: rgba(33,30,29,0.06); }
+.warm-share-status {
+  margin: 12px 0 0;
+  min-height: 1em;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: rgba(218,90,42,0.7);
+  text-align: center;
+}
 
 /* ===========================================================
    BOOKSHELF (used as secondary decor)
@@ -785,13 +882,13 @@ body::before {
   .ball--shaking { animation: none; }
   .screen.is-active { animation: none; }
   .focus-top, .focus-orb-area, .focus-hint { animation: none; opacity: 1; }
-  .ask2-smoke span, .ask2-orb-glow { animation: none; }
+  .warm-smoke span, .warm-orb-glow { animation: none; }
 }
 
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v11</span>
+  <span class="build-tag" aria-hidden="true">v12</span>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -827,6 +924,38 @@ body::before {
           <path d="M 86 154 Q 100 152 114 154" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round"/>
           <circle cx="52" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
           <circle cx="148" cy="142" r="7" fill="#FFFFFF" stroke="#090412" stroke-width="3"/>
+        </symbol>
+
+        <!-- Warm-palette variant (same shape, terracotta glasses) for the interior screens -->
+        <symbol id="abuelaFigureWarm" viewBox="0 0 200 200">
+          <g fill="#1a1716">
+            <circle cx="100" cy="40" r="32"/>
+            <circle cx="65" cy="50" r="28"/>
+            <circle cx="135" cy="50" r="28"/>
+            <circle cx="45" cy="80" r="28"/>
+            <circle cx="155" cy="80" r="28"/>
+            <circle cx="35" cy="115" r="26"/>
+            <circle cx="165" cy="115" r="26"/>
+            <circle cx="45" cy="150" r="24"/>
+            <circle cx="155" cy="150" r="24"/>
+            <circle cx="70" cy="170" r="22"/>
+            <circle cx="130" cy="170" r="22"/>
+            <circle cx="100" cy="100" r="55"/>
+            <rect x="50" y="100" width="100" height="70"/>
+          </g>
+          <path d="M 62 140 C 62 180, 138 180, 138 140 C 138 80, 62 80, 62 140 Z" fill="#e5d4c3"/>
+          <rect x="88" y="170" width="24" height="20" fill="#d6c5b4"/>
+          <path d="M 30 220 C 30 180, 65 178, 100 178 C 135 178, 170 180, 170 220 Z" fill="#da5a2a"/>
+          <g stroke="#da5a2a" stroke-width="7" fill="none">
+            <circle cx="76" cy="112" r="20"/>
+            <circle cx="124" cy="112" r="20"/>
+          </g>
+          <circle cx="76" cy="115" r="4.5" fill="#211e1d"/>
+          <circle cx="124" cy="115" r="4.5" fill="#211e1d"/>
+          <path d="M 100 115 L 93 138 L 105 138 Z" fill="none" stroke="#211e1d" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M 86 155 Q 100 158 114 155" fill="none" stroke="#da5a2a" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="52" cy="142" r="7" fill="#e5d4c3" stroke="#211e1d" stroke-width="3"/>
+          <circle cx="148" cy="142" r="7" fill="#e5d4c3" stroke="#211e1d" stroke-width="3"/>
         </symbol>
       </defs>
     </svg>
@@ -869,36 +998,35 @@ body::before {
     </section>
 
     <!-- ===================== 2. ASK SCREEN (share your worries) ===================== -->
-    <section class="screen screen--ask ask2" id="screen-ask" data-screen="ask">
-      <div class="ask2-bg" aria-hidden="true"></div>
-      <div class="ask2-smoke" aria-hidden="true"><span></span><span></span></div>
+    <section class="screen screen--ask warm" id="screen-ask" data-screen="ask">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
 
-      <button class="ask2-back" data-go="intro" aria-label="Back">&larr;</button>
+      <button class="warm-back" data-go="intro" aria-label="Back">&larr;</button>
 
-      <div class="ask2-inner">
-        <!-- orb with the intro abuela -->
-        <div class="ask2-orb">
-          <span class="ask2-orb-glow" aria-hidden="true"></span>
-          <div class="orb ask2-orb-ball">
-            <span class="orb__sheen" aria-hidden="true"></span>
-            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigure"/></svg>
+      <div class="warm-inner">
+        <!-- orb with the warm abuela -->
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
           </div>
         </div>
 
-        <h2 class="ask2-heading">What weighs on your heart?</h2>
+        <h2 class="warm-heading">What weighs on your heart?</h2>
 
-        <form id="ask-form" novalidate class="ask2-form">
-          <div class="ask2-paper">
-            <div class="ask2-paper__l1" aria-hidden="true"></div>
-            <div class="ask2-paper__l2" aria-hidden="true"></div>
-            <div class="ask2-paper__inner">
-              <textarea id="question" name="question" class="ask2-textarea"
+        <form id="ask-form" novalidate class="warm-form">
+          <div class="warm-paper">
+            <div class="warm-paper__l1" aria-hidden="true"></div>
+            <div class="warm-paper__l2" aria-hidden="true"></div>
+            <div class="warm-paper__inner">
+              <textarea id="question" name="question" class="warm-textarea"
                         placeholder="Dear Abuela, I'm worried about..." maxlength="400"></textarea>
-              <span class="ask2-ink">Ink is drying...</span>
+              <span class="warm-ink">Ink is drying...</span>
             </div>
           </div>
 
-          <button class="ask2-cta" type="submit" id="shake-btn">
+          <button class="warm-cta" type="submit" id="shake-btn">
             Ask the spirits
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -908,50 +1036,98 @@ body::before {
         </form>
       </div>
 
-      <p class="ask2-footer">Listening with love</p>
+      <p class="warm-footer">Listening with love</p>
     </section>
 
     <!-- ===================== 3. SHAKING / LOADING SCREEN ===================== -->
-    <section class="screen screen--wait" id="screen-wait" data-screen="wait">
-      <div class="wrap">
-        <div class="ball ball--shaking orb" aria-hidden="true">
-          <span class="orb__sheen"></span>
-          <svg class="orb__fig" viewBox="0 0 200 200"><use href="#abuelaFigure"/></svg>
+    <section class="screen screen--wait warm" id="screen-wait" data-screen="wait">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <div class="warm-inner warm-inner--center">
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="ball ball--shaking orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200"><use href="#abuelaFigureWarm"/></svg>
+          </div>
         </div>
-        <p class="waiting-text" id="waiting-text">Abuela is consulting the spirits…</p>
+        <p class="warm-waiting" id="waiting-text">Abuela is consulting the spirits…</p>
       </div>
     </section>
 
     <!-- ===================== 4. ANSWER SCREEN ===================== -->
-    <section class="screen screen--answer" id="screen-answer" data-screen="answer">
-      <div class="wrap">
-        <p class="kicker c-orange">La abuela has spoken</p>
-        <p class="your-q" id="echo-q"></p>
-        <blockquote class="advice" id="advice-text">…</blockquote>
-        <p class="advice-en" id="advice-en"></p>
-        <div class="btn-row">
-          <button class="btn btn--magenta" data-go="ask">Ask again 🔮</button>
-          <button class="btn btn--ghost" id="share-btn" type="button">Share her wisdom</button>
+    <section class="screen screen--answer warm" id="screen-answer" data-screen="answer">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <div class="warm-inner">
+        <div class="warm-orb">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
+          </div>
         </div>
-        <p class="fineprint" id="share-status" aria-live="polite"></p>
+
+        <p class="warm-eyebrow">La abuela has spoken</p>
+
+        <div class="warm-paper warm-paper--answer">
+          <div class="warm-paper__l1" aria-hidden="true"></div>
+          <div class="warm-paper__l2" aria-hidden="true"></div>
+          <div class="warm-paper__inner warm-paper__inner--answer">
+            <p class="warm-your-q" id="echo-q"></p>
+            <blockquote class="warm-advice" id="advice-text">…</blockquote>
+            <p class="warm-advice-en" id="advice-en"></p>
+          </div>
+        </div>
+
+        <div class="warm-btnrow">
+          <button class="warm-cta" data-go="ask">Ask again
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </button>
+          <button class="warm-cta warm-cta--ghost" id="share-btn" type="button">Share her wisdom</button>
+        </div>
+        <p class="warm-share-status" id="share-status" aria-live="polite"></p>
       </div>
     </section>
 
     <!-- ===================== 5. ABOUT SCREEN ===================== -->
-    <section class="screen screen--about" id="screen-about" data-screen="about">
-      <div class="wrap">
-        <p class="kicker c-purple">The legend</p>
-        <h2 class="heading">About <span class="c-green">la abuela</span></h2>
-        <p class="lede">Abuela 8 Ball is the world's most opinionated fortune teller. Ask any
-          question, pick what is weighing on your heart, and shake the bola. She answers in her
-          own words — half blessing, half regañada (scolding), always with love.</p>
-        <ul class="steps">
-          <li><b>1.</b> Write your question. Be honest, she always knows when you're not.</li>
-          <li><b>2.</b> Pick a topic: amor, dinero, familia, or la vida.</li>
-          <li><b>3.</b> Shake the bola and receive your consejo.</li>
-        </ul>
-        <p class="lede lede--tight">Not a substitute for actually calling your real grandmother. Llámala. She misses you.</p>
-        <button class="btn btn--magenta" data-go="intro">&larr; Take me to abuela</button>
+    <section class="screen screen--about warm" id="screen-about" data-screen="about">
+      <div class="warm-bg" aria-hidden="true"></div>
+      <div class="warm-smoke" aria-hidden="true"><span></span><span></span></div>
+      <button class="warm-back" data-go="intro" aria-label="Back">&larr;</button>
+      <div class="warm-inner">
+        <div class="warm-orb warm-orb--sm">
+          <span class="warm-orb-glow" aria-hidden="true"></span>
+          <div class="orb orb--warm warm-orb-ball warm-orb-ball--sm">
+            <svg class="orb__fig" viewBox="0 0 200 200" aria-hidden="true"><use href="#abuelaFigureWarm"/></svg>
+          </div>
+        </div>
+
+        <h2 class="warm-heading">About la abuela</h2>
+
+        <div class="warm-paper warm-paper--answer">
+          <div class="warm-paper__l1" aria-hidden="true"></div>
+          <div class="warm-paper__l2" aria-hidden="true"></div>
+          <div class="warm-paper__inner warm-paper__inner--answer warm-about">
+            <p>Abuela 8 Ball is the world's most opinionated fortune teller. Write down what
+              weighs on your heart, tap <em>Ask the spirits</em>, and she answers in her own
+              words — half blessing, half regañada, always with love.</p>
+            <ul class="warm-steps">
+              <li><b>1.</b> Write your worry. Be honest — she always knows when you're not.</li>
+              <li><b>2.</b> Tap <em>Ask the spirits</em> and let her consult them.</li>
+              <li><b>3.</b> Receive your consejo.</li>
+            </ul>
+            <p class="warm-about__fine">Not a substitute for calling your real grandmother. Llámala. She misses you.</p>
+          </div>
+        </div>
+
+        <button class="warm-cta" data-go="intro">Take me to abuela
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14m-7-7 7 7-7 7"/>
+          </svg>
+        </button>
       </div>
     </section>
 
