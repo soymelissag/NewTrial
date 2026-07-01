@@ -23,6 +23,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Dandelion";
+  src: url("../fonts/Dandelion-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --paper:  #f3ecda;   /* warm cream ground */
@@ -284,7 +291,7 @@ body {
   gap: clamp(10px, 3.5vw, 22px);
 }
 .focus-title {
-  font-family: "Fredoka", ui-rounded, system-ui, sans-serif;
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
   font-weight: 600;
   font-size: var(--pk-text-h1);
   line-height: 0.94;
@@ -293,7 +300,7 @@ body {
   margin: 0;
 }
 .wm-line { display: block; }
-.wm { display: inline-block; font-family: "Fredoka", ui-rounded, system-ui, sans-serif; }
+.wm { display: inline-block; font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif; }
 .wm-sp { width: .28em; }
 .focus-accent { display: block; color: var(--pk-orange); }
 
