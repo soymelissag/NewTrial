@@ -1245,9 +1245,9 @@ body {
 @keyframes splashOut { to { opacity: 0; visibility: hidden; } }
 .splash-line { display: flex; gap: .02em; line-height: .9; }
 .sl {
-  font-family: "ElmsSans", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(58px, 17vw, 152px);
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(64px, 19vw, 168px);
   display: inline-block;
   opacity: 0;
   transform: translateY(-150%) rotate(var(--r0));
@@ -1270,25 +1270,25 @@ body {
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v44</span>
+  <span class="build-tag" aria-hidden="true">v45</span>
 
-  <!-- intro splash: kinetic falling letters -->
+  <!-- intro splash: Dandelion wordmark, one word at a time -->
   <div class="intro-splash" id="introSplash" aria-label="Abuela 8 Ball">
     <div class="splash-line">
-      <span class="sl" style="color:#2E7FD6;--r0:-34deg;--rf:-6deg;--d:.05s">a</span>
-      <span class="sl" style="color:#E24B72;--r0:28deg;--rf:5deg;--d:.14s">b</span>
-      <span class="sl" style="color:#F09400;--r0:-22deg;--rf:-3deg;--d:.23s">u</span>
-      <span class="sl" style="color:#1E9E57;--r0:33deg;--rf:6deg;--d:.32s">e</span>
-      <span class="sl" style="color:#E23B3B;--r0:-18deg;--rf:-4deg;--d:.41s">l</span>
-      <span class="sl" style="color:#6B342A;--r0:24deg;--rf:4deg;--d:.50s">a</span>
+      <span class="sl" style="color:var(--pk-olive);--r0:-30deg;--rf:-6deg;--d:.05s">a</span>
+      <span class="sl" style="color:var(--pk-orange);--r0:26deg;--rf:5deg;--d:.13s">b</span>
+      <span class="sl" style="color:var(--pk-ink);--r0:-20deg;--rf:-3deg;--d:.21s">u</span>
+      <span class="sl" style="color:var(--pk-sky-deep);--r0:30deg;--rf:6deg;--d:.29s">e</span>
+      <span class="sl" style="color:var(--pk-pink-deep);--r0:-16deg;--rf:-4deg;--d:.37s">l</span>
+      <span class="sl" style="color:var(--pk-yellow-deep);--r0:22deg;--rf:4deg;--d:.45s">a</span>
     </div>
     <div class="splash-line">
-      <span class="sl" style="color:#C39400;--r0:-30deg;--rf:-5deg;--d:.60s">8</span>
+      <span class="sl" style="color:var(--pk-orange);--r0:-28deg;--rf:-5deg;--d:1.50s">8</span>
       <span class="sl sl-sp"></span>
-      <span class="sl" style="color:#4FA3E0;--r0:26deg;--rf:5deg;--d:.69s">b</span>
-      <span class="sl" style="color:#2E7FD6;--r0:-20deg;--rf:-3deg;--d:.78s">a</span>
-      <span class="sl" style="color:#E24B72;--r0:30deg;--rf:6deg;--d:.87s">l</span>
-      <span class="sl" style="color:#1E9E57;--r0:-24deg;--rf:-5deg;--d:.96s">l</span>
+      <span class="sl" style="color:var(--pk-olive);--r0:24deg;--rf:5deg;--d:1.58s">b</span>
+      <span class="sl" style="color:var(--pk-sky-deep);--r0:-20deg;--rf:-3deg;--d:1.66s">a</span>
+      <span class="sl" style="color:var(--pk-pink-deep);--r0:28deg;--rf:6deg;--d:1.74s">l</span>
+      <span class="sl" style="color:var(--pk-ink);--r0:-22deg;--rf:-5deg;--d:1.82s">l</span>
     </div>
   </div>
   <!-- ===================== APP SHELL ===================== -->
@@ -4984,7 +4984,7 @@ body {
       }, 520);
     }
     splash.addEventListener("click", dismiss);   // tap to skip
-    window.setTimeout(dismiss, 2700);            // after letters land + a beat
+    window.setTimeout(dismiss, 3400);            // after both words land + a beat
   })();
 
   function showScreen(name) {

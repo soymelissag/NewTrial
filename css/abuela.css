@@ -1039,9 +1039,9 @@ body {
 @keyframes splashOut { to { opacity: 0; visibility: hidden; } }
 .splash-line { display: flex; gap: .02em; line-height: .9; }
 .sl {
-  font-family: "ElmsSans", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(58px, 17vw, 152px);
+  font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(64px, 19vw, 168px);
   display: inline-block;
   opacity: 0;
   transform: translateY(-150%) rotate(var(--r0));
