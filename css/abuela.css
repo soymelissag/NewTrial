@@ -1035,8 +1035,24 @@ body {
   cursor: pointer;
   overflow: hidden;
 }
-.intro-splash.done { animation: splashOut .5s ease forwards; }
+.intro-splash.done { animation: splashOut .55s ease forwards; }
 @keyframes splashOut { to { opacity: 0; visibility: hidden; } }
+/* the wordmark block: settle-pop once both words have landed */
+.splash-word {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .04em;
+  animation: wordSettle 1.1s cubic-bezier(.22, 1, .3, 1) 4.15s both;
+}
+@keyframes wordSettle {
+  0%   { transform: scale(1) rotate(0); }
+  38%  { transform: scale(1.05) rotate(-1deg); }
+  64%  { transform: scale(.986) rotate(.6deg); }
+  82%  { transform: scale(1.012) rotate(-.3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
 .splash-line { display: flex; gap: .02em; line-height: .9; }
 .sl {
   font-family: "Dandelion", "Fredoka", ui-rounded, system-ui, sans-serif;
@@ -1044,17 +1060,41 @@ body {
   font-size: clamp(64px, 19vw, 168px);
   display: inline-block;
   opacity: 0;
-  transform: translateY(-150%) rotate(var(--r0));
-  animation: slDrop .95s cubic-bezier(.18, .9, .28, 1.1) var(--d) forwards;
+  transform: translateY(-165%) rotate(var(--r0));
+  /* slower, multi-bounce fall */
+  animation: slDrop 1.5s cubic-bezier(.16, .82, .28, 1) var(--d) forwards;
   will-change: transform, opacity;
 }
 .sl-sp { width: .32em; }
+/* intricate drop: fall → impact overshoot → up-bounce with over-rotation → small settles */
 @keyframes slDrop {
-  0%   { opacity: 0; transform: translateY(-155%) rotate(var(--r0)) scale(.9); }
-  55%  { opacity: 1; transform: translateY(9%)   rotate(calc(var(--rf) * .5)) scale(1.03); }
-  72%  { transform: translateY(-4%) rotate(var(--rf)) scale(1); }
-  86%  { transform: translateY(2%)  rotate(var(--rf)); }
-  100% { opacity: 1; transform: translateY(0)   rotate(var(--rf)); }
+  0%   { opacity: 0; transform: translateY(-170%) rotate(var(--r0)) scale(.8); }
+  14%  { opacity: 1; }
+  40%  { transform: translateY(7%)   rotate(calc(var(--rf) * .25)) scale(1.08); }
+  55%  { transform: translateY(-11%) rotate(calc(var(--rf) * 1.5)) scale(.97); }
+  69%  { transform: translateY(4%)   rotate(calc(var(--rf) * .6))  scale(1.03); }
+  81%  { transform: translateY(-3.5%) rotate(calc(var(--rf) * 1.15)); }
+  90%  { transform: translateY(1.5%)  rotate(var(--rf)); }
+  96%  { transform: translateY(-.6%)  rotate(var(--rf)); }
+  100% { opacity: 1; transform: translateY(0) rotate(var(--rf)); }
+}
+/* little plus-flowers that pop in as a finishing flourish */
+.splash-flower {
+  position: absolute;
+  width: clamp(16px, 4vw, 28px);
+  aspect-ratio: 1;
+  opacity: 0;
+  animation: flowerPop .55s cubic-bezier(.2, 1.5, .4, 1) var(--fd) forwards;
+}
+.splash-flower::before, .splash-flower::after {
+  content: ""; position: absolute; background: currentColor; border-radius: 3px;
+}
+.splash-flower::before { left: 50%; top: 0; width: 32%; height: 100%; transform: translateX(-50%); }
+.splash-flower::after  { top: 50%; left: 0; height: 32%; width: 100%; transform: translateY(-50%); }
+@keyframes flowerPop {
+  0%   { opacity: 0; transform: scale(0) rotate(-45deg); }
+  70%  { opacity: 1; transform: scale(1.2) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
 }
 /* reduced motion: no splash animation, just skip it */
 @media (prefers-reduced-motion: reduce) {
