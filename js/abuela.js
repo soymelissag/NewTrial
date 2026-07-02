@@ -115,7 +115,7 @@
       }, 520);
     }
     splash.addEventListener("click", dismiss);   // tap to skip
-    window.setTimeout(dismiss, 3400);            // after both words land + a beat
+    window.setTimeout(dismiss, 5600);            // after both words land, settle-pop + flowers
   })();
 
   function showScreen(name) {
