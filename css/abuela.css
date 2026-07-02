@@ -30,6 +30,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "ElmsSans";
+  src: url("../assets/ElmsSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --paper:  #f3ecda;   /* warm cream ground */
@@ -58,7 +65,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   background: var(--pk-paper);
-  color: var(--pk-ink);
+  color: #000;
   font-family: var(--pk-font-text);
   font-size: var(--pk-text-body);
   line-height: var(--pk-leading-body);
@@ -550,7 +557,7 @@ body {
   font-family: var(--pk-font-text);
   font-size: 4.1cqw;
   line-height: 1.4;
-  color: var(--pk-ink);
+  color: #000;
   margin: 0;
   width: 100%;
 }
@@ -588,7 +595,7 @@ body {
   font-family: var(--pk-font-text);
   font-size: 17px;
   line-height: 1.55;
-  color: var(--pk-ink);
+  color: #000;
 }
 .warm-textarea::placeholder { color: var(--pk-ink-faint); }
 .warm-textarea:focus { outline: none; }
@@ -757,10 +764,10 @@ body {
 
 /* about copy */
 .warm-about { text-align: left; gap: 14px; display: flex; flex-direction: column; }
-.warm-about p { font-family: var(--pk-font-text); font-size: 15px; line-height: 1.55; color: var(--pk-ink); margin: 0; }
+.warm-about p { font-family: var(--pk-font-text); font-size: 15px; line-height: 1.55; color: #000; margin: 0; }
 .warm-about em { color: var(--pk-orange-deep); font-style: italic; }
 .warm-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.warm-steps li { font-family: var(--pk-font-text); font-size: 14px; line-height: 1.5; color: var(--pk-ink); }
+.warm-steps li { font-family: var(--pk-font-text); font-size: 14px; line-height: 1.5; color: #000; }
 .warm-steps b { color: var(--pk-orange-deep); font-family: var(--pk-font-display); margin-right: 4px; }
 .warm-about__fine { font-style: italic; color: var(--pk-ink-muted) !important; font-size: 13px !important; }
 
