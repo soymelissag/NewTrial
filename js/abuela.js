@@ -115,7 +115,7 @@
       }, 520);
     }
     splash.addEventListener("click", dismiss);   // tap to skip
-    window.setTimeout(dismiss, 2700);            // after letters land + a beat
+    window.setTimeout(dismiss, 3400);            // after both words land + a beat
   })();
 
   function showScreen(name) {
