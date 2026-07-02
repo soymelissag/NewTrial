@@ -115,7 +115,7 @@
       }, 520);
     }
     splash.addEventListener("click", dismiss);   // tap to skip
-    window.setTimeout(dismiss, 5600);            // after both words land, settle-pop + flowers
+    window.setTimeout(dismiss, 6000);            // full 6s lettering sequence
   })();
 
   function showScreen(name) {
