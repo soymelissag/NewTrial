@@ -51,7 +51,7 @@
 
   /* ---- Type ------------------------------------------------- */
   --pk-font-display: "Fredoka", ui-rounded, "Segoe UI", system-ui, sans-serif;
-  --pk-font-text:    "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --pk-font-text:    "ElmsSans", "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
 
   --pk-text-eyebrow: 0.75rem;   --pk-text-sm: 0.875rem;
   --pk-text-body:    1.0625rem; --pk-text-lg: 1.25rem;
