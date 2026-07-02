@@ -1225,10 +1225,72 @@ body {
   .blink-overlay { animation: none; opacity: 0; }
 }
 
+/* ============================================================
+   INTRO SPLASH — kinetic falling "abuela 8 ball" letters
+   ============================================================ */
+.intro-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--pk-paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .04em;
+  cursor: pointer;
+  overflow: hidden;
+}
+.intro-splash.done { animation: splashOut .5s ease forwards; }
+@keyframes splashOut { to { opacity: 0; visibility: hidden; } }
+.splash-line { display: flex; gap: .02em; line-height: .9; }
+.sl {
+  font-family: "ElmsSans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(58px, 17vw, 152px);
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-150%) rotate(var(--r0));
+  animation: slDrop .95s cubic-bezier(.18, .9, .28, 1.1) var(--d) forwards;
+  will-change: transform, opacity;
+}
+.sl-sp { width: .32em; }
+@keyframes slDrop {
+  0%   { opacity: 0; transform: translateY(-155%) rotate(var(--r0)) scale(.9); }
+  55%  { opacity: 1; transform: translateY(9%)   rotate(calc(var(--rf) * .5)) scale(1.03); }
+  72%  { transform: translateY(-4%) rotate(var(--rf)) scale(1); }
+  86%  { transform: translateY(2%)  rotate(var(--rf)); }
+  100% { opacity: 1; transform: translateY(0)   rotate(var(--rf)); }
+}
+/* reduced motion: no splash animation, just skip it */
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash { display: none; }
+}
+
 </style>
 </head>
 <body>
-  <span class="build-tag" aria-hidden="true">v43</span>
+  <span class="build-tag" aria-hidden="true">v44</span>
+
+  <!-- intro splash: kinetic falling letters -->
+  <div class="intro-splash" id="introSplash" aria-label="Abuela 8 Ball">
+    <div class="splash-line">
+      <span class="sl" style="color:#2E7FD6;--r0:-34deg;--rf:-6deg;--d:.05s">a</span>
+      <span class="sl" style="color:#E24B72;--r0:28deg;--rf:5deg;--d:.14s">b</span>
+      <span class="sl" style="color:#F09400;--r0:-22deg;--rf:-3deg;--d:.23s">u</span>
+      <span class="sl" style="color:#1E9E57;--r0:33deg;--rf:6deg;--d:.32s">e</span>
+      <span class="sl" style="color:#E23B3B;--r0:-18deg;--rf:-4deg;--d:.41s">l</span>
+      <span class="sl" style="color:#6B342A;--r0:24deg;--rf:4deg;--d:.50s">a</span>
+    </div>
+    <div class="splash-line">
+      <span class="sl" style="color:#C39400;--r0:-30deg;--rf:-5deg;--d:.60s">8</span>
+      <span class="sl sl-sp"></span>
+      <span class="sl" style="color:#4FA3E0;--r0:26deg;--rf:5deg;--d:.69s">b</span>
+      <span class="sl" style="color:#2E7FD6;--r0:-20deg;--rf:-3deg;--d:.78s">a</span>
+      <span class="sl" style="color:#E24B72;--r0:30deg;--rf:6deg;--d:.87s">l</span>
+      <span class="sl" style="color:#1E9E57;--r0:-24deg;--rf:-5deg;--d:.96s">l</span>
+    </div>
+  </div>
   <!-- ===================== APP SHELL ===================== -->
   <main id="app">
 
@@ -4903,6 +4965,27 @@ body {
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
   var QUESTION_PREFIX = "Dear abuela... ";
+
+  /* ---------- Intro splash (kinetic falling letters) ---------- */
+  (function () {
+    var splash = $("#introSplash");
+    if (!splash) { return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      splash.parentNode.removeChild(splash);
+      return;
+    }
+    var dismissed = false;
+    function dismiss() {
+      if (dismissed) { return; }
+      dismissed = true;
+      splash.classList.add("done");
+      window.setTimeout(function () {
+        if (splash.parentNode) { splash.parentNode.removeChild(splash); }
+      }, 520);
+    }
+    splash.addEventListener("click", dismiss);   // tap to skip
+    window.setTimeout(dismiss, 2700);            // after letters land + a beat
+  })();
 
   function showScreen(name) {
     $all(".screen").forEach(function (s) {

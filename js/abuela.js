@@ -97,6 +97,27 @@
 
   var QUESTION_PREFIX = "Dear abuela... ";
 
+  /* ---------- Intro splash (kinetic falling letters) ---------- */
+  (function () {
+    var splash = $("#introSplash");
+    if (!splash) { return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      splash.parentNode.removeChild(splash);
+      return;
+    }
+    var dismissed = false;
+    function dismiss() {
+      if (dismissed) { return; }
+      dismissed = true;
+      splash.classList.add("done");
+      window.setTimeout(function () {
+        if (splash.parentNode) { splash.parentNode.removeChild(splash); }
+      }, 520);
+    }
+    splash.addEventListener("click", dismiss);   // tap to skip
+    window.setTimeout(dismiss, 2700);            // after letters land + a beat
+  })();
+
   function showScreen(name) {
     $all(".screen").forEach(function (s) {
       s.classList.toggle("is-active", s.dataset.screen === name);
