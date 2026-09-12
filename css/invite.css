@@ -1,0 +1,220 @@
+/* ─────────────────────────────────────────────────────────────────────
+   Peter Luger × Fuku — invitation set as a graphics standards manual.
+   Swiss grid, three-colour masthead, a seal, a spec table, one big word.
+   Type: OT Neue Montreal (SemiSqueezed for text, UltraSqueezed for display)
+   ───────────────────────────────────────────────────────────────────── */
+
+:root {
+  --ink:   #111111;
+  --red:   #F0401E;
+  --blue:  #1B35B0;
+  --paper: #FFFFFF;
+  --field: #000000;
+  --rule:  #D8D8D8;
+
+  --gutter: clamp(28px, 6vw, 84px);
+  --sheet-max: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: clamp(0px, 4vw, 72px) clamp(0px, 3vw, 48px);
+  background: var(--field);
+  color: var(--ink);
+  font-family: "OT Neue Montreal", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The printed sheet ------------------------------------------------- */
+.sheet {
+  max-width: var(--sheet-max);
+  margin: 0 auto;
+  container-type: inline-size;
+  padding: clamp(34px, 6vw, 86px) var(--gutter) clamp(40px, 7vw, 96px);
+  background: var(--paper);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .55);
+}
+
+/* Masthead ----------------------------------------------------------- */
+.masthead {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: clamp(20px, 4vw, 56px);
+  align-items: start;
+}
+
+.block {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(17px, 1.9vw, 25px);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.block--ink  { color: var(--ink); }
+.block--red  { color: var(--red); }
+.block--blue { color: var(--blue); }
+
+/* Seal --------------------------------------------------------------- */
+.seal {
+  margin: clamp(36px, 8vw, 104px) auto clamp(34px, 6.5vw, 84px);
+  max-width: min(520px, 76%);
+}
+
+.seal__svg { display: block; width: 100%; height: auto; }
+
+.seal__type {
+  font-family: "OT Neue Montreal", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 57px;
+  letter-spacing: 0.05em;
+  fill: var(--ink);
+}
+
+.knot__red,
+.knot__blue,
+.knot__case {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.knot__red  { stroke: var(--red);   stroke-width: 60; }
+.knot__case { stroke: var(--paper); stroke-width: 62; }
+.knot__blue { stroke: var(--blue);  stroke-width: 34; }
+
+/* Pitch -------------------------------------------------------------- */
+.pitch {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(20px, 4vw, 56px);
+  align-items: start;
+  padding-top: clamp(18px, 3vw, 34px);
+  border-top: 1.5px solid var(--ink);
+}
+
+.pitch__lede {
+  margin: 0;
+  font-family: "OT Neue Montreal Ultra", "OT Neue Montreal", Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: 0.004em;
+  word-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lede__a,
+.lede__b { display: block; }
+
+/* each line set to fill the column — flush left and right */
+.lede__a { font-size: clamp(34px, 17.1cqw, 160px); }
+.lede__b { font-size: clamp(37px, 18.7cqw, 176px); }
+
+.pitch__body {
+  margin: clamp(6px, 1vw, 12px) 0 0;
+  max-width: 34ch;
+  font-size: clamp(16px, 1.55vw, 20px);
+  line-height: 1.28;
+  letter-spacing: -0.004em;
+}
+
+.pitch__body em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.eyes { font-size: 0.9em; }
+
+/* Specification table ------------------------------------------------ */
+.specs { margin-top: clamp(34px, 6vw, 78px); }
+
+.specs__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 0;
+  border-top: 1.5px solid var(--ink);
+}
+
+.spec {
+  padding: clamp(12px, 1.6vw, 20px) clamp(12px, 2vw, 26px) clamp(18px, 2.6vw, 30px) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.spec__label {
+  margin: 0 0 0.45em;
+  font-weight: 500;
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.spec__no {
+  margin-right: 0.85em;
+  color: var(--red);
+}
+
+.spec__value {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 29px);
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+}
+
+.spec:nth-child(3n) { padding-right: 0; }
+
+/* Signoff ------------------------------------------------------------ */
+.signoff { margin-top: clamp(44px, 8vw, 104px); }
+
+.signoff__word {
+  margin: 0;
+  font-family: "OT Neue Montreal Ultra", "OT Neue Montreal", Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: clamp(52px, 58.8cqw, 600px);
+  line-height: 0.76;
+  letter-spacing: -0.005em;
+  word-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.signoff__hungry { color: var(--red); }
+
+.signoff__fine {
+  margin: clamp(20px, 3vw, 34px) 0 0;
+  max-width: 46ch;
+  font-size: clamp(11px, 1.05vw, 13px);
+  line-height: 1.32;
+  letter-spacing: 0.01em;
+  color: var(--blue);
+}
+
+/* Narrow ------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .masthead      { grid-template-columns: 1fr 1fr; }
+  .block--blue   { grid-column: 1 / -1; }
+  .pitch         { grid-template-columns: 1fr; }
+  .specs__grid   { grid-template-columns: repeat(2, 1fr); }
+  .spec:nth-child(3n)  { padding-right: clamp(12px, 2vw, 26px); }
+  .spec:nth-child(2n)  { padding-right: 0; }
+  .seal          { max-width: 88%; }
+  .lede__a { font-size: clamp(34px, 34.6cqw, 200px); }
+  .lede__b { font-size: clamp(37px, 38.0cqw, 220px); }
+}
+
+/* Print -------------------------------------------------------------- */
+@media print {
+  @page { margin: 12mm; }
+  body   { background: #fff; padding: 0; }
+  .sheet { box-shadow: none; max-width: none; padding: 0; }
+}

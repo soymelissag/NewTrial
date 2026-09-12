@@ -1,0 +1,61 @@
+/* OT Neue Montreal (Free for Personal Use v1.0) — Pangram Pangram / OffType.
+   Only the "Squeezed" widths ship with the free release, so the family is
+   split by width: SemiSqueezed for text, UltraSqueezed for display. */
+
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("../fonts/OTNeueMontreal-BookSemiSqueezed.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("../fonts/OTNeueMontreal-MediumSemiSqueezed.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("../fonts/OTNeueMontreal-SemiBoldSemiSqueezed.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("../fonts/OTNeueMontreal-BoldSemiSqueezed.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("../fonts/OTNeueMontreal-ItalicSemiSqueezed.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OT Neue Montreal Ultra";
+  src: url("../fonts/OTNeueMontreal-BookUltraSqueezed.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal Ultra";
+  src: url("../fonts/OTNeueMontreal-MediumUltraSqueezed.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal Ultra";
+  src: url("../fonts/OTNeueMontreal-BoldUltraSqueezed.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
