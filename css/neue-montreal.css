@@ -59,3 +59,26 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Squeezed and ExtraSqueezed — the poster widths */
+@font-face {
+  font-family: "OT Neue Montreal Squeezed";
+  src: url("../fonts/OTNeueMontreal-BoldSqueezed.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal Extra";
+  src: url("../fonts/OTNeueMontreal-MediumExtraSqueezed.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OT Neue Montreal Extra";
+  src: url("../fonts/OTNeueMontreal-BoldExtraSqueezed.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

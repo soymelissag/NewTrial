@@ -8,6 +8,8 @@ Pangram Pangram × OffType. The free release ships only the *Squeezed* widths;
 |---|---|---|
 | `OT Neue Montreal` | SemiSqueezed | 400 Book · 500 Medium · 600 SemiBold · 700 Bold · 400 italic |
 | `OT Neue Montreal Ultra` | UltraSqueezed | 400 Book · 500 Medium · 700 Bold |
+| `OT Neue Montreal Squeezed` | Squeezed | 700 Bold |
+| `OT Neue Montreal Extra` | ExtraSqueezed | 500 Medium · 700 Bold |
 
 Licensed for **personal use only** — commercial use requires a licence from
 Pangram Pangram. The EULA ships with the original download.

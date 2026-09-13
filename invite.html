@@ -3,120 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Peter Luger × Fuku — Official Sando Standards Manual</title>
-<meta name="description" content="Two New York icons. One night in Miami. The first bite of the new Peter Luger × Fuku sando — October 8, 7–10 PM, 135 Miracle Mile.">
+<title>Peter Luger × Fuku — Sando Launch Party</title>
+<meta name="description" content="Two New York icons, one night in Miami. The first bite of the new Peter Luger × Fuku sando — October 8, 7–10 PM, 135 Miracle Mile.">
 <link rel="stylesheet" href="css/neue-montreal.css">
 <link rel="stylesheet" href="css/invite.css">
 </head>
 <body>
 
-<main class="sheet" role="main">
+<main class="poster">
+  <div class="stage">
 
-  <!-- ── Masthead: three tight blocks, black / red / blue ───────────── -->
-  <header class="masthead">
-    <p class="block block--ink">
-      Official Sandwich of<br>
-      The Peter Luger<br>
-      × Fuku Collaboration
-    </p>
-    <p class="block block--red">
-      Guidelines<br>
-      for Authorized<br>
-      Eating
-    </p>
-    <p class="block block--blue">
-      Official<br>
-      Sando Standards<br>
-      Manual
-    </p>
-  </header>
-
-  <!-- ── The seal ───────────────────────────────────────────────────── -->
-  <section class="seal" aria-label="Peter Luger × Fuku sando seal">
-    <svg class="seal__svg" viewBox="0 0 1000 1000" role="img"
-         aria-label="Circular seal reading Peter Luger × Fuku Sando, Miami, October 8, around an interlocking red and blue star knot">
-      <defs>
-        <path id="arcTop"
-              d="M 90,500 a 410,410 0 0 1 820,0" fill="none"></path>
-        <path id="arcBottom"
-              d="M 118,500 a 382,382 0 0 0 764,0" fill="none"></path>
-      </defs>
-
-      <text class="seal__type">
-        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">
-          PETER LUGER × FUKU SANDO
-        </textPath>
-      </text>
-      <text class="seal__type">
-        <textPath href="#arcBottom" startOffset="50%" text-anchor="middle" side="right">
-          MIAMI · OCTOBER 8
-        </textPath>
-      </text>
-
-      <!-- Star knot: a red five-loop band with a blue star run through it -->
-      <g class="knot" transform="translate(500 508)">
-        <path class="knot__red"  d="M0,-228 L134,184.5 L-216.8,-70.5 L216.8,-70.5 L-134,184.5 Z"></path>
-        <g transform="rotate(36)">
-          <path class="knot__case" d="M0,-138 L81.1,111.6 L-131.2,-42.6 L131.2,-42.6 L-81.1,111.6 Z"></path>
-          <path class="knot__blue" d="M0,-138 L81.1,111.6 L-131.2,-42.6 L131.2,-42.6 L-81.1,111.6 Z"></path>
-        </g>
+    <!-- ── Mascot: the martini that comes with it ─────────────────── -->
+    <svg class="mascot" viewBox="0 0 300 360" aria-hidden="true">
+      <g class="mascot__glass">
+        <path d="M20 30 C 100 16, 200 16, 280 30 C 244 104, 194 152, 168 182
+                 L 168 292 C 202 298, 226 310, 236 326 L 64 326
+                 C 74 310, 98 298, 132 292 L 132 182
+                 C 106 152, 56 104, 20 30 Z"></path>
+        <path d="M188 8 L214 96 L196 100 L178 14 Z"></path>
+      </g>
+      <circle class="mascot__olive" cx="116" cy="88" r="34"></circle>
+      <circle class="mascot__olive" cx="182" cy="70" r="27"></circle>
+      <circle class="mascot__pit" cx="116" cy="88" r="13"></circle>
+      <circle class="mascot__pit" cx="182" cy="70" r="10"></circle>
+      <g class="mascot__spark">
+        <path d="M262 150 L276 186 L262 222 L248 186 Z"></path>
+        <path d="M40 214 L50 238 L40 262 L30 238 Z"></path>
       </g>
     </svg>
-  </section>
 
-  <!-- ── The pitch ──────────────────────────────────────────────────── -->
-  <section class="pitch">
-    <p class="pitch__lede">
-      <span class="lede__a">Two New York icons.</span>
-      <span class="lede__b">One night in Miami.</span>
+    <!-- ── The three big words ────────────────────────────────────── -->
+    <h1 class="word word--sando">Sando</h1>
+    <p class="word word--launch">Launch</p>
+    <p class="word word--party">Party</p>
+
+    <!-- ── Fuku staircase lockup ──────────────────────────────────── -->
+    <div class="lockup" aria-label="Peter Luger × Fuku">
+      <span class="lockup__pl">Peter Luger&nbsp;×</span>
+      <span class="lockup__stack" aria-hidden="true">
+        <b>F</b><b>U</b><b>K</b><b>U</b>
+      </span>
+    </div>
+
+    <!-- ── Date badge ─────────────────────────────────────────────── -->
+    <p class="badge">
+      <span>October 8<sup>th</sup></span>
+      <span>7–10 PM</span>
     </p>
-    <p class="pitch__body">
-      You’re invited to the first bite of the new <em>Peter Luger × Fuku</em>
-      sando — a steakhouse spin on our signature sandwich. Martinis by
-      Giovanny Gutierrez, and a few things worth taking
-      home.&nbsp;<span class="eyes" aria-hidden="true">👀</span>
-    </p>
-  </section>
 
-  <!-- ── Specification table ────────────────────────────────────────── -->
-  <section class="specs" aria-label="Event details">
-    <dl class="specs__grid">
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.1</span>Date</dt>
-        <dd class="spec__value">October 8</dd>
-      </div>
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.2</span>Hours</dt>
-        <dd class="spec__value">7–10 PM</dd>
-      </div>
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.3</span>Location</dt>
-        <dd class="spec__value">135 Miracle Mile</dd>
-      </div>
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.4</span>Bar</dt>
-        <dd class="spec__value">Martinis by<br>Giovanny Gutierrez</dd>
-      </div>
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.5</span>Take-home</dt>
-        <dd class="spec__value">A few things worth<br>taking home</dd>
-      </div>
-      <div class="spec">
-        <dt class="spec__label"><span class="spec__no">2.6</span>Dress code</dt>
-        <dd class="spec__value">An appetite</dd>
-      </div>
-    </dl>
-  </section>
+    <!-- ── Tagline bar ────────────────────────────────────────────── -->
+    <p class="tag">Two New York icons.<br>One night in Miami.</p>
 
-  <!-- ── Signoff ────────────────────────────────────────────────────── -->
-  <footer class="signoff">
-    <p class="signoff__word">Come <span class="signoff__hungry">hungry</span></p>
-    <p class="signoff__fine">
-      Sec. 1.1 — This invitation admits one hungry person and is valid for
-      one night only.
-    </p>
-  </footer>
+    <!-- ── Friends line ───────────────────────────────────────────── -->
+    <p class="friends">Martinis all night from our friend<br><b>Giovanny Gutierrez</b></p>
 
+    <!-- ── Ruled detail column ────────────────────────────────────── -->
+    <ul class="list">
+      <li>First&nbsp;&nbsp;Bite</li>
+      <li>Martinis</li>
+      <li>Take-Homes</li>
+      <li class="list__long">135&nbsp;Miracle&nbsp;Mile</li>
+    </ul>
+
+    <!-- ── Sign-off ───────────────────────────────────────────────── -->
+    <p class="hungry">Come Hungry</p>
+
+  </div>
 </main>
+
 </body>
 </html>
