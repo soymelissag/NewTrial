@@ -213,6 +213,23 @@ body {
   transform: rotate(-9deg);
 }
 
+/* One-colour mode ───────────────────────────────────────────────────────
+   Everything paints in --ink on an --acid ground; reversed elements keep
+   their knockouts. Rendered as a coverage map it becomes the white
+   transparent PNG (assets/invite-white.png) — see tools/export-white.js. */
+body.mono {
+  --acid: #FFFFFF;
+  --orange: #000000;
+  --ink: #000000;
+  background: #FFFFFF;
+  padding: 0;
+}
+
+.mono .stage           { box-shadow: none; }
+.mono .lockup__stack b,
+.mono .badge,
+.mono .hungry          { color: var(--acid); }
+
 /* Print ─────────────────────────────────────────────────────────────── */
 @media print {
   @page { margin: 8mm; }
